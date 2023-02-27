@@ -6,19 +6,19 @@
 
 <header style="margin-bottom:35px">
     <div class="container">
-        <h2>Chambers</h2>
+        <h2>Палаты</h2>
     </div>
 
     <div class="container" style="display:flex">
         <form>
             <button type="button" onclick="awe.open('@("create" + gridName)')" class="btn btn-secondary btn-main col-sm-4">
-                Create
+                Добавить
             </button>
         </form>
         <form>
             <div class="dropdown">
                 <button class="btn btn-secondary btn-actions dropdown-toggle col-sm-4" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    Actions
+                    Действия
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li><button formmethod="get" asp-controller="Chamber" asp-action="Index">Import Excel</button></li>
@@ -38,13 +38,13 @@
         .Resizable()
         .Columns(
         new Column { Bind = "Id", Groupable = false, Hidden = true },
-        new Column { Bind = "Number", Header = "Number chamber" }.Mod(o => o.Nohide()),
-        new Column { Bind = "Floor", Header = "Floor" },
-        new Column { Bind = "QuantitySeats", Header = "Quantity of seats" },
-        new Column { Bind = "Patients", ClientFormat = ".(PatientNames)", Header = "Patient names" },
-        new Column { Bind = "Owner.FullName", ClientFormat = ".(OwnerName)", Header = "Owner" },
-        new Column { Bind = "CreatedOn", Header = "Date of creation" },
-        new Column { Bind = "ModifiedOn", Header = "Date of change" },
+        new Column { Bind = "Number", Header = "Номер палаты" }.Mod(o => o.Nohide()),
+        new Column { Bind = "Floor", Header = "Этаж" },
+        new Column { Bind = "QuantitySeats", Header = "Количество мест" },
+        new Column { Bind = "Patients", ClientFormat = ".(PatientNames)", Header = "Постояльцы" },
+        new Column { Bind = "Owner.FullName", ClientFormat = ".(OwnerName)", Header = "Ответственный" },
+        new Column { Bind = "CreatedOn", Header = "Дата создания" },
+        new Column { Bind = "ModifiedOn", Header = "Дата изменения" },
         new Column { ClientFormat = Html.EditFormatForGrid(gridName), Width = 55 }.Mod(o => o.Nohide()),
         new Column { ClientFormat = Html.DeleteFormatForGrid(gridName), Width = 55 }.Mod(o => o.Nohide())))
 </div>
