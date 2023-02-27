@@ -8,27 +8,27 @@ namespace WebApp.Models.Chamber
     {
         public Guid Id { get; set; }
 
-        [Display(Name = "Number chamber")]
+        [Display(Name = "Номер палаты")]
         [Remote("VerifyNumberEdit", "ChamberValidate", "Number is incorrect", AdditionalFields = (nameof(Floor)))]
         public int Number { get; set; }
 
-        [Display(Name = "Floor")]
+        [Display(Name = "Этаж")]
         [UIHint("Combobox")]
         [AweUrl("GetFloorsList", "Chamber")]
         [Required(ErrorMessage = "Floor is required")]
         public int Floor { get; set; }
 
-        [Display(Name = "Quantity of seats")]
+        [Display(Name = "Количество мест")]
         [UIHint("Combobox")]
         [AweUrl("GetSeatsList", "Chamber")]
         [Required(ErrorMessage = "Quantity of seats is required")]
         public int QuantitySeats { get; set; }
 
-        [Display(Name = "Patients")]
+        [Display(Name = "Постояльцы")]
         [UIHint("MultiLookup")]
         public IEnumerable<Guid>? Patients { get; set; }
 
-        [Display(Name = "Owner")]
+        [Display(Name = "Ответственный")]
         [UIHint("Lookup")]
         [Required(ErrorMessage = "Owner is required")]
         public Guid Owner { get; set; }

@@ -6,19 +6,19 @@
 
 <header style="margin-bottom:35px">
     <div class="container">
-        <h2>Contacts</h2>
+        <h2>Контакты</h2>
     </div>
 
     <div class="container" style="display:flex">
         <form>
             <button type="button" onclick="awe.open('@("create" + gridName)')" class="btn btn-secondary btn-main col-sm-4">
-                Create
+                Добавить
             </button>
         </form>
         <form>
             <div class="dropdown">
                 <button class="btn btn-secondary btn-actions dropdown-toggle col-sm-4" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    Actions
+                    Действия
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li><button formmethod="get" asp-controller="Contact" asp-action="Index">Import Excel</button></li>
@@ -38,16 +38,16 @@
         .Resizable()
         .Columns(
         new Column { Bind = "Id", Groupable = false, Hidden = true },
-        new Column { Bind = "Name", Header = "Name" },
-        new Column { Bind = "FullName", Header = "Full name" }.Mod(o => o.Nohide()),
-        new Column { Bind = "Email", Header = "Email" },
-        new Column { Bind = "Age", Header = "Age" },
-        new Column { Bind = "BirthDate", Header = "Date of birthday" },
-        new Column { Bind = "Phone", Header = "Phone" },
-        new Column { Bind = "MobilePhone", Header = "Mobile phone" },
-        new Column { Bind = "ContactType.Name", ClientFormat = ".(ContactType)", Header = "Contact type" },
-        new Column { Bind = "CreatedOn", Header = "Date of creation" },
-        new Column { Bind = "ModifiedOn", Header = "Date of change" },
+        new Column { Bind = "Name", Header = "Инициалы" },
+        new Column { Bind = "FullName", Header = "ФИО" }.Mod(o => o.Nohide()),
+        new Column { Bind = "Email", Header = "E-mail" },
+        new Column { Bind = "Age", Header = "Возраст" },
+        new Column { Bind = "BirthDate", Header = "Дата рождения" },
+        new Column { Bind = "Phone", Header = "Рабочий телефон" },
+        new Column { Bind = "MobilePhone", Header = "Мобильный телефон" },
+        new Column { Bind = "ContactType.Name", ClientFormat = ".(ContactType)", Header = "Роль" },
+        new Column { Bind = "CreatedOn", Header = "Дата создания" },
+        new Column { Bind = "ModifiedOn", Header = "Дата изменения" },
         new Column { ClientFormat = Html.EditFormatForGrid(gridName), Width = 55 }.Mod(o => o.Nohide()),
         new Column { ClientFormat = Html.DeleteFormatForGrid(gridName), Width = 55 }.Mod(o => o.Nohide())))
 </div>
