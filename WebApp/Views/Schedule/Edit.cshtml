@@ -1,0 +1,34 @@
+﻿@model ScheduleEditInput
+
+@using (Html.BeginForm())
+{
+    @Html.EditorFor(x => x.Title)
+    @Html.EditorFor(x => x.Color)
+    <div style="pointer-events: none">
+        @Html.EditorFor(x => x.Owner)
+        @Html.EditorFor(x => x.Patient)
+        @Html.EditorFor(x => x.Procedure)
+    </div>
+    @Html.EditorFor(x => x.IsAllDay)
+    @Html.EditorFor(x => x.StartDate)
+    <div class="timeEditor" style="@(Model.IsAllDay ? "display:none" : "")">
+        @Html.EditorFor(x => x.StartTime)
+    </div>
+    @Html.EditorFor(x => x.EndDate)
+    <div class="timeEditor" style="@(Model.IsAllDay ? "display:none" : "")">
+        @Html.EditorFor(x => x.EndTime)
+    </div>
+    @Html.EditorFor(x => x.Description)
+}
+@Html.ValidationSummary(true)
+
+<script>
+    $(function () {
+        const time = $('.timeEditor');
+        $('#IsAllDay').change(function () {
+            $(this).val() === 'true'
+                ? time.hide()
+                : time.show();
+        });
+    });
+</script>

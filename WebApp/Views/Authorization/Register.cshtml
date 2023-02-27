@@ -1,0 +1,44 @@
+﻿@model RegisterViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="~/css/authorization.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container" id="container">
+        <form>
+            <div class="sign-container">
+                <h1>Регистрация</h1>
+
+                <span asp-validation-for="NickName" class="text-danger"></span>
+                <input asp-for="NickName" type="text" placeholder="ФИО" />
+
+                <span asp-validation-for="Login" class="text-danger"></span>
+                <input asp-for="Login" type="email" placeholder="Email" />
+
+                <span asp-validation-for="Password" class="text-danger"></span>
+                <input asp-for="Password" type="password" placeholder="Пароль" />
+
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                <input asp-for="ConfirmPassword" type="password" placeholder="Повторите пароль" />
+
+                <button formmethod="post" asp-controller="Authorization" asp-action="Register">Зарегистрироваться</button>
+            </div>
+
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel">
+                        <p>Уже есть аккаунт, войдите в систему.</p>
+                        <button formmethod="get" asp-controller="Authorization" asp-action="Login" class="ghost">Войти</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

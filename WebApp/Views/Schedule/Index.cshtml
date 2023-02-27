@@ -1,0 +1,56 @@
+﻿@{
+    var gridName = "Schedule";
+}
+
+@Html.InitCrudPopupsForGrid(gridName, "Schedule")
+
+<header style="margin-bottom:35px">
+    <div class="container">
+        <h2>Schedules</h2>
+    </div>
+
+    <div class="container" style="display:flex">
+        <button type="button" onclick="awe.open('@("create" + gridName)')" class="btn btn-secondary btn-main col-sm-4">
+            Create
+        </button>
+    </div>
+</header>
+<hr />
+
+<div class="scheduler">
+    <div class="schedBar">
+        <div class="sbitem">
+            @Html.Awe().DatePicker("Date").CssClass("schDate").HtmlAttributes(null, new { tabindex = -1 })
+            <span class="dateLabel"></span>
+        </div>
+        <div class="sbitem sbvtype">
+            @(Html.Awe().AjaxRadioList("ViewType")
+                .CssClass("viewType")
+                .ButtonGroup()
+                .Url(Url.Action("GetViewTypes")))
+        </div>
+    </div>
+
+    @(Html.Awe().Grid(gridName)
+        .Height(900)
+        .Mod(o => o.Loading())
+        .ShowFooter(false)
+        .ShowGroupedColumn(false)
+        .Url(Url.Action("GridGetItems"))
+        .Parent("ViewType", "viewType")
+        .Parent("HourStep", "hourStep")
+        .Parent("Date", "date"))
+
+    <div class="schedBotBar" data-g="@(gridName)">
+        @(Html.Awe().AjaxRadioList("HourStep")
+            .Odropdown(o => o.InLabel("Step: "))
+            .Value(60)
+            .Url(Url.Action("GetHourSteps")))
+    </div>
+</div>
+
+<script>
+    $(function () {
+        scheduler.init('@gridName', 'Schedule');
+    });
+</script>

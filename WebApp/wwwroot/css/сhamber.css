@@ -1,0 +1,12 @@
+﻿.btn-main {
+    width: 175px;
+    height: 40px;
+    background-color: #6c757d;
+    margin-right: 10px;
+    color: white;
+}
+
+.btn-actions {
+    width: auto;
+    height: 40px;
+}

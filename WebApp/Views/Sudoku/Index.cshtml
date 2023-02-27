@@ -1,0 +1,50 @@
+﻿@model SudokuViewModel
+
+<div class="sudoku-flex">
+    <table id="table-user" class="table table-striped">
+        <tbody id="sudoku-board">
+            @for (var i = 0; i < Model.SudokuHided.GetLength(0); i++)
+            {
+                <tr class="@(i % 3 == 2 && i != Model.SudokuHided.GetLength(0) - 1 ? "border-bottom" : "")">
+                    @for (var j = 0; j < Model.SudokuHided.GetLength(1); j++)
+                    {
+                        <td>
+                            <input class="square @(j % 3 == 2 && j != Model.SudokuHided.GetLength(0) - 1 ? "border-right" : "")" maxlength="1" type="text"
+                           value="@(Model.SudokuHided[i, j] == 0 ? "" : Model.SudokuHided[i, j].ToString())"
+                           onkeypress="return isNumberKey(event)"
+                           @(Model.SudokuHided[i, j] == 0 ? "" : "disabled") />
+
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <table id="table-answer" class="table table-striped table-hide">
+        <tbody id="sudoku-board">
+            @for (var i = 0; i < Model.Sudoku.GetLength(0); i++)
+            {
+                <tr class="@(i % 3 == 2 && i != Model.Sudoku.GetLength(0) - 1 ? "border-bottom" : "")">
+                    @for (var j = 0; j < Model.Sudoku[i].Length; j++)
+                    {
+                        <td>
+                            <input class="square @(j % 3 == 2 && j != Model.Sudoku.GetLength(0) - 1 ? "border-right" : "")" type="text"
+                           value="@Model.Sudoku[i][j]"
+                           disabled />
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div id="solver-controls">
+    <button id="solve" class="btn btn-primary">
+        Solve!
+    </button>
+    <button id="get-candidate" class="btn pull-right" onclick="showCandidate()">
+        Show Candidate
+    </button>
+</div>

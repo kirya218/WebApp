@@ -1,0 +1,15 @@
+﻿@model ContactAddInput
+@using (Html.BeginForm())
+{
+    using (Html.Awe().BeginContext())
+    {
+        @Html.EditorFor(model => model.Name)
+        @Html.EditorFor(model => model.FullName)
+        @Html.EditorFor(model => model.Email)
+        @Html.EditorFor(model => model.Age)
+        @Html.EditorFor(model => model.BirthDate)
+        @Html.EditorFor(model => model.MobilePhone)
+        @Html.EditorFor(model => model.Phone)
+        @Html.EditorFor(model => model.ContactType)
+    }
+}
