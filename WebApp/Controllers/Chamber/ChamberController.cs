@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Omu.AwesomeMvc;
+using GridLibrary;
 using WebApp.Context;
 using WebApp.Entities;
 using WebApp.Interfaces;
@@ -10,7 +10,7 @@ using WebApp.Tools;
 
 namespace WebApp.Controllers.ChamberControllers
 {
-    public class ChamberController : Controller, IController<Chamber, ChamberAddImput, ChamberEditImput, DeleteImput>
+    public class ChamberController : Controller, IController<Chamber, ChamberAddImput, ChamberEditImput, DeleteInput>
     {
         /// <summary>
         /// Контекст.
@@ -158,7 +158,7 @@ namespace WebApp.Controllers.ChamberControllers
         {
             var chamber = _context.Chambers.Single(x => x.Id == id);
 
-            return PartialView(new DeleteImput
+            return PartialView(new DeleteInput
             {
                 Id = id,
                 GridId = gridId,
@@ -167,7 +167,7 @@ namespace WebApp.Controllers.ChamberControllers
         }
 
         [HttpPost]
-        public ActionResult Delete(DeleteImput view)
+        public ActionResult Delete(DeleteInput view)
         {
             var chamber = _context.Chambers.Single(x => x.Id == view.Id);
 

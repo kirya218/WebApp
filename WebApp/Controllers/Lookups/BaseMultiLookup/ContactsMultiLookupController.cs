@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Omu.AwesomeMvc;
+using GridLibrary;
 using WebApp.Context;
 using WebApp.Interfaces;
 

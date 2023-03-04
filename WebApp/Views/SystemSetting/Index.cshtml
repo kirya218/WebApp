@@ -1,0 +1,27 @@
+﻿@{
+    var gridName = "SystemSetting";
+}
+
+@Html.InitCrudPopupsForGrid(gridName, "SystemSetting")
+
+<header style="margin-bottom:35px">
+    <div class="container">
+        <h2>Системные настройки</h2>
+    </div>
+</header>
+<hr />
+
+<div class="gui3">
+    @(Html.Awe().Grid(gridName)
+        .Mod(o => o.Main().ColumnsAutohide())
+        .Url(Url.Action("GridGetItems"))
+        .Reorderable()
+        .Resizable()
+        .Columns(
+        new Column { Bind = "Id", Groupable = false, Hidden = true },
+        new Column { Bind = "Name", Header = "Название" }.Mod(o => o.Nohide()),
+        new Column { Bind = "Code", Header = "Код" },
+        new Column { Bind = "Value", Header = "Значение" },
+        new Column { Bind = "Description", Header = "Описание" },
+        new Column { ClientFormat = Html.EditFormatForGrid(gridName), Width = 55 }.Mod(o => o.Nohide())))
+</div>

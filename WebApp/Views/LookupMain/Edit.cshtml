@@ -1,0 +1,22 @@
+﻿@model LookupMainEditInput
+
+@using (Html.Awe().BeginContext())
+{
+    var columns = Model.Columns.ToList();
+    columns.Add(new Column { ClientFormat = Html.EditFormatForGrid(Model.GridName), Width = 55 });
+    columns.Add(new Column { ClientFormat = Html.DeleteFormatForGrid(Model.GridName), Width = 55 });
+
+    @Html.InitCrudPopupsForGrid(Model.GridName, Model.ControllerName, 230)
+
+    <div class="bar">
+        @Html.CreateButtonForGrid(Model.GridName, "Добавить")
+    </div>
+    <hr/>
+
+    <div>
+        @(Html.Awe().Grid(Model.GridName)
+            .Url(Url.Action("GridGetItems", Model.ControllerName))
+            .Groupable(false)
+            .Columns(columns.ToArray()))
+    </div>
+}

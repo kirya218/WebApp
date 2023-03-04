@@ -5,11 +5,11 @@ namespace WebApp.Tools
 {
     public class SettingHelper
     {
-        public static bool TryGetValue<T>(WebAppContext context, string settingName, out T? value)
+        public static bool TryGetValue<T>(WebAppContext context, string settingCode, out T? value)
         {
             var setting = context.Settings
                 .Include(x => x.SettingValue)
-                .FirstOrDefault(x => x.Code == settingName);
+                .FirstOrDefault(x => x.Code == settingCode);
 
             if (setting == null)
             {
@@ -34,6 +34,24 @@ namespace WebApp.Tools
             }
 
             return true;
+        }
+
+        public static object GetValue(WebAppContext context, string settingCode)
+        {
+            var setting = context.Settings
+                .Include(x => x.SettingValue)
+                .FirstOrDefault(x => x.Code == settingCode);
+
+            return setting.Type switch
+            {
+                "string" => setting.SettingValue.TextValue,
+                "bool" => setting.SettingValue.BooleanValue,
+                "guid" => setting.SettingValue.GuidValue,
+                "datetime" => setting.SettingValue.DateTimeValue,
+                "int" => setting.SettingValue.IntegerValue,
+                "float" => setting.SettingValue.FloatValue,
+                _ => default
+            };
         }
     }
 }

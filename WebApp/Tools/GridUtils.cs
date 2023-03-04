@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Newtonsoft.Json;
-using Omu.AwesomeMvc;
+using GridLibrary;
+using System.Reflection;
 
 namespace WebApp.Tools
 {
@@ -12,37 +12,11 @@ namespace WebApp.Tools
             return action + html.Awe().GetContextPrefix() + gridId;
         }
 
-        public static string InlineCancelBtn<T>(this IHtmlHelper<T> html, string text = "Cancel")
-        {
-            return html.Awe()
-                .Button()
-                .Text(text)
-                .CssClass("o-glcanb awe-nonselect o-gl o-glbtn").ToString();
-        }
-
-        public static string InlineDeleteFormatForGrid<T>(this IHtmlHelper<T> html, string gridId, string key = "Id", bool nofocus = false, string text = "Cancel")
-        {
-            var popupName = html.GetPopupName("delete", gridId);
-
-            return DeleteFormat(popupName, key, btnClass: "o-glh", nofocus: nofocus) +
-                   InlineCancelBtn(html, text);
-        }
-
-        public static IHtmlContent InlineCreateButtonForGrid<T>(this IHtmlHelper<T> html, string gridId, object parameters = null, string text = "Create")
-        {
-            gridId = html.Awe().GetContextPrefix() + gridId;
-            var parms = JsonConvert.SerializeObject(parameters, Formatting.None, new JsonSerializerSettings { StringEscapeHandling = StringEscapeHandling.EscapeHtml });
-
-            return html.Awe().Button()
-                .Text(text)
-                .OnClick(string.Format("$('#{0}').data('api').inlineCreate({1})", gridId, parms));
-        }
-
-        public static IHtmlContent CreateButtonForGrid<T>(this IHtmlHelper<T> html, string gridId, object parameters = null, string text = "Create")
+        public static IHtmlContent CreateButtonForGrid<T>(this IHtmlHelper<T> html, string gridId, string text = "Create")
         {
             return html.Awe().Button()
                 .Text(text)
-                .OnClick(html.Awe().OpenPopup(html.GetPopupName("create", gridId)).Params(parameters));
+                .OnClick(html.Awe().OpenPopup(html.GetPopupName("create", gridId)));
         }
 
         public static string EditFormatForGrid<T>(this IHtmlHelper<T> html, string gridId, string key = "Id", bool setId = false, bool nofocus = false, int? height = null)
@@ -82,30 +56,12 @@ namespace WebApp.Tools
         {
             gridId = html.Awe().GetContextPrefix() + gridId;
 
-            return DeleteFormatForGrid(gridId, key, nofocus);
-        }
-
-        public static string EditFormat(string popupName, string key = "Id", bool setId = false, bool nofocus = false)
-        {
-            var idattr = "";
-            if (setId)
-            {
-                idattr = $"id = 'gbtn{popupName}.{key}'";
-            }
-
-            var tabindex = nofocus ? "tabindex = \"-1\"" : string.Empty;
-
-            return string.Format("<button aria-label=\"edit\" type=\"button\" class=\"awe-btn awe-nonselect editbtn\" {3} {2}" +
-                                 " onclick=\"awe.open('{0}', {{ params:{{ id: '.({1})' }} }}, event)\"><span class='ico-crud ico-edit'></span></button>",
-                popupName, key, idattr, tabindex);
+            return DeleteFormat("delete" + gridId, key, null, null, nofocus);
         }
 
         public static string DeleteFormat(string popupName, string key = "Id", string deleteContent = null, string btnClass = null, bool nofocus = false)
         {
-            if (deleteContent == null)
-            {
-                deleteContent = "<span class='ico-crud ico-del'></span>";
-            }
+            deleteContent ??= "<span class='ico-crud ico-del'></span>";
 
             var tabindex = nofocus ? "tabindex = \"-1\"" : string.Empty;
 
@@ -114,41 +70,13 @@ namespace WebApp.Tools
                 popupName, key, deleteContent, btnClass, tabindex);
         }
 
-        public static string InlineEditFormat(bool nofocus = false)
+        public static IReadOnlyCollection<Type> GetTypes(Type baseType)
         {
-            var tabindex = nofocus ? "tabindex = \"-1\"" : string.Empty;
-            return string.Format("<button type=\"button\" class=\"awe-btn o-gledtb awe-nonselect o-glh o-glbtn\" {0} ><span class=\"btn-cont\">Edit</span></button>" +
-                                 "<button type=\"button\" class=\"awe-btn o-glsvb awe-nonselect o-gl o-glbtn\"><span class=\"btn-cont\">Save</span></button>", tabindex);
-        }
-
-        public static string EditFormatForGrid(string gridId, string key = "Id", bool setId = false, bool nofocus = false)
-        {
-            return EditFormat("edit" + gridId, key, setId, nofocus);
-        }
-
-        public static string DeleteFormatForGrid(string gridId, string key = "Id", bool nofocus = false)
-        {
-            return DeleteFormat("delete" + gridId, key, null, null, nofocus);
-        }
-
-        public static string EditGridNestFormat()
-        {
-            return "<button type='button' class='awe-btn editnst'><span class='ico-crud ico-edit'></span></button>";
-        }
-
-        public static string DeleteGridNestFormat()
-        {
-            return "<button type='button' class='awe-btn delnst'><span class='ico-crud ico-del'></span></button>";
-        }
-
-        public static string AddChildFormat()
-        {
-            return "<button type='button' class='awe-btn awe-nonselect o-pad' onclick=\"awe.open('createNode', { params:{ parentId: '.(Id)' } })\">add child</button>";
-        }
-
-        public static string MoveBtn()
-        {
-            return "<button type=\"button\" class=\"awe-movebtn awe-btn\" tabindex=\"-1\"><i class=\"awe-icon\"></i></button>";
+            return Assembly
+                .GetAssembly(baseType)
+                .GetTypes()
+                .Where(type => type.IsSubclassOf(baseType))
+                .ToList();
         }
     }
 }

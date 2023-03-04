@@ -1,4 +1,4 @@
-using Omu.AwesomeMvc;
+using GridLibrary;
 
 namespace WebApp.Tools.Helpers
 {

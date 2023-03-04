@@ -1,5 +1,5 @@
 ﻿using Microsoft.SqlServer.Server;
-using Omu.AwesomeMvc;
+using GridLibrary;
 using System.Globalization;
 using WebApp.Entities;
 using WebApp.Enums.Schedule;
@@ -30,9 +30,9 @@ namespace WebApp.Builders
         {
             var viewTypes = new Dictionary<ScheduleViewType, string>
             {
-                {ScheduleViewType.Day, "Day"},
-                {ScheduleViewType.Week, "Week"},
-                {ScheduleViewType.Month, "Month"}
+                {ScheduleViewType.Day, "День"},
+                {ScheduleViewType.Week, "Неделя"},
+                {ScheduleViewType.Month, "Месяц"}
             };
 
             return viewTypes.Select(o => new KeyContent(o.Key.ToString(), o.Value));
@@ -46,12 +46,12 @@ namespace WebApp.Builders
         {
             var hoursTypes = new Dictionary<int, string>
             {
-                { 30, "30 min" },
-                { 60, "1 hour" },
-                { 120, "2 hours" },
-                { 180, "3 hours" },
-                { 300, "5 hours" },
-                { 720, "12 hours" },
+                { 30, "30 мин" },
+                { 60, "1 час" },
+                { 120, "2 часа" },
+                { 180, "3 часа" },
+                { 300, "5 часов" },
+                { 720, "12 часов" },
             };
 
             return hoursTypes.Select(o => new KeyContent(o.Key, o.Value));
@@ -81,7 +81,7 @@ namespace WebApp.Builders
 
             if (IsDayLikeView())
             {
-                var allDayRow = new ScheduleRow { Time = "all day", IsAllDay = true };
+                var allDayRow = new ScheduleRow { Time = "Весь день", IsAllDay = true };
 
                 var allDayCells = new List<ScheduleCell>();
                 var daysCount = GetDaysCount();

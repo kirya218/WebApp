@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Omu.AwesomeMvc;
+using GridLibrary;
 using WebApp.Context;
 using WebApp.Entities;
 using WebApp.Interfaces;
@@ -9,7 +9,7 @@ using WebApp.Models.Contact;
 
 namespace WebApp.Controllers.ContactControllers
 {
-    public class ContactController : Controller, IController<Contact, ContactAddInput, ContactEditInput, DeleteImput>
+    public class ContactController : Controller, IController<Contact, ContactAddInput, ContactEditInput, DeleteInput>
     {
         /// <summary>
         /// Контекст.
@@ -107,7 +107,7 @@ namespace WebApp.Controllers.ContactControllers
         {
             var contact = _context.Contacts.Single(x => x.Id == id);
 
-            return PartialView(new DeleteImput
+            return PartialView(new DeleteInput
             {
                 Id = id,
                 GridId = gridId,
@@ -116,11 +116,11 @@ namespace WebApp.Controllers.ContactControllers
         }
 
         [HttpPost]
-        public ActionResult Delete(DeleteImput view)
+        public ActionResult Delete(DeleteInput view)
         {
-            var chamber = _context.Chambers.Single(x => x.Id == view.Id);
+            var contact = _context.Contacts.Single(x => x.Id == view.Id);
 
-            _context.Remove(chamber);
+            _context.Remove(contact);
             _context.SaveChanges();
 
             return Json(new { view.Id });
