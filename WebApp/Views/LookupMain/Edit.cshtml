@@ -11,9 +11,9 @@
     <div class="bar">
         @Html.CreateButtonForGrid(Model.GridName, "Добавить")
     </div>
-    <hr/>
+    <hr />
 
-    <div>
+    <div class="gui3">
         @(Html.Awe().Grid(Model.GridName)
             .Url(Url.Action("GridGetItems", Model.ControllerName))
             .Groupable(false)

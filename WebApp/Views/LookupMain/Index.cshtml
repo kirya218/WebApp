@@ -10,11 +10,13 @@
 </header>
 <hr />
 
-@(Html.Awe().Grid(gridName)
-    .Url(Url.Action("GridGetItems"))
-    .Groupable(false)
-    .Columns(
+<div class="gui3">
+    @(Html.Awe().Grid(gridName)
+        .Url(Url.Action("GridGetItems"))
+        .Groupable(false)
+        .Columns(
         new Column { Bind = "Id", Hidden = true },
         new Column { Bind = "Name", Header = "Название" },
         new Column { Bind = "Description", Header = "Описание" },
         new Column { ClientFormat = Html.EditFormatForGrid(gridName), Width = 55 }))
+</div>
