@@ -1,4 +1,4 @@
-﻿using Omu.AwesomeMvc;
+﻿using GridLibrary;
 using WebApp.Enums.Schedule;
 
 namespace WebApp.Models.Schedule

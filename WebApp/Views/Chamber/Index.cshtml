@@ -33,7 +33,7 @@
 <div class="gui3">
     @(Html.Awe().Grid(gridName)
         .Mod(o => o.Main().ColumnsAutohide())
-        .Url(Url.Action("GridGetItems"))
+        .Url(Url.Action("GridGetItems", "Chamber"))
         .Reorderable()
         .Resizable()
         .Columns(

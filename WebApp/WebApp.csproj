@@ -21,8 +21,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Omu.AwesomeMvc">
-      <HintPath>..\libs\Omu.AwesomeMvc.dll</HintPath>
+    <Reference Include="GridLibrary">
+      <HintPath>..\libs\GridLibrary.dll</HintPath>
     </Reference>
   </ItemGroup>
 

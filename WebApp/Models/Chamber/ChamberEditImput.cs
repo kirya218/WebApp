@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Omu.AwesomeMvc;
+using GridLibrary;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebApp.Models.Chamber
@@ -14,13 +14,13 @@ namespace WebApp.Models.Chamber
 
         [Display(Name = "Этаж")]
         [UIHint("Combobox")]
-        [AweUrl("GetFloorsList", "Chamber")]
+        [AweUrl(Action = "GetFloorsList", Controller = "Chamber")]
         [Required(ErrorMessage = "Floor is required")]
         public int Floor { get; set; }
 
         [Display(Name = "Количество мест")]
         [UIHint("Combobox")]
-        [AweUrl("GetSeatsList", "Chamber")]
+        [AweUrl(Action = "GetSeatsList", Controller = "Chamber")]
         [Required(ErrorMessage = "Quantity of seats is required")]
         public int QuantitySeats { get; set; }
 

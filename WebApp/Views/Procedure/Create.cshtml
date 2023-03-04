@@ -1,0 +1,9 @@
+﻿@model ProcedureAddInput
+@using (Html.BeginForm())
+{
+    using (Html.Awe().BeginContext())
+    {
+        @Html.EditorFor(model => model.Name)
+        @Html.EditorFor(model => model.Description)
+    }
+}

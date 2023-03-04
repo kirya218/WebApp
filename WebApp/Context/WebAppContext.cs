@@ -15,6 +15,8 @@ namespace WebApp.Context
         public DbSet<ContactType> ContactTypes { get; set; }
         public DbSet<Procedure> Procedures { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
+        public DbSet<Lookup> Lookups { get; set; }
+
         public WebAppContext(DbContextOptions options) : base(options)
         {
             Database.EnsureCreated();
@@ -23,6 +25,24 @@ namespace WebApp.Context
 
         private void LoadData()
         {
+            Lookups.Add(new Lookup
+            {
+                LookupCode = "ContactType",
+                Name = "Тип контакта",
+                CreatedOn = DateTime.Now,
+                ModifiedOn = DateTime.Now,
+                Description = "Для типизации контантов"
+            });
+
+            Lookups.Add(new Lookup
+            {
+                LookupCode = "Procedure",
+                Name = "Процедуры",
+                CreatedOn = DateTime.Now,
+                ModifiedOn = DateTime.Now,
+                Description = "Можно добавить процедуры"
+            });
+
             var contactType = new ContactType()
             {
                 Name = "Работник",

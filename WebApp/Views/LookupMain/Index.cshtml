@@ -1,0 +1,20 @@
+﻿@{
+    var gridName = "Lookup";
+}
+@Html.InitCrudPopupsForGrid(gridName, "LookupMain", 470, 1000)
+
+<header style="margin-bottom:35px">
+    <div class="container">
+        <h2>Справочники</h2>
+    </div>
+</header>
+<hr />
+
+@(Html.Awe().Grid(gridName)
+    .Url(Url.Action("GridGetItems"))
+    .Groupable(false)
+    .Columns(
+        new Column { Bind = "Id", Hidden = true },
+        new Column { Bind = "Name", Header = "Название" },
+        new Column { Bind = "Description", Header = "Описание" },
+        new Column { ClientFormat = Html.EditFormatForGrid(gridName), Width = 55 }))

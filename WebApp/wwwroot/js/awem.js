@@ -2651,7 +2651,7 @@ var awem = function ($) {
         var $odropdown = $(rdiv('o-dd'));
         var $odisplay = $(rdiv('o-disp ' + soldngp, loadingHtml));
         var $valCont = $(rdiv('valCont')).hide();
-        var btnCaption = $(rdiv('o-cptn', "��������" + "���������� ��������"));
+        var btnCaption = $(rdiv('o-cptn', "Страница" + "Пожалуйста выберите"));
         var vprop = useConVal ? 'c' : 'k';
         var valInputType = opt.multiple ? "checkbox" : "radio";
         var ds = dataSource(function () { return o.lrs; }, cacheKey);
@@ -4170,20 +4170,20 @@ var awem = function ($) {
     }
 
     var clientDict = {
-        Empty: 'empty',
-        GridInfo: "of {0} items",
-        Select: 'please select',
-        SearchForRes: 'search for more results',
-        Search: 'search',
-        NoRecFound: 'no records found',
-        PageSize: 'page size',
+        Empty: 'пусто',
+        GridInfo: "из {0}",
+        Select: 'выберите',
+        SearchForRes: 'больше результатов',
+        Search: 'поиск',
+        NoRecFound: 'не найдено',
+        PageSize: 'размер страницы',
         Months: [
-            "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
+            "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
+            "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
         ],
-        Days: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
-        selected: 'selected',
-        More: 'more'
+        Days: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"],
+        selected: 'выбрано',
+        More: 'больше'
     };
 
     function gldng(disb, noEmpMsg) {

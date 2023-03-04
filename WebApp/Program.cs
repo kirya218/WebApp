@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-using Omu.AwesomeMvc;
+using GridLibrary;
 using WebApp.Context;
 
 namespace WebApp

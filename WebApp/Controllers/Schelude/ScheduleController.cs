@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Omu.AwesomeMvc;
+using GridLibrary;
 using WebApp.Builders;
 using WebApp.Context;
 using WebApp.Entities;
@@ -11,7 +11,7 @@ using WebApp.Models.Schedule;
 
 namespace WebApp.Controllers.ScheludeControllers
 {
-    public class ScheduleController : Controller, IController<Schedule, ScheduleAddInput, ScheduleEditInput, DeleteImput>
+    public class ScheduleController : Controller, IController<Schedule, ScheduleAddInput, ScheduleEditInput, DeleteInput>
     {
         private readonly WebAppContext _context;
 
@@ -204,7 +204,7 @@ namespace WebApp.Controllers.ScheludeControllers
         {
             var schelude = _context.Schedules.Single(x => x.Id == id);
 
-            return PartialView(new DeleteImput
+            return PartialView(new DeleteInput
             {
                 Id = id,
                 GridId = gridId,
@@ -213,7 +213,7 @@ namespace WebApp.Controllers.ScheludeControllers
         }
 
         [HttpPost]
-        public ActionResult Delete(DeleteImput view)
+        public ActionResult Delete(DeleteInput view)
         {
             var schelude = _context.Schedules.Single(x => x.Id == view.Id);
 

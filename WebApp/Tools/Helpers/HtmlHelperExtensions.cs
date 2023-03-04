@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Text;
 using Microsoft.AspNetCore.Html;
-using Omu.AwesomeMvc;
+using GridLibrary;
 
 namespace WebApp.Tools.Helpers
 {
