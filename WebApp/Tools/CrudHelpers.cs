@@ -92,7 +92,7 @@ namespace WebApp.Tools
             string gridId,
             string crudController,
             int createPopupHeight = 430,
-            int maxWidth = 264,
+            int maxWidth = 284,
             bool reload = false,
             string area = null)
         {

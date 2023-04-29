@@ -23,8 +23,14 @@ namespace WebApp.Models.Chamber
         [UIHint("Lookup")]
         public Guid? ChamberType { get; set; }
 
-        [Display(Name = "Типизация")]
+        [Display(Name = "Пол")]
         [UIHint("Lookup")]
         public Guid? Gender { get; set; }
+
+        [Display(Name = "Имеет ли братьев или сестер?")]
+        public bool HasBrather { get; set; }
+
+        [Display(Name = "Количество братьев или сестер")]
+        public int? QuantityBrather { get; set; }
     }
 }

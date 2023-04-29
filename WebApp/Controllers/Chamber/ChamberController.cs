@@ -20,6 +20,8 @@ namespace WebApp.Controllers.ChamberControllers
             public static int QuantitySeats { get; set; }
             public static int Floor { get; set; }
             public static bool IsChoice { get; set; }
+            public static bool HasBrather { get; set; }
+            public static int QuantityBrather { get; set; }
         }
 
         /// <summary>
@@ -155,6 +157,8 @@ namespace WebApp.Controllers.ChamberControllers
             FilterChoice.HobbiesId = view.Hobbies?.ToArray() ?? Array.Empty<Guid>();
             FilterChoice.QuantitySeats = view.QuantitySeats ?? 0;
             FilterChoice.Floor = view.Floor ?? 0;
+            FilterChoice.HasBrather = view.HasBrather;
+            FilterChoice.QuantityBrather = view.QuantityBrather ?? 0;
 
             return Json(new { view });
         }
@@ -313,7 +317,20 @@ namespace WebApp.Controllers.ChamberControllers
             if (priority >= 2)
             {
                 var chamberIds = GetChamberByHobbies();
-                items = items.Where(x => chamberIds.Contains(x.Id) || x.QuantitySeats == FilterChoice.QuantitySeats);
+
+                if (SettingHelper.TryGetValue<Guid>(_context, "SystemType", out var type) && type == ConstansCS.Type.Orphanage)
+                {
+                    items = items.Where(x => chamberIds.Contains(x.Id) || x.QuantitySeats == FilterChoice.QuantitySeats);
+
+                    if (FilterChoice.HasBrather)
+                    {
+                        items = items.Where(x => x.QuantitySeats == FilterChoice.QuantityBrather + 1);
+                    }
+                }
+                else
+                {
+                    items = items.Where(x => chamberIds.Contains(x.Id) || x.QuantitySeats == FilterChoice.QuantitySeats);
+                }
             }
 
             if (priority >= 3)
@@ -329,11 +346,6 @@ namespace WebApp.Controllers.ChamberControllers
             var contacts = _context.ContactHobbies.Where(x => FilterChoice.HobbiesId.Contains(x.Id)).Select(x => x.Contact.Id);
             var chambers = _context.ContactInChambers.Where(x => contacts.Contains(x.Contact.Id)).Select(x => x.Chamber.Id);
             return chambers.ToArray();
-        }
-
-        private class Frow
-        {
-            public KeyContent[] ContactType { get; set; }
         }
     }
 }

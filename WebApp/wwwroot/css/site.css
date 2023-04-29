@@ -457,7 +457,6 @@ select.awe-display {
 
 .elabel {
     text-align: right;
-    width: 150px;
     display: inline-block;
     zoom: 1;
     vertical-align: top;
@@ -467,7 +466,6 @@ select.awe-display {
 
     .elabel label {
         font-weight: 600;
-        text-transform: capitalize;
     }
 
 @media (max-width: 480px) {
