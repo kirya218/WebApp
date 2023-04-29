@@ -1,8 +1,10 @@
 ﻿@{
     var gridName = "Chamber";
+    var gridId = Html.Awe().GetContextPrefix() + gridName;
 }
 
 @Html.InitCrudPopupsForGrid(gridName, "Chamber")
+@Html.InitChoiseChamber(gridName, "Chamber")
 
 <header style="margin-bottom:35px">
     <div class="container">
@@ -25,6 +27,11 @@
                     <li><button formmethod="get" asp-controller="Chamber" asp-action="Index">Export Excel</button></li>
                 </ul>
             </div>
+        </form>
+        <form>
+            <button type="button" onclick="awe.open('@("choice" + gridName)')" class="btn btn-secondary btn-main col-sm-4">
+                Подобрать палату
+            </button>
         </form>
     </div>
 </header>
