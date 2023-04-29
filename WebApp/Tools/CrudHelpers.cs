@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Html;
+﻿using GridLibrary;
+using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using GridLibrary;
 
 namespace WebApp.Tools
 {
@@ -75,6 +74,45 @@ namespace WebApp.Tools
                     .OnLoad(delConfirmFunc)
                     .Height(200)
                     .Modal()
+             );
+        }
+
+        /// <summary>
+        /// Инициализирует окно выбора фильтров.
+        /// </summary>
+        /// <typeparam name="T">Тип html.</typeparam>
+        /// <param name="html">HTML.</param>
+        /// <param name="gridId">Идентификатор таблицы.</param>
+        /// <param name="crudController">Названия контролера.</param>
+        /// <param name="createPopupHeight">Высота окна.</param>
+        /// <param name="maxWidth">Максимальная ширина окна.</param>
+        /// <returns>Контент HTML.</returns>
+        public static IHtmlContent InitChoiseChamber<T>(
+            this IHtmlHelper<T> html,
+            string gridId,
+            string crudController,
+            int createPopupHeight = 430,
+            int maxWidth = 264,
+            bool reload = false,
+            string area = null)
+        {
+            var url = GetUrlHelper(html);
+            gridId = html.Awe().GetContextPrefix() + gridId;
+
+            var reloadFunc = "utils.refreshGrid('" + gridId + "')";
+
+            return new HtmlString(
+                html.Awe()
+                    .InitPopupForm()
+                    .Name("choice" + gridId)
+                    .Group(gridId)
+                    .Height(createPopupHeight)
+                    .MaxWidth(maxWidth)
+                    .Url(url.Action("Choice", crudController, new { area }))
+                    .Title("Подбор полаты")
+                    .Modal()
+                    .Success(reloadFunc)
+                    .ToString()
              );
         }
 

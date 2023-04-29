@@ -6,6 +6,12 @@ using WebApp.Entities;
 using WebApp.Interfaces;
 using WebApp.Models;
 using WebApp.Models.Contact;
+using WebApp.Tools;
+using System.Reflection;
+using System;
+using WebApp.Builders.Filters;
+using Microsoft.IdentityModel.Tokens;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace WebApp.Controllers.ContactControllers
 {
@@ -56,16 +62,39 @@ namespace WebApp.Controllers.ContactControllers
                 };
         }
 
-        public ActionResult GridGetItems(GridParams gridParams)
+        public async Task<ActionResult> GridGetItems(GridParams gridParams, string[] forder, string fullName, Guid? contactType)
         {
+            forder ??= Array.Empty<string>();
             var items = _context.Contacts.Include(x => x.ContactType).AsQueryable();
+            var frow = new Frow();
 
-            return Json(new GridModelBuilder<Contact>(items, gridParams)
+            var filterBuilder = new FilterBuilder<Contact>()
+                .Add("FullName", 
+                    x => !string.IsNullOrWhiteSpace(fullName) 
+                        ? x.Where(y => y.FullName.Contains(fullName)) 
+                        : x)
+                .Add("ContactType", new FilterRule<Contact>
+                {
+                    Query = x => contactType.HasValue && contactType != Guid.Empty ? x.Where(y => y.ContactType.Id == contactType) : x,
+                    Data = async x =>
+                    {
+                        frow.ContactType = await x.Select(x => x.ContactType)
+                            .Distinct()
+                            .Select(x => new KeyContent(x.Id, x.Name))
+                            .ToArrayAsync();
+                    }
+                });
+
+            items = await filterBuilder.ApplyAsync(items, forder);
+
+
+            return Json(await new GridModelBuilder<Contact>(items, gridParams)
             {
                 KeyProp = contact => contact.Id,
-                GetItem = () => items.Single(x => x.Id == Guid.Parse(gridParams.Key)),
-                Map = MapToGridModel
-            }.Build());
+                //GetItem = () => items.Single(x => x.Id == Guid.Parse(gridParams.Key)),
+                Map = MapToGridModel,
+                Tag = new { frow }
+            }.BuildAsync());
         }
 
         [HttpGet]
@@ -138,9 +167,9 @@ namespace WebApp.Controllers.ContactControllers
                 FullName = contact.FullName,
                 Age = contact.Age,
                 Email = contact.Email,
-                BirthDate= contact.BirthDate,
+                BirthDate = contact.BirthDate,
                 MobilePhone = contact.MobilePhone,
-                Phone= contact.Phone
+                Phone = contact.Phone
             };
 
             return PartialView("Edit", input);
@@ -169,6 +198,18 @@ namespace WebApp.Controllers.ContactControllers
             _context.SaveChanges();
 
             return Json(new { contact.Id });
+        }
+
+        public ActionResult ExportToExcel()
+        {
+            var excelHelper = new ExcelHelper();
+            var excel = excelHelper.ExportExcel(_context.Contacts.Include(x => x.ContactType).ToList());
+            return File(excel, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+        private class Frow
+        {
+            public KeyContent[] ContactType { get; set; }
         }
     }
 }

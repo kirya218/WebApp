@@ -1,0 +1,12 @@
+﻿@model ChamberChoiceImput
+@using (Html.BeginForm())
+{
+    using (Html.Awe().BeginContext())
+    {
+        @Html.EditorFor(model => model.Gender)
+        @Html.EditorFor(model => model.ChamberType)
+        @Html.EditorFor(model => model.Hobbies)
+        @Html.EditorFor(model => model.QuantitySeats)
+        @Html.EditorFor(model => model.Floor)
+    }
+}

@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GridLibrary;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using GridLibrary;
 using WebApp.Context;
 using WebApp.Entities;
 using WebApp.Interfaces;
@@ -12,6 +12,16 @@ namespace WebApp.Controllers.ChamberControllers
 {
     public class ChamberController : Controller, IController<Chamber, ChamberAddImput, ChamberEditImput, DeleteInput>
     {
+        private static class FilterChoice
+        {
+            public static Guid GenderId { get; set; }
+            public static Guid ChamberTypeId { get; set; }
+            public static Guid[] HobbiesId { get; set; }
+            public static int QuantitySeats { get; set; }
+            public static int Floor { get; set; }
+            public static bool IsChoice { get; set; }
+        }
+
         /// <summary>
         /// Контекст.
         /// </summary>
@@ -63,16 +73,35 @@ namespace WebApp.Controllers.ChamberControllers
                 };
         }
 
-        public ActionResult GridGetItems(GridParams gridParams)
+        public async Task<ActionResult> GridGetItems(GridParams gridParams)
         {
-            var items = _context.Chambers.Include(x => x.Owner).AsQueryable();
+            var items = _context.Chambers
+                .Include(x => x.Owner)
+                .Include(x => x.Gender)
+                .Include(x => x.ChamberType)
+                .AsQueryable();
 
-            return Json(new GridModelBuilder<Chamber>(items, gridParams)
+            if (FilterChoice.IsChoice)
+            {
+                var priority = 3;
+                var tempItems = items;
+                do
+                {
+                    tempItems = GetItemsFilteration(items, priority);
+                    priority--;
+                }
+                while (!tempItems.Any() && priority != 0);
+
+                items = tempItems;
+                FilterChoice.IsChoice = false;
+            }
+
+            return Json(await new GridModelBuilder<Chamber>(items, gridParams)
             {
                 KeyProp = chamber => chamber.Id,
                 GetItem = () => items.Single(x => x.Id == Guid.Parse(gridParams.Key)),
                 Map = MapToGridModel
-            }.Build());
+            }.BuildAsync());
         }
 
         [HttpGet]
@@ -104,6 +133,30 @@ namespace WebApp.Controllers.ChamberControllers
             _context.SaveChanges();
 
             return Json(MapToGridModel(chamber));
+        }
+
+        [HttpGet]
+        public ActionResult Choice()
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        public ActionResult Choice(ChamberChoiceImput view)
+        {
+            if (!ModelState.IsValid)
+            {
+                return PartialView(view);
+            }
+
+            FilterChoice.IsChoice = true;
+            FilterChoice.GenderId = view.Gender ?? Guid.Empty;
+            FilterChoice.ChamberTypeId = view.ChamberType ?? Guid.Empty;
+            FilterChoice.HobbiesId = view.Hobbies?.ToArray() ?? Array.Empty<Guid>();
+            FilterChoice.QuantitySeats = view.QuantitySeats ?? 0;
+            FilterChoice.Floor = view.Floor ?? 0;
+
+            return Json(new { view });
         }
 
         [HttpGet]
@@ -162,7 +215,7 @@ namespace WebApp.Controllers.ChamberControllers
             {
                 Id = id,
                 GridId = gridId,
-                Message = string.Format("Are you sure you want to delete the chamber number <b>{0}</b> ?", chamber.Number)
+                Message = string.Format("Вы действительно хотите удалить данную запись <b>{0}</b> ?", chamber.Number)
             });
         }
 
@@ -248,6 +301,39 @@ namespace WebApp.Controllers.ChamberControllers
             }
 
             return Json(Enumerable.Range(1, quantity).Select(x => new KeyContent(x, x.ToString())));
+        }
+
+        private IQueryable<Chamber> GetItemsFilteration(IQueryable<Chamber> items, int priority)
+        {
+            if (priority >= 1)
+            {
+                items = items.Where(x => x.ChamberType.Id == FilterChoice.ChamberTypeId || x.Gender.Id == FilterChoice.GenderId);
+            }
+
+            if (priority >= 2)
+            {
+                var chamberIds = GetChamberByHobbies();
+                items = items.Where(x => chamberIds.Contains(x.Id) || x.QuantitySeats == FilterChoice.QuantitySeats);
+            }
+
+            if (priority >= 3)
+            {
+                items = items.Where(x => x.Floor == FilterChoice.Floor);
+            }
+
+            return items;
+        }
+
+        private Guid[] GetChamberByHobbies()
+        {
+            var contacts = _context.ContactHobbies.Where(x => FilterChoice.HobbiesId.Contains(x.Id)).Select(x => x.Contact.Id);
+            var chambers = _context.ContactInChambers.Where(x => contacts.Contains(x.Contact.Id)).Select(x => x.Chamber.Id);
+            return chambers.ToArray();
+        }
+
+        private class Frow
+        {
+            public KeyContent[] ContactType { get; set; }
         }
     }
 }

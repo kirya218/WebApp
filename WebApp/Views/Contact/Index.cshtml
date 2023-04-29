@@ -1,5 +1,6 @@
 ﻿@{
     var gridName = "Contact";
+    var pref = "frowOut";
 }
 
 @Html.InitCrudPopupsForGrid(gridName, "Contact")
@@ -22,7 +23,7 @@
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li><button formmethod="get" asp-controller="Contact" asp-action="Index">Import Excel</button></li>
-                    <li><button formmethod="get" asp-controller="Contact" asp-action="Index">Export Excel</button></li>
+                    <li><button formmethod="get" asp-controller="Contact" asp-action="ExportToExcel">Export Excel</button></li>
                 </ul>
             </div>
         </form>
@@ -30,9 +31,28 @@
 </header>
 <hr />
 
+<div id="outfrow" class="frowpnl awe-il" style="margin-right: 1em">
+
+    @using (Html.Awe().BeginContext(pref))
+    {
+        <label>
+            ФИО:<br />
+            @Html.Awe().TextBox("FullName").ClearButton()
+        </label>
+        <label>
+            Роль:<br />
+            @Html.Awe().Odropdown("ContactType", x => x.ClearBtn()).DataFunc("filterData('ContactType')")
+        </label>
+        <label style="margin-right: 1em;">
+            <span> </span><br />
+            <button type="button" id="btnClearFilter" class="awe-btn">Очистить фильтры</button>
+        </label>
+    }
+</div>
+
 <div class="gui3">
     @(Html.Awe().Grid(gridName)
-        .Mod(o => o.Main().ColumnsAutohide())
+        .Mod(o => o.Main().ColumnsAutohide().Custom("outsideFilter"))
         .Url(Url.Action("GridGetItems"))
         .Reorderable()
         .Resizable()
@@ -52,3 +72,89 @@
         new Column { ClientFormat = Html.DeleteFormatForGrid(gridName), Width = 55 }.Mod(o => o.Nohide())))
 </div>
 
+<script>
+    function outsideFilter(o) {
+        var g = o.v;
+        var fcont = $('#outfrow');
+        var opt = { model: {} };
+        o.fltopt = opt;
+
+        g.on('aweload', function () {
+            $('#outfrow .awe-val').each(function () {
+                var api = $(this).data('api');
+                api && api.load && api.load();
+            });
+        });
+
+        fcont.on('change', function (e) {
+            opt.inp = fcont.find('input').not('.nonflt input');
+            awem.loadgflt(o);
+        });
+
+        $('#btnClearFilter').on('click', function () {
+            fcont.find('.awe-val').not('.nonflt input').each(function () {
+                var it = $(this).val('');
+                var api = it.data('api');
+                api && api.render && api.render();
+            });
+
+            opt.inp = fcont.find('input').not('.nonflt input');
+
+            awem.loadgflt(o);
+        });
+
+        var fkey = 'persFout' + o.id;
+        var storage = sessionStorage;
+        var pref = '@pref';
+
+        g.on('awefinit', function () {
+            var fopt = storage[fkey];
+            if (fopt) {
+                fopt = JSON.parse(fopt, function (key, val) {
+                    if (val && val.length > 0 && val[0] === '[') {
+                        return JSON.parse(val);
+                    }
+
+                    return val;
+                });
+
+                if (fopt.model) {
+                    o.fltopt.model = fopt.model;
+                    o.fltopt.order = fopt.order;
+
+                    var res = awef.serlObj(fopt.model);
+                    res = res.concat(awef.serlArr(fopt.order, 'forder'));
+                    o.fparams = res;
+                    var model = fopt.model;
+
+                    g.one('aweload', function () {
+                        for (var prop in model) {
+                            var editor = $('#' + pref + prop);
+                            if (editor.length) {
+                                editor.val(awef.sval(model[prop]));
+                                if (editor.closest('.awe-txt-field')) {
+                                    editor.data('api').render();
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+
+            g.on('aweload', function (e) {
+                if ($(e.target).is(g)) {
+                    fopt = o.fltopt;
+                    storage[fkey] = JSON.stringify({ model: fopt.model, order: fopt.order });
+                }
+            });
+        });
+    }
+
+    function filterData(name) {
+        return function () {
+            var g = $('#@gridName');
+            var o = g.data('o');
+            return awem.frowData(o, name);
+        }
+    }
+</script>
