@@ -2,7 +2,7 @@
 
 namespace WebApp.Models.SystemSetting
 {
-    public class SystemSettingEditInput<T>
+    public class SystemSettingEditInput
     {
         public Guid Id { get; set; }
 
@@ -13,8 +13,22 @@ namespace WebApp.Models.SystemSetting
         public string? Code { get; set; }
 
         [Display(Name = "Значение")]
-        [Required]
-        public T Value { get; set; }
+        public Guid? GuidValue { get; set; }
+
+        [Display(Name = "Значение")]
+        public string? StringValue { get; set; }
+
+        [Display(Name = "Значение")]
+        public DateTime? DateTimeValue { get; set; }
+
+        [Display(Name = "Значение")]
+        public bool? BoolValue { get; set; }
+
+        [Display(Name = "Значение")]
+        public float? FloatValue { get; set; }
+
+        [Display(Name = "Значение")]
+        public int? IntValue { get; set; }
 
         [Display(Name = "Описание")]
         public string? Description { get; set; }

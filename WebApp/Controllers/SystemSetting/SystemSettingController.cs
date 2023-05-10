@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using DocumentFormat.OpenXml.EMMA;
+using DocumentFormat.OpenXml.Wordprocessing;
 using GridLibrary;
-using System;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApp.Context;
 using WebApp.Entities;
 using WebApp.Models.SystemSetting;
@@ -69,52 +70,64 @@ namespace WebApp.Controllers.SystemSetting
             var systemSetting = _context.Settings.Include(x => x.SettingValue).Single(x => x.Id == id);
             var value = SettingHelper.GetValue(_context, systemSetting.Code);
 
-
-            switch (systemSetting.Type)
+            return systemSetting.Type switch
             {
-                case "string":
-                    return PartialView("Edit", CreateInput(systemSetting, (string)value));
-                case "bool":
-                    return PartialView("Edit", CreateInput(systemSetting, (bool)value));
-                case "guid":
-                    return PartialView("Edit", CreateInput(systemSetting, (Guid)value));
-                case "datetime":
-                    return PartialView("Edit", CreateInput(systemSetting, (DateTime)value));
-                case "int":
-                    return PartialView("EditInteger", CreateInput(systemSetting, (int)value));
-                case "float":
-                    return PartialView("Edit", CreateInput(systemSetting, (float)value));
-                default: 
-                    return PartialView();
-            }
-        }
-
-        private static SystemSettingEditInput<T> CreateInput<T>(Setting systemSetting, T value)
-        {
-            return new SystemSettingEditInput<T>
-            {
-                Id = systemSetting.Id,
-                Name = systemSetting.Name,
-                Code = systemSetting.Code,
-                Description = systemSetting.Description,
-                Value = value
+                "string" => PartialView("Edit", CreateInput(systemSetting, new SystemSettingEditInput() { StringValue = (string)value })),
+                "bool" => PartialView("Edit", CreateInput(systemSetting, new SystemSettingEditInput() { BoolValue = (bool)value })),
+                "guid" => PartialView("Edit", CreateInput(systemSetting, new SystemSettingEditInput() { GuidValue = (Guid)value })),
+                "datetime" => PartialView("Edit", CreateInput(systemSetting, new SystemSettingEditInput() { DateTimeValue = (DateTime)value })),
+                "int" => PartialView("Edit", CreateInput(systemSetting, new SystemSettingEditInput() { IntValue = (int)value })),
+                "float" => PartialView("Edit", CreateInput(systemSetting, new SystemSettingEditInput() { FloatValue = (float)value })),
+                _ => PartialView(),
             };
         }
 
+        private SystemSettingEditInput CreateInput(Setting systemSetting, SystemSettingEditInput view)
+        {
+            view.Id = systemSetting.Id;
+            view.Name = systemSetting.Name;
+            view.Code = systemSetting.Code;
+            view.Description = systemSetting.Description;
+            return view;
+        }
+
         [HttpPost]
-        public ActionResult Edit(SystemSettingEditInput<int> view)
+        public ActionResult Edit(SystemSettingEditInput view)
         {
             if (!ModelState.IsValid)
             {
-                return PartialView("EditInteger", view);
+                return PartialView("Edit", view);
             }
 
             var setting = _context.Settings.Include(x => x.SettingValue).Single(x => x.Id == view.Id);
-
             setting.Description = view.Description ?? string.Empty;
-            setting.SettingValue.IntegerValue = view.Value;
-            setting.ModifiedOn = DateTime.Now.ToLocalTime();
 
+            if (view.IntValue != null)
+            {
+                setting.SettingValue.IntegerValue = view.IntValue;
+            }
+            else if (view.GuidValue != null)
+            {
+                setting.SettingValue.GuidValue = view.GuidValue;
+            }
+            else if (view.DateTimeValue != null)
+            {
+                setting.SettingValue.DateTimeValue = view.DateTimeValue;
+            }
+            else if (view.FloatValue != null)
+            {
+                setting.SettingValue.FloatValue = view.FloatValue;
+            }
+            else if (view.BoolValue != null)
+            {
+                setting.SettingValue.BooleanValue = view.BoolValue;
+            }
+            else
+            {
+                setting.SettingValue.TextValue = view.StringValue;
+            }
+
+            setting.ModifiedOn = DateTime.Now.ToLocalTime();
 
             _context.Update(setting);
             _context.SaveChanges();

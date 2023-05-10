@@ -1,0 +1,36 @@
+﻿@model SystemSettingEditInput
+@using (Html.BeginForm())
+{
+    using (Html.Awe().BeginContext())
+    {
+        @Html.EditorFor(model => model.Name)
+        @Html.EditorFor(model => model.Code)
+
+        @if (Model.IntValue != null)
+        {
+            @Html.EditorFor(model => model.IntValue)
+        }
+        else if (Model.GuidValue != null)
+        {
+            @Html.EditorFor(model => model.GuidValue)
+        }
+        else if (Model.DateTimeValue != null)
+        {
+            @Html.EditorFor(model => model.DateTimeValue)
+        }
+        else if (Model.FloatValue != null)
+        {
+            @Html.EditorFor(model => model.FloatValue)
+        }
+        else if (Model.BoolValue != null)
+        {
+            @Html.EditorFor(model => model.BoolValue)
+        }
+        else
+        {
+            @Html.EditorFor(model => model.StringValue)
+        }
+
+        @Html.EditorFor(model => model.Description)
+    }
+}

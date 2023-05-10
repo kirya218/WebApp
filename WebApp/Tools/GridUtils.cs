@@ -19,9 +19,9 @@ namespace WebApp.Tools
                 .OnClick(html.Awe().OpenPopup(html.GetPopupName("create", gridId)));
         }
 
-        public static string EditFormatForGrid<T>(this IHtmlHelper<T> html, string gridId, string key = "Id", bool setId = false, bool nofocus = false, int? height = null)
+        public static string EditFormatForGrid<T>(this IHtmlHelper<T> html, string gridId, string popapName = "edit", string key = "Id", bool setId = false, bool nofocus = false, int? height = null)
         {
-            var popupName = html.GetPopupName("edit", gridId);
+            var popupName = html.GetPopupName(popapName, gridId);
 
             var click = html.Awe().OpenPopup(popupName).Params(new { id = $".({key})" });
             if (height.HasValue)
@@ -31,7 +31,7 @@ namespace WebApp.Tools
 
             var button = html.Awe().Button()
                 .CssClass("awe-nonselect editbtn")
-                .HtmlAttributes(new { aria_label = "edit"})
+                .HtmlAttributes(new { aria_label = popapName })
                 .Text("<span class='ico-crud ico-edit'></span>")
                 .OnClick(click);
 
