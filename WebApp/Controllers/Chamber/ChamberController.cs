@@ -14,14 +14,14 @@ namespace WebApp.Controllers.ChamberControllers
     {
         private static class FilterChoice
         {
-            public static Guid GenderId { get; set; }
-            public static Guid ChamberTypeId { get; set; }
-            public static Guid[] HobbiesId { get; set; }
-            public static int QuantitySeats { get; set; }
-            public static int Floor { get; set; }
+            public static Guid? GenderId { get; set; }
+            public static Guid? ChamberTypeId { get; set; }
+            public static Guid[]? HobbiesId { get; set; }
+            public static int? QuantitySeats { get; set; }
+            public static int? Floor { get; set; }
             public static bool IsChoice { get; set; }
             public static bool HasBrather { get; set; }
-            public static int QuantityBrather { get; set; }
+            public static int? QuantityBrather { get; set; }
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace WebApp.Controllers.ChamberControllers
                 while (!tempItems.Any() && priority != 0);
 
                 items = tempItems;
-                FilterChoice.IsChoice = false;
+                ClearFilter();
             }
 
             return Json(await new GridModelBuilder<Chamber>(items, gridParams)
@@ -140,7 +140,17 @@ namespace WebApp.Controllers.ChamberControllers
         [HttpGet]
         public ActionResult Choice()
         {
-            return PartialView();
+            var input = new ChamberChoiceImput()
+            {
+                SystemType = ConstansCS.Type.NursingHome
+            };
+
+            if (SettingHelper.TryGetValue<Guid>(_context, "SystemType", out var type))
+            {
+                input.SystemType = type;
+            }
+
+            return PartialView(input);
         }
 
         [HttpPost]
@@ -346,6 +356,18 @@ namespace WebApp.Controllers.ChamberControllers
             var contacts = _context.ContactHobbies.Where(x => FilterChoice.HobbiesId.Contains(x.Id)).Select(x => x.Contact.Id);
             var chambers = _context.ContactInChambers.Where(x => contacts.Contains(x.Contact.Id)).Select(x => x.Chamber.Id);
             return chambers.ToArray();
+        }
+
+        private static void ClearFilter()
+        {
+            FilterChoice.IsChoice = false;
+            FilterChoice.GenderId = (Guid?)null;
+            FilterChoice.ChamberTypeId = (Guid?)null;
+            FilterChoice.HobbiesId = null;
+            FilterChoice.QuantitySeats = null;
+            FilterChoice.Floor = null;
+            FilterChoice.HasBrather = false;
+            FilterChoice.QuantityBrather = null;
         }
     }
 }

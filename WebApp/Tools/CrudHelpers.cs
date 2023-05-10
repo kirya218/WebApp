@@ -35,9 +35,10 @@ namespace WebApp.Tools
 
             var format = "utils.{0}('" + gridId + "')";
 
-            var createFunc = string.Format(format, reload ? "refreshGrid" : "itemCreated");
-            var editFunc = string.Format(format, reload ? "refreshGrid" : "itemEdited");
-            var delFunc = string.Format(format, reload ? "refreshGrid" : "itemDeleted");
+            var refreshFunc = string.Format(format, "refreshGrid");
+            var createFunc = string.Format(format, "itemCreated");
+            var editFunc = string.Format(format, "itemEdited");
+            var delFunc = string.Format(format, "itemDeleted");
             var delConfirmFunc = string.Format(format, "delConfirmLoad");
 
             return new HtmlString(
@@ -51,6 +52,7 @@ namespace WebApp.Tools
                     .Title("Создание")
                     .Modal()
                     .Success(createFunc)
+                    .Success(refreshFunc)
                     .ToString()
                 +
                 html.Awe()
@@ -63,6 +65,7 @@ namespace WebApp.Tools
                     .Title("Редактирование")
                     .Modal()
                     .Success(editFunc)
+                    .Success(refreshFunc)
                 +
                 html.Awe()
                     .InitPopupForm()
@@ -71,6 +74,7 @@ namespace WebApp.Tools
                     .Url(url.Action("Delete", crudController, new { area }))
                     .Title("Удаление")
                     .Success(delFunc)
+                    .Success(refreshFunc)
                     .OnLoad(delConfirmFunc)
                     .Height(200)
                     .Modal()

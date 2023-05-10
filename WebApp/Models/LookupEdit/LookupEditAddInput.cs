@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace WebApp.Models.Procedure
+namespace WebApp.Models.LookupEdit
 {
-    public class ProcedureAddInput
+    public class LookupEditAddInput
     {
         public Guid Id { get; set; }
 

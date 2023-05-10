@@ -1,6 +1,6 @@
-﻿namespace WebApp.Models.Procedure
+﻿namespace WebApp.Models.LookupEdit
 {
-    public class ProcedureEditInput
+    public class LookupEditEditInput
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

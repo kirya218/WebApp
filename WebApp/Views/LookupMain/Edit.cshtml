@@ -15,7 +15,7 @@
 
     <div class="gui3">
         @(Html.Awe().Grid(Model.GridName)
-            .Url(Url.Action("GridGetItems", Model.ControllerName))
+            .Url(Url.Action("GridGetItems", Model.ControllerName, Model))
             .Groupable(false)
             .Columns(columns.ToArray()))
     </div>

@@ -1,13 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using GridLibrary;
-using System.Reflection;
-using System.Security.Cryptography;
+﻿using GridLibrary;
+using Microsoft.AspNetCore.Mvc;
 using WebApp.Context;
-using WebApp.Entities;
 using WebApp.Interfaces;
 using WebApp.Models;
 using WebApp.Models.Lookup;
-using WebApp.Tools;
 
 namespace WebApp.Controllers.Lookup
 {
@@ -69,7 +65,8 @@ namespace WebApp.Controllers.Lookup
             {
                 GridName = gridName,
                 LookupName = lookup.Name,
-                ControllerName = lookup.LookupCode,
+                LookupCode = lookup.LookupCode,
+                ControllerName = "LookupEdit",
                 Columns = new Column[]
                 {
                     new Column { Bind = "Id", Header = "Id",  Hidden = true },

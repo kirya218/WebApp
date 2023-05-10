@@ -20,6 +20,7 @@ namespace WebApp.Context
         public DbSet<Hobby> Hobbies { get; set; }
         public DbSet<ChamberType> ChamberTypes { get; set; }
         public DbSet<ContactHobby> ContactHobbies { get; set; }
+        public DbSet<SystemType> SystemTypes { get; set; }
 
         public WebAppContext(DbContextOptions options) : base(options)
         {
@@ -80,7 +81,7 @@ namespace WebApp.Context
 
             var gender3 = new Gender()
             {
-                Name = "Любой",
+                Name = "Не определенный",
                 CreatedOn = DateTime.Now,
                 ModifiedOn = DateTime.Now
             };
@@ -116,6 +117,7 @@ namespace WebApp.Context
 
             var role = new Role()
             {
+                Id = new Guid("09f161d7-8ed6-4eb0-a11d-3338453052d4"),
                 Name = "Supervisor",
                 Description = "Роль администратора",
                 CreatedOn = DateTime.Now,
@@ -129,6 +131,9 @@ namespace WebApp.Context
                 Email = "Kirill@mail.ru",
                 Phone = "+79192222222",
                 ContactType = contactType,
+                Age = 22,
+                BirthDate = DateTime.Parse("24.04.2001"),
+                MobilePhone = "+43564432426",
                 Gender = gender,
                 CreatedOn = DateTime.Now,
                 ModifiedOn = DateTime.Now
@@ -141,6 +146,9 @@ namespace WebApp.Context
                 Email = "Shik-310101@mail.ru",
                 Phone = "+791921231242",
                 ContactType = contactType2,
+                Age = 22,
+                BirthDate = DateTime.Parse("31.01.2001"),
+                MobilePhone = "+43564432426",
                 Gender = gender2,
                 CreatedOn = DateTime.Now,
                 ModifiedOn = DateTime.Now
@@ -152,6 +160,7 @@ namespace WebApp.Context
 
             Roles.Add(new Role()
             {
+                Id = new Guid("a9458d1d-ac61-4936-8c85-c72a76baeef8"),
                 Name = "User",
                 Description = "Роль пользователя",
                 CreatedOn = DateTime.Now,
@@ -185,7 +194,7 @@ namespace WebApp.Context
             Settings.Add(new Setting()
             {
                 Code = "QuntityRoomsOnFloor",
-                Name = "Quntity rooms on floor",
+                Name = "Количество палат на этаже",
                 Type = "int",
                 SettingValue = new SettingValue()
                 {
@@ -196,7 +205,7 @@ namespace WebApp.Context
             Settings.Add(new Setting()
             {
                 Code = "QuntityFloors",
-                Name = "Quntity floors",
+                Name = "Количество этажей",
                 Type = "int",
                 SettingValue = new SettingValue()
                 {
@@ -207,11 +216,40 @@ namespace WebApp.Context
             Settings.Add(new Setting()
             {
                 Code = "MaxQuantitySeats",
-                Name = "Max quntity seats on chamber",
+                Name = "Максимальное количество мест",
                 Type = "int",
                 SettingValue = new SettingValue()
                 {
                     IntegerValue = 5
+                }
+            });
+
+            var systemType1 = new SystemType
+            {
+                Id = new Guid("112303f1-e11f-489a-bb14-7eab492934d1"),
+                CreatedOn = DateTime.Now,
+                ModifiedOn = DateTime.Now,
+                Name = "Детдом"
+            };
+            
+            SystemTypes.Add(systemType1);
+
+            SystemTypes.Add(new SystemType
+            {
+                Id = new Guid("4a4a11bb-afc0-48e9-8e47-797d57189bb8"),
+                CreatedOn = DateTime.Now,
+                ModifiedOn = DateTime.Now,
+                Name = "Дом престарелых"
+            });
+
+            Settings.Add(new Setting()
+            {
+                Code = "SystemType",
+                Name = "Тип системы",
+                Type = "guid",
+                SettingValue = new SettingValue()
+                {
+                    GuidValue = systemType1.Id
                 }
             });
 

@@ -32,5 +32,6 @@ namespace WebApp.Models.Chamber
 
         [Display(Name = "Количество братьев или сестер")]
         public int? QuantityBrather { get; set; }
+        public Guid SystemType { get; set; }
     }
 }
