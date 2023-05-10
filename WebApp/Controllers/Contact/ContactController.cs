@@ -69,9 +69,9 @@ namespace WebApp.Controllers.ContactControllers
             var frow = new Frow();
 
             var filterBuilder = new FilterBuilder<Contact>()
-                .Add("FullName", 
-                    x => !string.IsNullOrWhiteSpace(fullName) 
-                        ? x.Where(y => y.FullName.Contains(fullName)) 
+                .Add("FullName",
+                    x => !string.IsNullOrWhiteSpace(fullName)
+                        ? x.Where(y => y.FullName.Contains(fullName))
                         : x)
                 .Add("ContactType", new FilterRule<Contact>
                 {
@@ -200,11 +200,62 @@ namespace WebApp.Controllers.ContactControllers
             return Json(new { contact.Id });
         }
 
+        [HttpGet]
         public ActionResult ExportToExcel()
         {
             var excelHelper = new ExcelHelper();
             var excel = excelHelper.ExportExcel(_context.Contacts.Include(x => x.ContactType).ToList());
             return File(excel, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        }
+
+        [HttpPost]
+        public IActionResult ImportExcel(IFormFile file)
+        {
+            var excelHelper = new ExcelHelper();
+            var items = excelHelper.ImportExcel<Contact>(typeof(Contact), file.OpenReadStream());
+
+            foreach (var item in items)
+            {
+                var contact = _context.Contacts.FirstOrDefault(x => x.Id == item.Id);
+
+                if (contact == null)
+                {
+                    var newContact = new Contact()
+                    {
+                        Id = item.Id,
+                        CreatedOn = DateTime.Now.ToLocalTime(),
+                        ModifiedOn = DateTime.Now.ToLocalTime(),
+                        MobilePhone = item.MobilePhone,
+                        Phone = item.Phone,
+                        FullName = item.FullName,
+                        Age = item.Age,
+                        BirthDate = item.BirthDate,
+                        ContactType = _context.ContactTypes.Find(item?.ContactType?.Id),
+                        Email = item.Email,
+                        Gender = _context.Genders.Find(item?.Gender?.Id) ?? null,
+                        Image = item.Image,
+                        Name = item.Name
+                    };
+
+                    _context.Contacts.Add(item);
+                }
+                else
+                {
+                    contact.BirthDate = item.BirthDate;
+                    contact.Name = item.Name;
+                    contact.Email = item.Email;
+                    contact.MobilePhone = item.MobilePhone;
+                    contact.Gender = _context.Genders.Find(item?.Gender?.Id) ?? null;
+                    contact.ContactType = _context.ContactTypes.Find(item?.ContactType?.Id);
+                    contact.Age = item.Age;
+                    contact.Phone = item.Phone;
+                    contact.ModifiedOn = DateTime.Now;
+                    _context.Contacts.Update(contact);
+                }
+            }
+
+            _context.SaveChanges();
+            return Json(items);
         }
 
         private class Frow

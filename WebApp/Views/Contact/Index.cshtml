@@ -22,7 +22,8 @@
                     Действия
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><button formmethod="get" asp-controller="Contact" asp-action="Index">Import Excel</button></li>
+                    <li><input type="file" name="file"/></li>
+                    <li><button formmethod="post" formenctype="multipart/form-data" asp-controller="Contact" asp-action="ImportExcel">Import Excel</button></li>
                     <li><button formmethod="get" asp-controller="Contact" asp-action="ExportToExcel">Export Excel</button></li>
                 </ul>
             </div>
