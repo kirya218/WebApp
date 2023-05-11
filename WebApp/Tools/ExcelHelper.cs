@@ -225,7 +225,7 @@ namespace WebApp.Tools
         {
             uint count = 2U;
 
-            while (!string.IsNullOrEmpty(excel.GetCellData($"A{count}")) || 
+            while (!string.IsNullOrEmpty(excel.GetCellData($"A{count}")) ||
                    !string.IsNullOrEmpty(excel.GetCellData($"D{count}")))
             {
                 count++;
@@ -246,7 +246,7 @@ namespace WebApp.Tools
             var column = 1U;
 
             while (excel.GetCellData(Excel.GetCellPosition(1U, column)) != property.Value ||
-                   string.IsNullOrWhiteSpace(excel.GetCellData(Excel.GetCellPosition(1U, column)))) 
+                   string.IsNullOrWhiteSpace(excel.GetCellData(Excel.GetCellPosition(1U, column))))
             {
                 column++;
             }
@@ -281,12 +281,12 @@ namespace WebApp.Tools
             var workbookPart = Document.WorkbookPart;
             var workbookStylesPart = workbookPart.AddNewPart<WorkbookStylesPart>();
 
-            var stylesheet1 = new Stylesheet() 
-            { 
-                MCAttributes = new MarkupCompatibilityAttributes() 
-                { 
-                    Ignorable = "x14ac x16r2 xr" 
-                } 
+            var stylesheet1 = new Stylesheet()
+            {
+                MCAttributes = new MarkupCompatibilityAttributes()
+                {
+                    Ignorable = "x14ac x16r2 xr"
+                }
             };
 
             stylesheet1.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
@@ -294,15 +294,15 @@ namespace WebApp.Tools
             stylesheet1.AddNamespaceDeclaration("x16r2", "http://schemas.microsoft.com/office/spreadsheetml/2015/02/main");
             stylesheet1.AddNamespaceDeclaration("xr", "http://schemas.microsoft.com/office/spreadsheetml/2014/revision");
 
-            Fonts fonts1 = new Fonts() { Count = (UInt32Value)19U, KnownFonts = true };
+            var fonts1 = new Fonts() { Count = (UInt32Value)19U, KnownFonts = true };
 
-            Font font1 = new Font();
-            FontSize fontSize1 = new FontSize() { Val = 11D };
-            Color color1 = new Color() { Theme = (UInt32Value)1U };
-            FontName fontName1 = new FontName() { Val = "Calibri" };
-            FontFamilyNumbering fontFamilyNumbering1 = new FontFamilyNumbering() { Val = 2 };
-            FontCharSet fontCharSet1 = new FontCharSet() { Val = 204 };
-            FontScheme fontScheme1 = new FontScheme() { Val = FontSchemeValues.Minor };
+            var font1 = new Font();
+            var fontSize1 = new FontSize() { Val = 11D };
+            var color1 = new Color() { Theme = (UInt32Value)1U };
+            var fontName1 = new FontName() { Val = "Calibri" };
+            var fontFamilyNumbering1 = new FontFamilyNumbering() { Val = 2 };
+            var fontCharSet1 = new FontCharSet() { Val = 204 };
+            var fontScheme1 = new FontScheme() { Val = FontSchemeValues.Minor };
 
             font1.Append(fontSize1);
             font1.Append(color1);
@@ -311,13 +311,13 @@ namespace WebApp.Tools
             font1.Append(fontCharSet1);
             font1.Append(fontScheme1);
 
-            Font font2 = new Font();
-            FontSize fontSize2 = new FontSize() { Val = 11D };
-            Color color2 = new Color() { Theme = (UInt32Value)1U };
-            FontName fontName2 = new FontName() { Val = "Calibri" };
-            FontFamilyNumbering fontFamilyNumbering2 = new FontFamilyNumbering() { Val = 2 };
-            FontCharSet fontCharSet2 = new FontCharSet() { Val = 204 };
-            FontScheme fontScheme2 = new FontScheme() { Val = FontSchemeValues.Minor };
+            var font2 = new Font();
+            var fontSize2 = new FontSize() { Val = 11D };
+            var color2 = new Color() { Theme = (UInt32Value)1U };
+            var fontName2 = new FontName() { Val = "Calibri" };
+            var fontFamilyNumbering2 = new FontFamilyNumbering() { Val = 2 };
+            var fontCharSet2 = new FontCharSet() { Val = 204 };
+            var fontScheme2 = new FontScheme() { Val = FontSchemeValues.Minor };
 
             font2.Append(fontSize2);
             font2.Append(color2);
@@ -326,13 +326,13 @@ namespace WebApp.Tools
             font2.Append(fontCharSet2);
             font2.Append(fontScheme2);
 
-            Font font3 = new Font();
-            FontSize fontSize3 = new FontSize() { Val = 18D };
-            Color color3 = new Color() { Theme = (UInt32Value)3U };
-            FontName fontName3 = new FontName() { Val = "Calibri Light" };
-            FontFamilyNumbering fontFamilyNumbering3 = new FontFamilyNumbering() { Val = 2 };
-            FontCharSet fontCharSet3 = new FontCharSet() { Val = 204 };
-            FontScheme fontScheme3 = new FontScheme() { Val = FontSchemeValues.Major };
+            var font3 = new Font();
+            var fontSize3 = new FontSize() { Val = 18D };
+            var color3 = new Color() { Theme = (UInt32Value)3U };
+            var fontName3 = new FontName() { Val = "Calibri Light" };
+            var fontFamilyNumbering3 = new FontFamilyNumbering() { Val = 2 };
+            var fontCharSet3 = new FontCharSet() { Val = 204 };
+            var fontScheme3 = new FontScheme() { Val = FontSchemeValues.Major };
 
             font3.Append(fontSize3);
             font3.Append(color3);
@@ -341,14 +341,14 @@ namespace WebApp.Tools
             font3.Append(fontCharSet3);
             font3.Append(fontScheme3);
 
-            Font font4 = new Font();
-            Bold bold1 = new Bold();
-            FontSize fontSize4 = new FontSize() { Val = 15D };
-            Color color4 = new Color() { Theme = (UInt32Value)3U };
-            FontName fontName4 = new FontName() { Val = "Calibri" };
-            FontFamilyNumbering fontFamilyNumbering4 = new FontFamilyNumbering() { Val = 2 };
-            FontCharSet fontCharSet4 = new FontCharSet() { Val = 204 };
-            FontScheme fontScheme4 = new FontScheme() { Val = FontSchemeValues.Minor };
+            var font4 = new Font();
+            var bold1 = new Bold();
+            var fontSize4 = new FontSize() { Val = 15D };
+            var color4 = new Color() { Theme = (UInt32Value)3U };
+            var fontName4 = new FontName() { Val = "Calibri" };
+            var fontFamilyNumbering4 = new FontFamilyNumbering() { Val = 2 };
+            var fontCharSet4 = new FontCharSet() { Val = 204 };
+            var fontScheme4 = new FontScheme() { Val = FontSchemeValues.Minor };
 
             font4.Append(bold1);
             font4.Append(fontSize4);
@@ -358,14 +358,14 @@ namespace WebApp.Tools
             font4.Append(fontCharSet4);
             font4.Append(fontScheme4);
 
-            Font font5 = new Font();
-            Bold bold2 = new Bold();
-            FontSize fontSize5 = new FontSize() { Val = 13D };
-            Color color5 = new Color() { Theme = (UInt32Value)3U };
-            FontName fontName5 = new FontName() { Val = "Calibri" };
-            FontFamilyNumbering fontFamilyNumbering5 = new FontFamilyNumbering() { Val = 2 };
-            FontCharSet fontCharSet5 = new FontCharSet() { Val = 204 };
-            FontScheme fontScheme5 = new FontScheme() { Val = FontSchemeValues.Minor };
+            var font5 = new Font();
+            var bold2 = new Bold();
+            var fontSize5 = new FontSize() { Val = 13D };
+            var color5 = new Color() { Theme = (UInt32Value)3U };
+            var fontName5 = new FontName() { Val = "Calibri" };
+            var fontFamilyNumbering5 = new FontFamilyNumbering() { Val = 2 };
+            var fontCharSet5 = new FontCharSet() { Val = 204 };
+            var fontScheme5 = new FontScheme() { Val = FontSchemeValues.Minor };
 
             font5.Append(bold2);
             font5.Append(fontSize5);
@@ -375,14 +375,14 @@ namespace WebApp.Tools
             font5.Append(fontCharSet5);
             font5.Append(fontScheme5);
 
-            Font font6 = new Font();
-            Bold bold3 = new Bold();
-            FontSize fontSize6 = new FontSize() { Val = 11D };
-            Color color6 = new Color() { Theme = (UInt32Value)3U };
-            FontName fontName6 = new FontName() { Val = "Calibri" };
-            FontFamilyNumbering fontFamilyNumbering6 = new FontFamilyNumbering() { Val = 2 };
-            FontCharSet fontCharSet6 = new FontCharSet() { Val = 204 };
-            FontScheme fontScheme6 = new FontScheme() { Val = FontSchemeValues.Minor };
+            var font6 = new Font();
+            var bold3 = new Bold();
+            var fontSize6 = new FontSize() { Val = 11D };
+            var color6 = new Color() { Theme = (UInt32Value)3U };
+            var fontName6 = new FontName() { Val = "Calibri" };
+            var fontFamilyNumbering6 = new FontFamilyNumbering() { Val = 2 };
+            var fontCharSet6 = new FontCharSet() { Val = 204 };
+            var fontScheme6 = new FontScheme() { Val = FontSchemeValues.Minor };
 
             font6.Append(bold3);
             font6.Append(fontSize6);
@@ -392,13 +392,13 @@ namespace WebApp.Tools
             font6.Append(fontCharSet6);
             font6.Append(fontScheme6);
 
-            Font font7 = new Font();
-            FontSize fontSize7 = new FontSize() { Val = 11D };
-            Color color7 = new Color() { Rgb = "FF006100" };
-            FontName fontName7 = new FontName() { Val = "Calibri" };
-            FontFamilyNumbering fontFamilyNumbering7 = new FontFamilyNumbering() { Val = 2 };
-            FontCharSet fontCharSet7 = new FontCharSet() { Val = 204 };
-            FontScheme fontScheme7 = new FontScheme() { Val = FontSchemeValues.Minor };
+            var font7 = new Font();
+            var fontSize7 = new FontSize() { Val = 11D };
+            var color7 = new Color() { Rgb = "FF006100" };
+            var fontName7 = new FontName() { Val = "Calibri" };
+            var fontFamilyNumbering7 = new FontFamilyNumbering() { Val = 2 };
+            var fontCharSet7 = new FontCharSet() { Val = 204 };
+            var fontScheme7 = new FontScheme() { Val = FontSchemeValues.Minor };
 
             font7.Append(fontSize7);
             font7.Append(color7);
@@ -407,13 +407,13 @@ namespace WebApp.Tools
             font7.Append(fontCharSet7);
             font7.Append(fontScheme7);
 
-            Font font8 = new Font();
-            FontSize fontSize8 = new FontSize() { Val = 11D };
-            Color color8 = new Color() { Rgb = "FF9C0006" };
-            FontName fontName8 = new FontName() { Val = "Calibri" };
-            FontFamilyNumbering fontFamilyNumbering8 = new FontFamilyNumbering() { Val = 2 };
-            FontCharSet fontCharSet8 = new FontCharSet() { Val = 204 };
-            FontScheme fontScheme8 = new FontScheme() { Val = FontSchemeValues.Minor };
+            var font8 = new Font();
+            var fontSize8 = new FontSize() { Val = 11D };
+            var color8 = new Color() { Rgb = "FF9C0006" };
+            var fontName8 = new FontName() { Val = "Calibri" };
+            var fontFamilyNumbering8 = new FontFamilyNumbering() { Val = 2 };
+            var fontCharSet8 = new FontCharSet() { Val = 204 };
+            var fontScheme8 = new FontScheme() { Val = FontSchemeValues.Minor };
 
             font8.Append(fontSize8);
             font8.Append(color8);
@@ -422,13 +422,13 @@ namespace WebApp.Tools
             font8.Append(fontCharSet8);
             font8.Append(fontScheme8);
 
-            Font font9 = new Font();
-            FontSize fontSize9 = new FontSize() { Val = 11D };
-            Color color9 = new Color() { Rgb = "FF9C5700" };
-            FontName fontName9 = new FontName() { Val = "Calibri" };
-            FontFamilyNumbering fontFamilyNumbering9 = new FontFamilyNumbering() { Val = 2 };
-            FontCharSet fontCharSet9 = new FontCharSet() { Val = 204 };
-            FontScheme fontScheme9 = new FontScheme() { Val = FontSchemeValues.Minor };
+            var font9 = new Font();
+            var fontSize9 = new FontSize() { Val = 11D };
+            var color9 = new Color() { Rgb = "FF9C5700" };
+            var fontName9 = new FontName() { Val = "Calibri" };
+            var fontFamilyNumbering9 = new FontFamilyNumbering() { Val = 2 };
+            var fontCharSet9 = new FontCharSet() { Val = 204 };
+            var fontScheme9 = new FontScheme() { Val = FontSchemeValues.Minor };
 
             font9.Append(fontSize9);
             font9.Append(color9);
@@ -437,13 +437,13 @@ namespace WebApp.Tools
             font9.Append(fontCharSet9);
             font9.Append(fontScheme9);
 
-            Font font10 = new Font();
-            FontSize fontSize10 = new FontSize() { Val = 11D };
-            Color color10 = new Color() { Rgb = "FF3F3F76" };
-            FontName fontName10 = new FontName() { Val = "Calibri" };
-            FontFamilyNumbering fontFamilyNumbering10 = new FontFamilyNumbering() { Val = 2 };
-            FontCharSet fontCharSet10 = new FontCharSet() { Val = 204 };
-            FontScheme fontScheme10 = new FontScheme() { Val = FontSchemeValues.Minor };
+            var font10 = new Font();
+            var fontSize10 = new FontSize() { Val = 11D };
+            var color10 = new Color() { Rgb = "FF3F3F76" };
+            var fontName10 = new FontName() { Val = "Calibri" };
+            var fontFamilyNumbering10 = new FontFamilyNumbering() { Val = 2 };
+            var fontCharSet10 = new FontCharSet() { Val = 204 };
+            var fontScheme10 = new FontScheme() { Val = FontSchemeValues.Minor };
 
             font10.Append(fontSize10);
             font10.Append(color10);
@@ -452,14 +452,14 @@ namespace WebApp.Tools
             font10.Append(fontCharSet10);
             font10.Append(fontScheme10);
 
-            Font font11 = new Font();
-            Bold bold4 = new Bold();
-            FontSize fontSize11 = new FontSize() { Val = 11D };
-            Color color11 = new Color() { Rgb = "FF3F3F3F" };
-            FontName fontName11 = new FontName() { Val = "Calibri" };
-            FontFamilyNumbering fontFamilyNumbering11 = new FontFamilyNumbering() { Val = 2 };
-            FontCharSet fontCharSet11 = new FontCharSet() { Val = 204 };
-            FontScheme fontScheme11 = new FontScheme() { Val = FontSchemeValues.Minor };
+            var font11 = new Font();
+            var bold4 = new Bold();
+            var fontSize11 = new FontSize() { Val = 11D };
+            var color11 = new Color() { Rgb = "FF3F3F3F" };
+            var fontName11 = new FontName() { Val = "Calibri" };
+            var fontFamilyNumbering11 = new FontFamilyNumbering() { Val = 2 };
+            var fontCharSet11 = new FontCharSet() { Val = 204 };
+            var fontScheme11 = new FontScheme() { Val = FontSchemeValues.Minor };
 
             font11.Append(bold4);
             font11.Append(fontSize11);
@@ -469,14 +469,14 @@ namespace WebApp.Tools
             font11.Append(fontCharSet11);
             font11.Append(fontScheme11);
 
-            Font font12 = new Font();
-            Bold bold5 = new Bold();
-            FontSize fontSize12 = new FontSize() { Val = 11D };
-            Color color12 = new Color() { Rgb = "FFFA7D00" };
-            FontName fontName12 = new FontName() { Val = "Calibri" };
-            FontFamilyNumbering fontFamilyNumbering12 = new FontFamilyNumbering() { Val = 2 };
-            FontCharSet fontCharSet12 = new FontCharSet() { Val = 204 };
-            FontScheme fontScheme12 = new FontScheme() { Val = FontSchemeValues.Minor };
+            var font12 = new Font();
+            var bold5 = new Bold();
+            var fontSize12 = new FontSize() { Val = 11D };
+            var color12 = new Color() { Rgb = "FFFA7D00" };
+            var fontName12 = new FontName() { Val = "Calibri" };
+            var fontFamilyNumbering12 = new FontFamilyNumbering() { Val = 2 };
+            var fontCharSet12 = new FontCharSet() { Val = 204 };
+            var fontScheme12 = new FontScheme() { Val = FontSchemeValues.Minor };
 
             font12.Append(bold5);
             font12.Append(fontSize12);
@@ -486,13 +486,13 @@ namespace WebApp.Tools
             font12.Append(fontCharSet12);
             font12.Append(fontScheme12);
 
-            Font font13 = new Font();
-            FontSize fontSize13 = new FontSize() { Val = 11D };
-            Color color13 = new Color() { Rgb = "FFFA7D00" };
-            FontName fontName13 = new FontName() { Val = "Calibri" };
-            FontFamilyNumbering fontFamilyNumbering13 = new FontFamilyNumbering() { Val = 2 };
-            FontCharSet fontCharSet13 = new FontCharSet() { Val = 204 };
-            FontScheme fontScheme13 = new FontScheme() { Val = FontSchemeValues.Minor };
+            var font13 = new Font();
+            var fontSize13 = new FontSize() { Val = 11D };
+            var color13 = new Color() { Rgb = "FFFA7D00" };
+            var fontName13 = new FontName() { Val = "Calibri" };
+            var fontFamilyNumbering13 = new FontFamilyNumbering() { Val = 2 };
+            var fontCharSet13 = new FontCharSet() { Val = 204 };
+            var fontScheme13 = new FontScheme() { Val = FontSchemeValues.Minor };
 
             font13.Append(fontSize13);
             font13.Append(color13);
@@ -501,14 +501,14 @@ namespace WebApp.Tools
             font13.Append(fontCharSet13);
             font13.Append(fontScheme13);
 
-            Font font14 = new Font();
-            Bold bold6 = new Bold();
-            FontSize fontSize14 = new FontSize() { Val = 11D };
-            Color color14 = new Color() { Theme = (UInt32Value)0U };
-            FontName fontName14 = new FontName() { Val = "Calibri" };
-            FontFamilyNumbering fontFamilyNumbering14 = new FontFamilyNumbering() { Val = 2 };
-            FontCharSet fontCharSet14 = new FontCharSet() { Val = 204 };
-            FontScheme fontScheme14 = new FontScheme() { Val = FontSchemeValues.Minor };
+            var font14 = new Font();
+            var bold6 = new Bold();
+            var fontSize14 = new FontSize() { Val = 11D };
+            var color14 = new Color() { Theme = (UInt32Value)0U };
+            var fontName14 = new FontName() { Val = "Calibri" };
+            var fontFamilyNumbering14 = new FontFamilyNumbering() { Val = 2 };
+            var fontCharSet14 = new FontCharSet() { Val = 204 };
+            var fontScheme14 = new FontScheme() { Val = FontSchemeValues.Minor };
 
             font14.Append(bold6);
             font14.Append(fontSize14);
@@ -518,13 +518,13 @@ namespace WebApp.Tools
             font14.Append(fontCharSet14);
             font14.Append(fontScheme14);
 
-            Font font15 = new Font();
-            FontSize fontSize15 = new FontSize() { Val = 11D };
-            Color color15 = new Color() { Rgb = "FFFF0000" };
-            FontName fontName15 = new FontName() { Val = "Calibri" };
-            FontFamilyNumbering fontFamilyNumbering15 = new FontFamilyNumbering() { Val = 2 };
-            FontCharSet fontCharSet15 = new FontCharSet() { Val = 204 };
-            FontScheme fontScheme15 = new FontScheme() { Val = FontSchemeValues.Minor };
+            var font15 = new Font();
+            var fontSize15 = new FontSize() { Val = 11D };
+            var color15 = new Color() { Rgb = "FFFF0000" };
+            var fontName15 = new FontName() { Val = "Calibri" };
+            var fontFamilyNumbering15 = new FontFamilyNumbering() { Val = 2 };
+            var fontCharSet15 = new FontCharSet() { Val = 204 };
+            var fontScheme15 = new FontScheme() { Val = FontSchemeValues.Minor };
 
             font15.Append(fontSize15);
             font15.Append(color15);
@@ -533,14 +533,14 @@ namespace WebApp.Tools
             font15.Append(fontCharSet15);
             font15.Append(fontScheme15);
 
-            Font font16 = new Font();
-            Italic italic1 = new Italic();
-            FontSize fontSize16 = new FontSize() { Val = 11D };
-            Color color16 = new Color() { Rgb = "FF7F7F7F" };
-            FontName fontName16 = new FontName() { Val = "Calibri" };
-            FontFamilyNumbering fontFamilyNumbering16 = new FontFamilyNumbering() { Val = 2 };
-            FontCharSet fontCharSet16 = new FontCharSet() { Val = 204 };
-            FontScheme fontScheme16 = new FontScheme() { Val = FontSchemeValues.Minor };
+            var font16 = new Font();
+            var italic1 = new Italic();
+            var fontSize16 = new FontSize() { Val = 11D };
+            var color16 = new Color() { Rgb = "FF7F7F7F" };
+            var fontName16 = new FontName() { Val = "Calibri" };
+            var fontFamilyNumbering16 = new FontFamilyNumbering() { Val = 2 };
+            var fontCharSet16 = new FontCharSet() { Val = 204 };
+            var fontScheme16 = new FontScheme() { Val = FontSchemeValues.Minor };
 
             font16.Append(italic1);
             font16.Append(fontSize16);
@@ -550,14 +550,14 @@ namespace WebApp.Tools
             font16.Append(fontCharSet16);
             font16.Append(fontScheme16);
 
-            Font font17 = new Font();
-            Bold bold7 = new Bold();
-            FontSize fontSize17 = new FontSize() { Val = 11D };
-            Color color17 = new Color() { Theme = (UInt32Value)1U };
-            FontName fontName17 = new FontName() { Val = "Calibri" };
-            FontFamilyNumbering fontFamilyNumbering17 = new FontFamilyNumbering() { Val = 2 };
-            FontCharSet fontCharSet17 = new FontCharSet() { Val = 204 };
-            FontScheme fontScheme17 = new FontScheme() { Val = FontSchemeValues.Minor };
+            var font17 = new Font();
+            var bold7 = new Bold();
+            var fontSize17 = new FontSize() { Val = 11D };
+            var color17 = new Color() { Theme = (UInt32Value)1U };
+            var fontName17 = new FontName() { Val = "Calibri" };
+            var fontFamilyNumbering17 = new FontFamilyNumbering() { Val = 2 };
+            var fontCharSet17 = new FontCharSet() { Val = 204 };
+            var fontScheme17 = new FontScheme() { Val = FontSchemeValues.Minor };
 
             font17.Append(bold7);
             font17.Append(fontSize17);
@@ -567,13 +567,13 @@ namespace WebApp.Tools
             font17.Append(fontCharSet17);
             font17.Append(fontScheme17);
 
-            Font font18 = new Font();
-            FontSize fontSize18 = new FontSize() { Val = 11D };
-            Color color18 = new Color() { Theme = (UInt32Value)0U };
-            FontName fontName18 = new FontName() { Val = "Calibri" };
-            FontFamilyNumbering fontFamilyNumbering18 = new FontFamilyNumbering() { Val = 2 };
-            FontCharSet fontCharSet18 = new FontCharSet() { Val = 204 };
-            FontScheme fontScheme18 = new FontScheme() { Val = FontSchemeValues.Minor };
+            var font18 = new Font();
+            var fontSize18 = new FontSize() { Val = 11D };
+            var color18 = new Color() { Theme = (UInt32Value)0U };
+            var fontName18 = new FontName() { Val = "Calibri" };
+            var fontFamilyNumbering18 = new FontFamilyNumbering() { Val = 2 };
+            var fontCharSet18 = new FontCharSet() { Val = 204 };
+            var fontScheme18 = new FontScheme() { Val = FontSchemeValues.Minor };
 
             font18.Append(fontSize18);
             font18.Append(color18);
@@ -582,14 +582,14 @@ namespace WebApp.Tools
             font18.Append(fontCharSet18);
             font18.Append(fontScheme18);
 
-            Font font19 = new Font();
-            Bold bold8 = new Bold();
-            FontSize fontSize19 = new FontSize() { Val = 12D };
-            Color color19 = new Color() { Theme = (UInt32Value)1U };
-            FontName fontName19 = new FontName() { Val = "Calibri" };
-            FontFamilyNumbering fontFamilyNumbering19 = new FontFamilyNumbering() { Val = 2 };
-            FontCharSet fontCharSet19 = new FontCharSet() { Val = 204 };
-            FontScheme fontScheme19 = new FontScheme() { Val = FontSchemeValues.Minor };
+            var font19 = new Font();
+            var bold8 = new Bold();
+            var fontSize19 = new FontSize() { Val = 12D };
+            var color19 = new Color() { Theme = (UInt32Value)1U };
+            var fontName19 = new FontName() { Val = "Calibri" };
+            var fontFamilyNumbering19 = new FontFamilyNumbering() { Val = 2 };
+            var fontCharSet19 = new FontCharSet() { Val = 204 };
+            var fontScheme19 = new FontScheme() { Val = FontSchemeValues.Minor };
 
             font19.Append(bold8);
             font19.Append(fontSize19);
@@ -619,338 +619,338 @@ namespace WebApp.Tools
             fonts1.Append(font18);
             fonts1.Append(font19);
 
-            Fills fills1 = new Fills() { Count = (UInt32Value)34U };
+            var fills1 = new Fills() { Count = (UInt32Value)34U };
 
-            Fill fill1 = new Fill();
-            PatternFill patternFill1 = new PatternFill() { PatternType = PatternValues.None };
+            var fill1 = new Fill();
+            var patternFill1 = new PatternFill() { PatternType = PatternValues.None };
 
             fill1.Append(patternFill1);
 
-            Fill fill2 = new Fill();
-            PatternFill patternFill2 = new PatternFill() { PatternType = PatternValues.Gray125 };
+            var fill2 = new Fill();
+            var patternFill2 = new PatternFill() { PatternType = PatternValues.Gray125 };
 
             fill2.Append(patternFill2);
 
-            Fill fill3 = new Fill();
+            var fill3 = new Fill();
 
-            PatternFill patternFill3 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor1 = new ForegroundColor() { Rgb = "FFC6EFCE" };
+            var patternFill3 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor1 = new ForegroundColor() { Rgb = "FFC6EFCE" };
 
             patternFill3.Append(foregroundColor1);
 
             fill3.Append(patternFill3);
 
-            Fill fill4 = new Fill();
+            var fill4 = new Fill();
 
-            PatternFill patternFill4 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor2 = new ForegroundColor() { Rgb = "FFFFC7CE" };
+            var patternFill4 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor2 = new ForegroundColor() { Rgb = "FFFFC7CE" };
 
             patternFill4.Append(foregroundColor2);
 
             fill4.Append(patternFill4);
 
-            Fill fill5 = new Fill();
+            var fill5 = new Fill();
 
-            PatternFill patternFill5 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor3 = new ForegroundColor() { Rgb = "FFFFEB9C" };
+            var patternFill5 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor3 = new ForegroundColor() { Rgb = "FFFFEB9C" };
 
             patternFill5.Append(foregroundColor3);
 
             fill5.Append(patternFill5);
 
-            Fill fill6 = new Fill();
+            var fill6 = new Fill();
 
-            PatternFill patternFill6 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor4 = new ForegroundColor() { Rgb = "FFFFCC99" };
+            var patternFill6 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor4 = new ForegroundColor() { Rgb = "FFFFCC99" };
 
             patternFill6.Append(foregroundColor4);
 
             fill6.Append(patternFill6);
 
-            Fill fill7 = new Fill();
+            var fill7 = new Fill();
 
-            PatternFill patternFill7 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor5 = new ForegroundColor() { Rgb = "FFF2F2F2" };
+            var patternFill7 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor5 = new ForegroundColor() { Rgb = "FFF2F2F2" };
 
             patternFill7.Append(foregroundColor5);
 
             fill7.Append(patternFill7);
 
-            Fill fill8 = new Fill();
+            var fill8 = new Fill();
 
-            PatternFill patternFill8 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor6 = new ForegroundColor() { Rgb = "FFA5A5A5" };
+            var patternFill8 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor6 = new ForegroundColor() { Rgb = "FFA5A5A5" };
 
             patternFill8.Append(foregroundColor6);
 
             fill8.Append(patternFill8);
 
-            Fill fill9 = new Fill();
+            var fill9 = new Fill();
 
-            PatternFill patternFill9 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor7 = new ForegroundColor() { Rgb = "FFFFFFCC" };
+            var patternFill9 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor7 = new ForegroundColor() { Rgb = "FFFFFFCC" };
 
             patternFill9.Append(foregroundColor7);
 
             fill9.Append(patternFill9);
 
-            Fill fill10 = new Fill();
+            var fill10 = new Fill();
 
-            PatternFill patternFill10 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor8 = new ForegroundColor() { Theme = (UInt32Value)4U };
+            var patternFill10 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor8 = new ForegroundColor() { Theme = (UInt32Value)4U };
 
             patternFill10.Append(foregroundColor8);
 
             fill10.Append(patternFill10);
 
-            Fill fill11 = new Fill();
+            var fill11 = new Fill();
 
-            PatternFill patternFill11 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor9 = new ForegroundColor() { Theme = (UInt32Value)4U, Tint = 0.79998168889431442D };
-            BackgroundColor backgroundColor1 = new BackgroundColor() { Indexed = (UInt32Value)65U };
+            var patternFill11 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor9 = new ForegroundColor() { Theme = (UInt32Value)4U, Tint = 0.79998168889431442D };
+            var backgroundColor1 = new BackgroundColor() { Indexed = (UInt32Value)65U };
 
             patternFill11.Append(foregroundColor9);
             patternFill11.Append(backgroundColor1);
 
             fill11.Append(patternFill11);
 
-            Fill fill12 = new Fill();
+            var fill12 = new Fill();
 
-            PatternFill patternFill12 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor10 = new ForegroundColor() { Theme = (UInt32Value)4U, Tint = 0.59999389629810485D };
-            BackgroundColor backgroundColor2 = new BackgroundColor() { Indexed = (UInt32Value)65U };
+            var patternFill12 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor10 = new ForegroundColor() { Theme = (UInt32Value)4U, Tint = 0.59999389629810485D };
+            var backgroundColor2 = new BackgroundColor() { Indexed = (UInt32Value)65U };
 
             patternFill12.Append(foregroundColor10);
             patternFill12.Append(backgroundColor2);
 
             fill12.Append(patternFill12);
 
-            Fill fill13 = new Fill();
+            var fill13 = new Fill();
 
-            PatternFill patternFill13 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor11 = new ForegroundColor() { Theme = (UInt32Value)4U, Tint = 0.39997558519241921D };
-            BackgroundColor backgroundColor3 = new BackgroundColor() { Indexed = (UInt32Value)65U };
+            var patternFill13 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor11 = new ForegroundColor() { Theme = (UInt32Value)4U, Tint = 0.39997558519241921D };
+            var backgroundColor3 = new BackgroundColor() { Indexed = (UInt32Value)65U };
 
             patternFill13.Append(foregroundColor11);
             patternFill13.Append(backgroundColor3);
 
             fill13.Append(patternFill13);
 
-            Fill fill14 = new Fill();
+            var fill14 = new Fill();
 
-            PatternFill patternFill14 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor12 = new ForegroundColor() { Theme = (UInt32Value)5U };
+            var patternFill14 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor12 = new ForegroundColor() { Theme = (UInt32Value)5U };
 
             patternFill14.Append(foregroundColor12);
 
             fill14.Append(patternFill14);
 
-            Fill fill15 = new Fill();
+            var fill15 = new Fill();
 
-            PatternFill patternFill15 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor13 = new ForegroundColor() { Theme = (UInt32Value)5U, Tint = 0.79998168889431442D };
-            BackgroundColor backgroundColor4 = new BackgroundColor() { Indexed = (UInt32Value)65U };
+            var patternFill15 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor13 = new ForegroundColor() { Theme = (UInt32Value)5U, Tint = 0.79998168889431442D };
+            var backgroundColor4 = new BackgroundColor() { Indexed = (UInt32Value)65U };
 
             patternFill15.Append(foregroundColor13);
             patternFill15.Append(backgroundColor4);
 
             fill15.Append(patternFill15);
 
-            Fill fill16 = new Fill();
+            var fill16 = new Fill();
 
-            PatternFill patternFill16 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor14 = new ForegroundColor() { Theme = (UInt32Value)5U, Tint = 0.59999389629810485D };
-            BackgroundColor backgroundColor5 = new BackgroundColor() { Indexed = (UInt32Value)65U };
+            var patternFill16 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor14 = new ForegroundColor() { Theme = (UInt32Value)5U, Tint = 0.59999389629810485D };
+            var backgroundColor5 = new BackgroundColor() { Indexed = (UInt32Value)65U };
 
             patternFill16.Append(foregroundColor14);
             patternFill16.Append(backgroundColor5);
 
             fill16.Append(patternFill16);
 
-            Fill fill17 = new Fill();
+            var fill17 = new Fill();
 
-            PatternFill patternFill17 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor15 = new ForegroundColor() { Theme = (UInt32Value)5U, Tint = 0.39997558519241921D };
-            BackgroundColor backgroundColor6 = new BackgroundColor() { Indexed = (UInt32Value)65U };
+            var patternFill17 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor15 = new ForegroundColor() { Theme = (UInt32Value)5U, Tint = 0.39997558519241921D };
+            var backgroundColor6 = new BackgroundColor() { Indexed = (UInt32Value)65U };
 
             patternFill17.Append(foregroundColor15);
             patternFill17.Append(backgroundColor6);
 
             fill17.Append(patternFill17);
 
-            Fill fill18 = new Fill();
+            var fill18 = new Fill();
 
-            PatternFill patternFill18 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor16 = new ForegroundColor() { Theme = (UInt32Value)6U };
+            var patternFill18 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor16 = new ForegroundColor() { Theme = (UInt32Value)6U };
 
             patternFill18.Append(foregroundColor16);
 
             fill18.Append(patternFill18);
 
-            Fill fill19 = new Fill();
+            var fill19 = new Fill();
 
-            PatternFill patternFill19 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor17 = new ForegroundColor() { Theme = (UInt32Value)6U, Tint = 0.79998168889431442D };
-            BackgroundColor backgroundColor7 = new BackgroundColor() { Indexed = (UInt32Value)65U };
+            var patternFill19 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor17 = new ForegroundColor() { Theme = (UInt32Value)6U, Tint = 0.79998168889431442D };
+            var backgroundColor7 = new BackgroundColor() { Indexed = (UInt32Value)65U };
 
             patternFill19.Append(foregroundColor17);
             patternFill19.Append(backgroundColor7);
 
             fill19.Append(patternFill19);
 
-            Fill fill20 = new Fill();
+            var fill20 = new Fill();
 
-            PatternFill patternFill20 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor18 = new ForegroundColor() { Theme = (UInt32Value)6U, Tint = 0.59999389629810485D };
-            BackgroundColor backgroundColor8 = new BackgroundColor() { Indexed = (UInt32Value)65U };
+            var patternFill20 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor18 = new ForegroundColor() { Theme = (UInt32Value)6U, Tint = 0.59999389629810485D };
+            var backgroundColor8 = new BackgroundColor() { Indexed = (UInt32Value)65U };
 
             patternFill20.Append(foregroundColor18);
             patternFill20.Append(backgroundColor8);
 
             fill20.Append(patternFill20);
 
-            Fill fill21 = new Fill();
+            var fill21 = new Fill();
 
-            PatternFill patternFill21 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor19 = new ForegroundColor() { Theme = (UInt32Value)6U, Tint = 0.39997558519241921D };
-            BackgroundColor backgroundColor9 = new BackgroundColor() { Indexed = (UInt32Value)65U };
+            var patternFill21 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor19 = new ForegroundColor() { Theme = (UInt32Value)6U, Tint = 0.39997558519241921D };
+            var backgroundColor9 = new BackgroundColor() { Indexed = (UInt32Value)65U };
 
             patternFill21.Append(foregroundColor19);
             patternFill21.Append(backgroundColor9);
 
             fill21.Append(patternFill21);
 
-            Fill fill22 = new Fill();
+            var fill22 = new Fill();
 
-            PatternFill patternFill22 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor20 = new ForegroundColor() { Theme = (UInt32Value)7U };
+            var patternFill22 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor20 = new ForegroundColor() { Theme = (UInt32Value)7U };
 
             patternFill22.Append(foregroundColor20);
 
             fill22.Append(patternFill22);
 
-            Fill fill23 = new Fill();
+            var fill23 = new Fill();
 
-            PatternFill patternFill23 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor21 = new ForegroundColor() { Theme = (UInt32Value)7U, Tint = 0.79998168889431442D };
-            BackgroundColor backgroundColor10 = new BackgroundColor() { Indexed = (UInt32Value)65U };
+            var patternFill23 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor21 = new ForegroundColor() { Theme = (UInt32Value)7U, Tint = 0.79998168889431442D };
+            var backgroundColor10 = new BackgroundColor() { Indexed = (UInt32Value)65U };
 
             patternFill23.Append(foregroundColor21);
             patternFill23.Append(backgroundColor10);
 
             fill23.Append(patternFill23);
 
-            Fill fill24 = new Fill();
+            var fill24 = new Fill();
 
-            PatternFill patternFill24 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor22 = new ForegroundColor() { Theme = (UInt32Value)7U, Tint = 0.59999389629810485D };
-            BackgroundColor backgroundColor11 = new BackgroundColor() { Indexed = (UInt32Value)65U };
+            var patternFill24 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor22 = new ForegroundColor() { Theme = (UInt32Value)7U, Tint = 0.59999389629810485D };
+            var backgroundColor11 = new BackgroundColor() { Indexed = (UInt32Value)65U };
 
             patternFill24.Append(foregroundColor22);
             patternFill24.Append(backgroundColor11);
 
             fill24.Append(patternFill24);
 
-            Fill fill25 = new Fill();
+            var fill25 = new Fill();
 
-            PatternFill patternFill25 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor23 = new ForegroundColor() { Theme = (UInt32Value)7U, Tint = 0.39997558519241921D };
-            BackgroundColor backgroundColor12 = new BackgroundColor() { Indexed = (UInt32Value)65U };
+            var patternFill25 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor23 = new ForegroundColor() { Theme = (UInt32Value)7U, Tint = 0.39997558519241921D };
+            var backgroundColor12 = new BackgroundColor() { Indexed = (UInt32Value)65U };
 
             patternFill25.Append(foregroundColor23);
             patternFill25.Append(backgroundColor12);
 
             fill25.Append(patternFill25);
 
-            Fill fill26 = new Fill();
+            var fill26 = new Fill();
 
-            PatternFill patternFill26 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor24 = new ForegroundColor() { Theme = (UInt32Value)8U };
+            var patternFill26 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor24 = new ForegroundColor() { Theme = (UInt32Value)8U };
 
             patternFill26.Append(foregroundColor24);
 
             fill26.Append(patternFill26);
 
-            Fill fill27 = new Fill();
+            var fill27 = new Fill();
 
-            PatternFill patternFill27 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor25 = new ForegroundColor() { Theme = (UInt32Value)8U, Tint = 0.79998168889431442D };
-            BackgroundColor backgroundColor13 = new BackgroundColor() { Indexed = (UInt32Value)65U };
+            var patternFill27 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor25 = new ForegroundColor() { Theme = (UInt32Value)8U, Tint = 0.79998168889431442D };
+            var backgroundColor13 = new BackgroundColor() { Indexed = (UInt32Value)65U };
 
             patternFill27.Append(foregroundColor25);
             patternFill27.Append(backgroundColor13);
 
             fill27.Append(patternFill27);
 
-            Fill fill28 = new Fill();
+            var fill28 = new Fill();
 
-            PatternFill patternFill28 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor26 = new ForegroundColor() { Theme = (UInt32Value)8U, Tint = 0.59999389629810485D };
-            BackgroundColor backgroundColor14 = new BackgroundColor() { Indexed = (UInt32Value)65U };
+            var patternFill28 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor26 = new ForegroundColor() { Theme = (UInt32Value)8U, Tint = 0.59999389629810485D };
+            var backgroundColor14 = new BackgroundColor() { Indexed = (UInt32Value)65U };
 
             patternFill28.Append(foregroundColor26);
             patternFill28.Append(backgroundColor14);
 
             fill28.Append(patternFill28);
 
-            Fill fill29 = new Fill();
+            var fill29 = new Fill();
 
-            PatternFill patternFill29 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor27 = new ForegroundColor() { Theme = (UInt32Value)8U, Tint = 0.39997558519241921D };
-            BackgroundColor backgroundColor15 = new BackgroundColor() { Indexed = (UInt32Value)65U };
+            var patternFill29 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor27 = new ForegroundColor() { Theme = (UInt32Value)8U, Tint = 0.39997558519241921D };
+            var backgroundColor15 = new BackgroundColor() { Indexed = (UInt32Value)65U };
 
             patternFill29.Append(foregroundColor27);
             patternFill29.Append(backgroundColor15);
 
             fill29.Append(patternFill29);
 
-            Fill fill30 = new Fill();
+            var fill30 = new Fill();
 
-            PatternFill patternFill30 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor28 = new ForegroundColor() { Theme = (UInt32Value)9U };
+            var patternFill30 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor28 = new ForegroundColor() { Theme = (UInt32Value)9U };
 
             patternFill30.Append(foregroundColor28);
 
             fill30.Append(patternFill30);
 
-            Fill fill31 = new Fill();
+            var fill31 = new Fill();
 
-            PatternFill patternFill31 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor29 = new ForegroundColor() { Theme = (UInt32Value)9U, Tint = 0.79998168889431442D };
-            BackgroundColor backgroundColor16 = new BackgroundColor() { Indexed = (UInt32Value)65U };
+            var patternFill31 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor29 = new ForegroundColor() { Theme = (UInt32Value)9U, Tint = 0.79998168889431442D };
+            var backgroundColor16 = new BackgroundColor() { Indexed = (UInt32Value)65U };
 
             patternFill31.Append(foregroundColor29);
             patternFill31.Append(backgroundColor16);
 
             fill31.Append(patternFill31);
 
-            Fill fill32 = new Fill();
+            var fill32 = new Fill();
 
-            PatternFill patternFill32 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor30 = new ForegroundColor() { Theme = (UInt32Value)9U, Tint = 0.59999389629810485D };
-            BackgroundColor backgroundColor17 = new BackgroundColor() { Indexed = (UInt32Value)65U };
+            var patternFill32 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor30 = new ForegroundColor() { Theme = (UInt32Value)9U, Tint = 0.59999389629810485D };
+            var backgroundColor17 = new BackgroundColor() { Indexed = (UInt32Value)65U };
 
             patternFill32.Append(foregroundColor30);
             patternFill32.Append(backgroundColor17);
 
             fill32.Append(patternFill32);
 
-            Fill fill33 = new Fill();
+            var fill33 = new Fill();
 
-            PatternFill patternFill33 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor31 = new ForegroundColor() { Theme = (UInt32Value)9U, Tint = 0.39997558519241921D };
-            BackgroundColor backgroundColor18 = new BackgroundColor() { Indexed = (UInt32Value)65U };
+            var patternFill33 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor31 = new ForegroundColor() { Theme = (UInt32Value)9U, Tint = 0.39997558519241921D };
+            var backgroundColor18 = new BackgroundColor() { Indexed = (UInt32Value)65U };
 
             patternFill33.Append(foregroundColor31);
             patternFill33.Append(backgroundColor18);
 
             fill33.Append(patternFill33);
 
-            Fill fill34 = new Fill();
+            var fill34 = new Fill();
 
-            PatternFill patternFill34 = new PatternFill() { PatternType = PatternValues.Solid };
-            ForegroundColor foregroundColor32 = new ForegroundColor() { Theme = (UInt32Value)4U, Tint = 0.59999389629810485D };
-            BackgroundColor backgroundColor19 = new BackgroundColor() { Indexed = (UInt32Value)64U };
+            var patternFill34 = new PatternFill() { PatternType = PatternValues.Solid };
+            var foregroundColor32 = new ForegroundColor() { Theme = (UInt32Value)4U, Tint = 0.59999389629810485D };
+            var backgroundColor19 = new BackgroundColor() { Indexed = (UInt32Value)64U };
 
             patternFill34.Append(foregroundColor32);
             patternFill34.Append(backgroundColor19);
@@ -992,14 +992,14 @@ namespace WebApp.Tools
             fills1.Append(fill33);
             fills1.Append(fill34);
 
-            Borders borders1 = new Borders() { Count = (UInt32Value)11U };
+            var borders1 = new Borders() { Count = (UInt32Value)11U };
 
-            Border border1 = new Border();
-            LeftBorder leftBorder1 = new LeftBorder();
-            RightBorder rightBorder1 = new RightBorder();
-            TopBorder topBorder1 = new TopBorder();
-            BottomBorder bottomBorder1 = new BottomBorder();
-            DiagonalBorder diagonalBorder1 = new DiagonalBorder();
+            var border1 = new Border();
+            var leftBorder1 = new LeftBorder();
+            var rightBorder1 = new RightBorder();
+            var topBorder1 = new TopBorder();
+            var bottomBorder1 = new BottomBorder();
+            var diagonalBorder1 = new DiagonalBorder();
 
             border1.Append(leftBorder1);
             border1.Append(rightBorder1);
@@ -1007,16 +1007,16 @@ namespace WebApp.Tools
             border1.Append(bottomBorder1);
             border1.Append(diagonalBorder1);
 
-            Border border2 = new Border();
-            LeftBorder leftBorder2 = new LeftBorder();
-            RightBorder rightBorder2 = new RightBorder();
-            TopBorder topBorder2 = new TopBorder();
+            var border2 = new Border();
+            var leftBorder2 = new LeftBorder();
+            var rightBorder2 = new RightBorder();
+            var topBorder2 = new TopBorder();
 
-            BottomBorder bottomBorder2 = new BottomBorder() { Style = BorderStyleValues.Thick };
-            Color color20 = new Color() { Theme = (UInt32Value)4U };
+            var bottomBorder2 = new BottomBorder() { Style = BorderStyleValues.Thick };
+            var color20 = new Color() { Theme = (UInt32Value)4U };
 
             bottomBorder2.Append(color20);
-            DiagonalBorder diagonalBorder2 = new DiagonalBorder();
+            var diagonalBorder2 = new DiagonalBorder();
 
             border2.Append(leftBorder2);
             border2.Append(rightBorder2);
@@ -1024,16 +1024,16 @@ namespace WebApp.Tools
             border2.Append(bottomBorder2);
             border2.Append(diagonalBorder2);
 
-            Border border3 = new Border();
-            LeftBorder leftBorder3 = new LeftBorder();
-            RightBorder rightBorder3 = new RightBorder();
-            TopBorder topBorder3 = new TopBorder();
+            var border3 = new Border();
+            var leftBorder3 = new LeftBorder();
+            var rightBorder3 = new RightBorder();
+            var topBorder3 = new TopBorder();
 
-            BottomBorder bottomBorder3 = new BottomBorder() { Style = BorderStyleValues.Thick };
-            Color color21 = new Color() { Theme = (UInt32Value)4U, Tint = 0.499984740745262D };
+            var bottomBorder3 = new BottomBorder() { Style = BorderStyleValues.Thick };
+            var color21 = new Color() { Theme = (UInt32Value)4U, Tint = 0.499984740745262D };
 
             bottomBorder3.Append(color21);
-            DiagonalBorder diagonalBorder3 = new DiagonalBorder();
+            var diagonalBorder3 = new DiagonalBorder();
 
             border3.Append(leftBorder3);
             border3.Append(rightBorder3);
@@ -1041,16 +1041,16 @@ namespace WebApp.Tools
             border3.Append(bottomBorder3);
             border3.Append(diagonalBorder3);
 
-            Border border4 = new Border();
-            LeftBorder leftBorder4 = new LeftBorder();
-            RightBorder rightBorder4 = new RightBorder();
-            TopBorder topBorder4 = new TopBorder();
+            var border4 = new Border();
+            var leftBorder4 = new LeftBorder();
+            var rightBorder4 = new RightBorder();
+            var topBorder4 = new TopBorder();
 
-            BottomBorder bottomBorder4 = new BottomBorder() { Style = BorderStyleValues.Medium };
-            Color color22 = new Color() { Theme = (UInt32Value)4U, Tint = 0.39997558519241921D };
+            var bottomBorder4 = new BottomBorder() { Style = BorderStyleValues.Medium };
+            var color22 = new Color() { Theme = (UInt32Value)4U, Tint = 0.39997558519241921D };
 
             bottomBorder4.Append(color22);
-            DiagonalBorder diagonalBorder4 = new DiagonalBorder();
+            var diagonalBorder4 = new DiagonalBorder();
 
             border4.Append(leftBorder4);
             border4.Append(rightBorder4);
@@ -1058,28 +1058,28 @@ namespace WebApp.Tools
             border4.Append(bottomBorder4);
             border4.Append(diagonalBorder4);
 
-            Border border5 = new Border();
+            var border5 = new Border();
 
-            LeftBorder leftBorder5 = new LeftBorder() { Style = BorderStyleValues.Thin };
-            Color color23 = new Color() { Rgb = "FF7F7F7F" };
+            var leftBorder5 = new LeftBorder() { Style = BorderStyleValues.Thin };
+            var color23 = new Color() { Rgb = "FF7F7F7F" };
 
             leftBorder5.Append(color23);
 
-            RightBorder rightBorder5 = new RightBorder() { Style = BorderStyleValues.Thin };
-            Color color24 = new Color() { Rgb = "FF7F7F7F" };
+            var rightBorder5 = new RightBorder() { Style = BorderStyleValues.Thin };
+            var color24 = new Color() { Rgb = "FF7F7F7F" };
 
             rightBorder5.Append(color24);
 
-            TopBorder topBorder5 = new TopBorder() { Style = BorderStyleValues.Thin };
-            Color color25 = new Color() { Rgb = "FF7F7F7F" };
+            var topBorder5 = new TopBorder() { Style = BorderStyleValues.Thin };
+            var color25 = new Color() { Rgb = "FF7F7F7F" };
 
             topBorder5.Append(color25);
 
-            BottomBorder bottomBorder5 = new BottomBorder() { Style = BorderStyleValues.Thin };
-            Color color26 = new Color() { Rgb = "FF7F7F7F" };
+            var bottomBorder5 = new BottomBorder() { Style = BorderStyleValues.Thin };
+            var color26 = new Color() { Rgb = "FF7F7F7F" };
 
             bottomBorder5.Append(color26);
-            DiagonalBorder diagonalBorder5 = new DiagonalBorder();
+            var diagonalBorder5 = new DiagonalBorder();
 
             border5.Append(leftBorder5);
             border5.Append(rightBorder5);
@@ -1087,28 +1087,28 @@ namespace WebApp.Tools
             border5.Append(bottomBorder5);
             border5.Append(diagonalBorder5);
 
-            Border border6 = new Border();
+            var border6 = new Border();
 
-            LeftBorder leftBorder6 = new LeftBorder() { Style = BorderStyleValues.Thin };
-            Color color27 = new Color() { Rgb = "FF3F3F3F" };
+            var leftBorder6 = new LeftBorder() { Style = BorderStyleValues.Thin };
+            var color27 = new Color() { Rgb = "FF3F3F3F" };
 
             leftBorder6.Append(color27);
 
-            RightBorder rightBorder6 = new RightBorder() { Style = BorderStyleValues.Thin };
-            Color color28 = new Color() { Rgb = "FF3F3F3F" };
+            var rightBorder6 = new RightBorder() { Style = BorderStyleValues.Thin };
+            var color28 = new Color() { Rgb = "FF3F3F3F" };
 
             rightBorder6.Append(color28);
 
-            TopBorder topBorder6 = new TopBorder() { Style = BorderStyleValues.Thin };
-            Color color29 = new Color() { Rgb = "FF3F3F3F" };
+            var topBorder6 = new TopBorder() { Style = BorderStyleValues.Thin };
+            var color29 = new Color() { Rgb = "FF3F3F3F" };
 
             topBorder6.Append(color29);
 
-            BottomBorder bottomBorder6 = new BottomBorder() { Style = BorderStyleValues.Thin };
-            Color color30 = new Color() { Rgb = "FF3F3F3F" };
+            var bottomBorder6 = new BottomBorder() { Style = BorderStyleValues.Thin };
+            var color30 = new Color() { Rgb = "FF3F3F3F" };
 
             bottomBorder6.Append(color30);
-            DiagonalBorder diagonalBorder6 = new DiagonalBorder();
+            var diagonalBorder6 = new DiagonalBorder();
 
             border6.Append(leftBorder6);
             border6.Append(rightBorder6);
@@ -1116,16 +1116,16 @@ namespace WebApp.Tools
             border6.Append(bottomBorder6);
             border6.Append(diagonalBorder6);
 
-            Border border7 = new Border();
-            LeftBorder leftBorder7 = new LeftBorder();
-            RightBorder rightBorder7 = new RightBorder();
-            TopBorder topBorder7 = new TopBorder();
+            var border7 = new Border();
+            var leftBorder7 = new LeftBorder();
+            var rightBorder7 = new RightBorder();
+            var topBorder7 = new TopBorder();
 
-            BottomBorder bottomBorder7 = new BottomBorder() { Style = BorderStyleValues.Double };
-            Color color31 = new Color() { Rgb = "FFFF8001" };
+            var bottomBorder7 = new BottomBorder() { Style = BorderStyleValues.Double };
+            var color31 = new Color() { Rgb = "FFFF8001" };
 
             bottomBorder7.Append(color31);
-            DiagonalBorder diagonalBorder7 = new DiagonalBorder();
+            var diagonalBorder7 = new DiagonalBorder();
 
             border7.Append(leftBorder7);
             border7.Append(rightBorder7);
@@ -1133,28 +1133,28 @@ namespace WebApp.Tools
             border7.Append(bottomBorder7);
             border7.Append(diagonalBorder7);
 
-            Border border8 = new Border();
+            var border8 = new Border();
 
-            LeftBorder leftBorder8 = new LeftBorder() { Style = BorderStyleValues.Double };
-            Color color32 = new Color() { Rgb = "FF3F3F3F" };
+            var leftBorder8 = new LeftBorder() { Style = BorderStyleValues.Double };
+            var color32 = new Color() { Rgb = "FF3F3F3F" };
 
             leftBorder8.Append(color32);
 
-            RightBorder rightBorder8 = new RightBorder() { Style = BorderStyleValues.Double };
-            Color color33 = new Color() { Rgb = "FF3F3F3F" };
+            var rightBorder8 = new RightBorder() { Style = BorderStyleValues.Double };
+            var color33 = new Color() { Rgb = "FF3F3F3F" };
 
             rightBorder8.Append(color33);
 
-            TopBorder topBorder8 = new TopBorder() { Style = BorderStyleValues.Double };
-            Color color34 = new Color() { Rgb = "FF3F3F3F" };
+            var topBorder8 = new TopBorder() { Style = BorderStyleValues.Double };
+            var color34 = new Color() { Rgb = "FF3F3F3F" };
 
             topBorder8.Append(color34);
 
-            BottomBorder bottomBorder8 = new BottomBorder() { Style = BorderStyleValues.Double };
-            Color color35 = new Color() { Rgb = "FF3F3F3F" };
+            var bottomBorder8 = new BottomBorder() { Style = BorderStyleValues.Double };
+            var color35 = new Color() { Rgb = "FF3F3F3F" };
 
             bottomBorder8.Append(color35);
-            DiagonalBorder diagonalBorder8 = new DiagonalBorder();
+            var diagonalBorder8 = new DiagonalBorder();
 
             border8.Append(leftBorder8);
             border8.Append(rightBorder8);
@@ -1162,28 +1162,28 @@ namespace WebApp.Tools
             border8.Append(bottomBorder8);
             border8.Append(diagonalBorder8);
 
-            Border border9 = new Border();
+            var border9 = new Border();
 
-            LeftBorder leftBorder9 = new LeftBorder() { Style = BorderStyleValues.Thin };
-            Color color36 = new Color() { Rgb = "FFB2B2B2" };
+            var leftBorder9 = new LeftBorder() { Style = BorderStyleValues.Thin };
+            var color36 = new Color() { Rgb = "FFB2B2B2" };
 
             leftBorder9.Append(color36);
 
-            RightBorder rightBorder9 = new RightBorder() { Style = BorderStyleValues.Thin };
-            Color color37 = new Color() { Rgb = "FFB2B2B2" };
+            var rightBorder9 = new RightBorder() { Style = BorderStyleValues.Thin };
+            var color37 = new Color() { Rgb = "FFB2B2B2" };
 
             rightBorder9.Append(color37);
 
-            TopBorder topBorder9 = new TopBorder() { Style = BorderStyleValues.Thin };
-            Color color38 = new Color() { Rgb = "FFB2B2B2" };
+            var topBorder9 = new TopBorder() { Style = BorderStyleValues.Thin };
+            var color38 = new Color() { Rgb = "FFB2B2B2" };
 
             topBorder9.Append(color38);
 
-            BottomBorder bottomBorder9 = new BottomBorder() { Style = BorderStyleValues.Thin };
-            Color color39 = new Color() { Rgb = "FFB2B2B2" };
+            var bottomBorder9 = new BottomBorder() { Style = BorderStyleValues.Thin };
+            var color39 = new Color() { Rgb = "FFB2B2B2" };
 
             bottomBorder9.Append(color39);
-            DiagonalBorder diagonalBorder9 = new DiagonalBorder();
+            var diagonalBorder9 = new DiagonalBorder();
 
             border9.Append(leftBorder9);
             border9.Append(rightBorder9);
@@ -1191,20 +1191,20 @@ namespace WebApp.Tools
             border9.Append(bottomBorder9);
             border9.Append(diagonalBorder9);
 
-            Border border10 = new Border();
-            LeftBorder leftBorder10 = new LeftBorder();
-            RightBorder rightBorder10 = new RightBorder();
+            var border10 = new Border();
+            var leftBorder10 = new LeftBorder();
+            var rightBorder10 = new RightBorder();
 
-            TopBorder topBorder10 = new TopBorder() { Style = BorderStyleValues.Thin };
-            Color color40 = new Color() { Theme = (UInt32Value)4U };
+            var topBorder10 = new TopBorder() { Style = BorderStyleValues.Thin };
+            var color40 = new Color() { Theme = (UInt32Value)4U };
 
             topBorder10.Append(color40);
 
-            BottomBorder bottomBorder10 = new BottomBorder() { Style = BorderStyleValues.Double };
-            Color color41 = new Color() { Theme = (UInt32Value)4U };
+            var bottomBorder10 = new BottomBorder() { Style = BorderStyleValues.Double };
+            var color41 = new Color() { Theme = (UInt32Value)4U };
 
             bottomBorder10.Append(color41);
-            DiagonalBorder diagonalBorder10 = new DiagonalBorder();
+            var diagonalBorder10 = new DiagonalBorder();
 
             border10.Append(leftBorder10);
             border10.Append(rightBorder10);
@@ -1212,28 +1212,28 @@ namespace WebApp.Tools
             border10.Append(bottomBorder10);
             border10.Append(diagonalBorder10);
 
-            Border border11 = new Border();
+            var border11 = new Border();
 
-            LeftBorder leftBorder11 = new LeftBorder() { Style = BorderStyleValues.Medium };
-            Color color42 = new Color() { Indexed = (UInt32Value)64U };
+            var leftBorder11 = new LeftBorder() { Style = BorderStyleValues.Medium };
+            var color42 = new Color() { Indexed = (UInt32Value)64U };
 
             leftBorder11.Append(color42);
 
-            RightBorder rightBorder11 = new RightBorder() { Style = BorderStyleValues.Medium };
-            Color color43 = new Color() { Indexed = (UInt32Value)64U };
+            var rightBorder11 = new RightBorder() { Style = BorderStyleValues.Medium };
+            var color43 = new Color() { Indexed = (UInt32Value)64U };
 
             rightBorder11.Append(color43);
 
-            TopBorder topBorder11 = new TopBorder() { Style = BorderStyleValues.Medium };
-            Color color44 = new Color() { Indexed = (UInt32Value)64U };
+            var topBorder11 = new TopBorder() { Style = BorderStyleValues.Medium };
+            var color44 = new Color() { Indexed = (UInt32Value)64U };
 
             topBorder11.Append(color44);
 
-            BottomBorder bottomBorder11 = new BottomBorder() { Style = BorderStyleValues.Medium };
-            Color color45 = new Color() { Indexed = (UInt32Value)64U };
+            var bottomBorder11 = new BottomBorder() { Style = BorderStyleValues.Medium };
+            var color45 = new Color() { Indexed = (UInt32Value)64U };
 
             bottomBorder11.Append(color45);
-            DiagonalBorder diagonalBorder11 = new DiagonalBorder();
+            var diagonalBorder11 = new DiagonalBorder();
 
             border11.Append(leftBorder11);
             border11.Append(rightBorder11);
@@ -1253,49 +1253,53 @@ namespace WebApp.Tools
             borders1.Append(border10);
             borders1.Append(border11);
 
-            CellStyleFormats cellStyleFormats1 = new CellStyleFormats() { Count = (UInt32Value)42U };
-            CellFormat cellFormat1 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)0U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)0U };
-            CellFormat cellFormat2 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)2U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyFill = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat3 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)3U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)1U, ApplyNumberFormat = false, ApplyFill = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat4 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)4U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)2U, ApplyNumberFormat = false, ApplyFill = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat5 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)5U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)3U, ApplyNumberFormat = false, ApplyFill = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat6 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)5U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyFill = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat7 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)6U, FillId = (UInt32Value)2U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat8 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)7U, FillId = (UInt32Value)3U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat9 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)8U, FillId = (UInt32Value)4U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat10 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)9U, FillId = (UInt32Value)5U, BorderId = (UInt32Value)4U, ApplyNumberFormat = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat11 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)10U, FillId = (UInt32Value)6U, BorderId = (UInt32Value)5U, ApplyNumberFormat = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat12 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)11U, FillId = (UInt32Value)6U, BorderId = (UInt32Value)4U, ApplyNumberFormat = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat13 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)12U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)6U, ApplyNumberFormat = false, ApplyFill = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat14 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)13U, FillId = (UInt32Value)7U, BorderId = (UInt32Value)7U, ApplyNumberFormat = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat15 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)14U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyFill = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat16 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)8U, BorderId = (UInt32Value)8U, ApplyNumberFormat = false, ApplyFont = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat17 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)15U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyFill = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat18 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)16U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)9U, ApplyNumberFormat = false, ApplyFill = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat19 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)17U, FillId = (UInt32Value)9U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat20 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)10U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat21 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)11U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat22 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)12U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat23 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)17U, FillId = (UInt32Value)13U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat24 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)14U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat25 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)15U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat26 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)16U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat27 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)17U, FillId = (UInt32Value)17U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat28 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)18U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat29 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)19U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat30 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)20U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat31 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)17U, FillId = (UInt32Value)21U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat32 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)22U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat33 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)23U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat34 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)24U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat35 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)17U, FillId = (UInt32Value)25U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat36 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)26U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat37 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)27U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat38 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)28U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat39 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)17U, FillId = (UInt32Value)29U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat40 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)30U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat41 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)31U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
-            CellFormat cellFormat42 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)32U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellStyleFormats1 = new CellStyleFormats()
+            {
+                Count = (UInt32Value)42U
+            };
+
+            var cellFormat1 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)0U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)0U };
+            var cellFormat2 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)2U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyFill = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat3 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)3U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)1U, ApplyNumberFormat = false, ApplyFill = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat4 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)4U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)2U, ApplyNumberFormat = false, ApplyFill = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat5 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)5U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)3U, ApplyNumberFormat = false, ApplyFill = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat6 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)5U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyFill = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat7 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)6U, FillId = (UInt32Value)2U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat8 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)7U, FillId = (UInt32Value)3U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat9 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)8U, FillId = (UInt32Value)4U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat10 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)9U, FillId = (UInt32Value)5U, BorderId = (UInt32Value)4U, ApplyNumberFormat = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat11 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)10U, FillId = (UInt32Value)6U, BorderId = (UInt32Value)5U, ApplyNumberFormat = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat12 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)11U, FillId = (UInt32Value)6U, BorderId = (UInt32Value)4U, ApplyNumberFormat = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat13 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)12U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)6U, ApplyNumberFormat = false, ApplyFill = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat14 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)13U, FillId = (UInt32Value)7U, BorderId = (UInt32Value)7U, ApplyNumberFormat = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat15 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)14U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyFill = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat16 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)8U, BorderId = (UInt32Value)8U, ApplyNumberFormat = false, ApplyFont = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat17 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)15U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyFill = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat18 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)16U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)9U, ApplyNumberFormat = false, ApplyFill = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat19 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)17U, FillId = (UInt32Value)9U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat20 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)10U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat21 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)11U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat22 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)12U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat23 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)17U, FillId = (UInt32Value)13U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat24 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)14U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat25 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)15U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat26 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)16U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat27 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)17U, FillId = (UInt32Value)17U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat28 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)18U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat29 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)19U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat30 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)20U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat31 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)17U, FillId = (UInt32Value)21U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat32 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)22U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat33 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)23U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat34 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)24U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat35 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)17U, FillId = (UInt32Value)25U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat36 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)26U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat37 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)27U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat38 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)28U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat39 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)17U, FillId = (UInt32Value)29U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat40 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)30U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat41 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)31U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
+            var cellFormat42 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)1U, FillId = (UInt32Value)32U, BorderId = (UInt32Value)0U, ApplyNumberFormat = false, ApplyBorder = false, ApplyAlignment = false, ApplyProtection = false };
 
             cellStyleFormats1.Append(cellFormat1);
             cellStyleFormats1.Append(cellFormat2);
@@ -1340,29 +1344,29 @@ namespace WebApp.Tools
             cellStyleFormats1.Append(cellFormat41);
             cellStyleFormats1.Append(cellFormat42);
 
-            CellFormats cellFormats1 = new CellFormats() { Count = (UInt32Value)5U };
-            CellFormat cellFormat43 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)0U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)0U, FormatId = (UInt32Value)0U };
+            var cellFormats1 = new CellFormats() { Count = (UInt32Value)5U };
+            var cellFormat43 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)0U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)0U, FormatId = (UInt32Value)0U };
 
-            CellFormat cellFormat44 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)0U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)0U, FormatId = (UInt32Value)0U, ApplyAlignment = true };
-            Alignment alignment1 = new Alignment() { Horizontal = HorizontalAlignmentValues.Center, Vertical = VerticalAlignmentValues.Center };
+            var cellFormat44 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)0U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)0U, FormatId = (UInt32Value)0U, ApplyAlignment = true };
+            var alignment1 = new Alignment() { Horizontal = HorizontalAlignmentValues.Center, Vertical = VerticalAlignmentValues.Center };
 
             cellFormat44.Append(alignment1);
 
-            CellFormat cellFormat45 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)18U, FillId = (UInt32Value)33U, BorderId = (UInt32Value)10U, FormatId = (UInt32Value)0U, ApplyFont = true, ApplyFill = true, ApplyBorder = true, ApplyAlignment = true };
-            Alignment alignment2 = new Alignment() { Horizontal = HorizontalAlignmentValues.Center, Vertical = VerticalAlignmentValues.Center };
+            var cellFormat45 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)18U, FillId = (UInt32Value)33U, BorderId = (UInt32Value)10U, FormatId = (UInt32Value)0U, ApplyFont = true, ApplyFill = true, ApplyBorder = true, ApplyAlignment = true };
+            var alignment2 = new Alignment() { Horizontal = HorizontalAlignmentValues.Center, Vertical = VerticalAlignmentValues.Center };
 
             cellFormat45.Append(alignment2);
 
-            CellFormat cellFormat46 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)0U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)0U, FormatId = (UInt32Value)0U, ApplyAlignment = true, ApplyProtection = true };
-            Alignment alignment3 = new Alignment() { Horizontal = HorizontalAlignmentValues.Center, Vertical = VerticalAlignmentValues.Center };
-            Protection protection1 = new Protection() { Locked = false };
+            var cellFormat46 = new CellFormat() { NumberFormatId = (UInt32Value)0U, FontId = (UInt32Value)0U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)0U, FormatId = (UInt32Value)0U, ApplyAlignment = true, ApplyProtection = true };
+            var alignment3 = new Alignment() { Horizontal = HorizontalAlignmentValues.Center, Vertical = VerticalAlignmentValues.Center };
+            var protection1 = new Protection() { Locked = false };
 
             cellFormat46.Append(alignment3);
             cellFormat46.Append(protection1);
 
-            CellFormat cellFormat47 = new CellFormat() { NumberFormatId = (UInt32Value)22U, FontId = (UInt32Value)0U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)0U, FormatId = (UInt32Value)0U, ApplyNumberFormat = true, ApplyAlignment = true, ApplyProtection = true };
-            Alignment alignment4 = new Alignment() { Horizontal = HorizontalAlignmentValues.Center, Vertical = VerticalAlignmentValues.Center };
-            Protection protection2 = new Protection() { Locked = false };
+            var cellFormat47 = new CellFormat() { NumberFormatId = (UInt32Value)22U, FontId = (UInt32Value)0U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)0U, FormatId = (UInt32Value)0U, ApplyNumberFormat = true, ApplyAlignment = true, ApplyProtection = true };
+            var alignment4 = new Alignment() { Horizontal = HorizontalAlignmentValues.Center, Vertical = VerticalAlignmentValues.Center };
+            var protection2 = new Protection() { Locked = false };
 
             cellFormat47.Append(alignment4);
             cellFormat47.Append(protection2);
@@ -1373,49 +1377,49 @@ namespace WebApp.Tools
             cellFormats1.Append(cellFormat46);
             cellFormats1.Append(cellFormat47);
 
-            CellStyles cellStyles1 = new CellStyles() { Count = (UInt32Value)42U };
-            CellStyle cellStyle1 = new CellStyle() { Name = "20% — акцент1", FormatId = (UInt32Value)19U, BuiltinId = (UInt32Value)30U, CustomBuiltin = true };
-            CellStyle cellStyle2 = new CellStyle() { Name = "20% — акцент2", FormatId = (UInt32Value)23U, BuiltinId = (UInt32Value)34U, CustomBuiltin = true };
-            CellStyle cellStyle3 = new CellStyle() { Name = "20% — акцент3", FormatId = (UInt32Value)27U, BuiltinId = (UInt32Value)38U, CustomBuiltin = true };
-            CellStyle cellStyle4 = new CellStyle() { Name = "20% — акцент4", FormatId = (UInt32Value)31U, BuiltinId = (UInt32Value)42U, CustomBuiltin = true };
-            CellStyle cellStyle5 = new CellStyle() { Name = "20% — акцент5", FormatId = (UInt32Value)35U, BuiltinId = (UInt32Value)46U, CustomBuiltin = true };
-            CellStyle cellStyle6 = new CellStyle() { Name = "20% — акцент6", FormatId = (UInt32Value)39U, BuiltinId = (UInt32Value)50U, CustomBuiltin = true };
-            CellStyle cellStyle7 = new CellStyle() { Name = "40% — акцент1", FormatId = (UInt32Value)20U, BuiltinId = (UInt32Value)31U, CustomBuiltin = true };
-            CellStyle cellStyle8 = new CellStyle() { Name = "40% — акцент2", FormatId = (UInt32Value)24U, BuiltinId = (UInt32Value)35U, CustomBuiltin = true };
-            CellStyle cellStyle9 = new CellStyle() { Name = "40% — акцент3", FormatId = (UInt32Value)28U, BuiltinId = (UInt32Value)39U, CustomBuiltin = true };
-            CellStyle cellStyle10 = new CellStyle() { Name = "40% — акцент4", FormatId = (UInt32Value)32U, BuiltinId = (UInt32Value)43U, CustomBuiltin = true };
-            CellStyle cellStyle11 = new CellStyle() { Name = "40% — акцент5", FormatId = (UInt32Value)36U, BuiltinId = (UInt32Value)47U, CustomBuiltin = true };
-            CellStyle cellStyle12 = new CellStyle() { Name = "40% — акцент6", FormatId = (UInt32Value)40U, BuiltinId = (UInt32Value)51U, CustomBuiltin = true };
-            CellStyle cellStyle13 = new CellStyle() { Name = "60% — акцент1", FormatId = (UInt32Value)21U, BuiltinId = (UInt32Value)32U, CustomBuiltin = true };
-            CellStyle cellStyle14 = new CellStyle() { Name = "60% — акцент2", FormatId = (UInt32Value)25U, BuiltinId = (UInt32Value)36U, CustomBuiltin = true };
-            CellStyle cellStyle15 = new CellStyle() { Name = "60% — акцент3", FormatId = (UInt32Value)29U, BuiltinId = (UInt32Value)40U, CustomBuiltin = true };
-            CellStyle cellStyle16 = new CellStyle() { Name = "60% — акцент4", FormatId = (UInt32Value)33U, BuiltinId = (UInt32Value)44U, CustomBuiltin = true };
-            CellStyle cellStyle17 = new CellStyle() { Name = "60% — акцент5", FormatId = (UInt32Value)37U, BuiltinId = (UInt32Value)48U, CustomBuiltin = true };
-            CellStyle cellStyle18 = new CellStyle() { Name = "60% — акцент6", FormatId = (UInt32Value)41U, BuiltinId = (UInt32Value)52U, CustomBuiltin = true };
-            CellStyle cellStyle19 = new CellStyle() { Name = "Акцент1", FormatId = (UInt32Value)18U, BuiltinId = (UInt32Value)29U, CustomBuiltin = true };
-            CellStyle cellStyle20 = new CellStyle() { Name = "Акцент2", FormatId = (UInt32Value)22U, BuiltinId = (UInt32Value)33U, CustomBuiltin = true };
-            CellStyle cellStyle21 = new CellStyle() { Name = "Акцент3", FormatId = (UInt32Value)26U, BuiltinId = (UInt32Value)37U, CustomBuiltin = true };
-            CellStyle cellStyle22 = new CellStyle() { Name = "Акцент4", FormatId = (UInt32Value)30U, BuiltinId = (UInt32Value)41U, CustomBuiltin = true };
-            CellStyle cellStyle23 = new CellStyle() { Name = "Акцент5", FormatId = (UInt32Value)34U, BuiltinId = (UInt32Value)45U, CustomBuiltin = true };
-            CellStyle cellStyle24 = new CellStyle() { Name = "Акцент6", FormatId = (UInt32Value)38U, BuiltinId = (UInt32Value)49U, CustomBuiltin = true };
-            CellStyle cellStyle25 = new CellStyle() { Name = "Ввод ", FormatId = (UInt32Value)9U, BuiltinId = (UInt32Value)20U, CustomBuiltin = true };
-            CellStyle cellStyle26 = new CellStyle() { Name = "Вывод", FormatId = (UInt32Value)10U, BuiltinId = (UInt32Value)21U, CustomBuiltin = true };
-            CellStyle cellStyle27 = new CellStyle() { Name = "Вычисление", FormatId = (UInt32Value)11U, BuiltinId = (UInt32Value)22U, CustomBuiltin = true };
-            CellStyle cellStyle28 = new CellStyle() { Name = "Заголовок 1", FormatId = (UInt32Value)2U, BuiltinId = (UInt32Value)16U, CustomBuiltin = true };
-            CellStyle cellStyle29 = new CellStyle() { Name = "Заголовок 2", FormatId = (UInt32Value)3U, BuiltinId = (UInt32Value)17U, CustomBuiltin = true };
-            CellStyle cellStyle30 = new CellStyle() { Name = "Заголовок 3", FormatId = (UInt32Value)4U, BuiltinId = (UInt32Value)18U, CustomBuiltin = true };
-            CellStyle cellStyle31 = new CellStyle() { Name = "Заголовок 4", FormatId = (UInt32Value)5U, BuiltinId = (UInt32Value)19U, CustomBuiltin = true };
-            CellStyle cellStyle32 = new CellStyle() { Name = "Итог", FormatId = (UInt32Value)17U, BuiltinId = (UInt32Value)25U, CustomBuiltin = true };
-            CellStyle cellStyle33 = new CellStyle() { Name = "Контрольная ячейка", FormatId = (UInt32Value)13U, BuiltinId = (UInt32Value)23U, CustomBuiltin = true };
-            CellStyle cellStyle34 = new CellStyle() { Name = "Название", FormatId = (UInt32Value)1U, BuiltinId = (UInt32Value)15U, CustomBuiltin = true };
-            CellStyle cellStyle35 = new CellStyle() { Name = "Нейтральный", FormatId = (UInt32Value)8U, BuiltinId = (UInt32Value)28U, CustomBuiltin = true };
-            CellStyle cellStyle36 = new CellStyle() { Name = "Обычный", FormatId = (UInt32Value)0U, BuiltinId = (UInt32Value)0U };
-            CellStyle cellStyle37 = new CellStyle() { Name = "Плохой", FormatId = (UInt32Value)7U, BuiltinId = (UInt32Value)27U, CustomBuiltin = true };
-            CellStyle cellStyle38 = new CellStyle() { Name = "Пояснение", FormatId = (UInt32Value)16U, BuiltinId = (UInt32Value)53U, CustomBuiltin = true };
-            CellStyle cellStyle39 = new CellStyle() { Name = "Примечание", FormatId = (UInt32Value)15U, BuiltinId = (UInt32Value)10U, CustomBuiltin = true };
-            CellStyle cellStyle40 = new CellStyle() { Name = "Связанная ячейка", FormatId = (UInt32Value)12U, BuiltinId = (UInt32Value)24U, CustomBuiltin = true };
-            CellStyle cellStyle41 = new CellStyle() { Name = "Текст предупреждения", FormatId = (UInt32Value)14U, BuiltinId = (UInt32Value)11U, CustomBuiltin = true };
-            CellStyle cellStyle42 = new CellStyle() { Name = "Хороший", FormatId = (UInt32Value)6U, BuiltinId = (UInt32Value)26U, CustomBuiltin = true };
+            var cellStyles1 = new CellStyles() { Count = (UInt32Value)42U };
+            var cellStyle1 = new CellStyle() { Name = "20% — акцент1", FormatId = (UInt32Value)19U, BuiltinId = (UInt32Value)30U, CustomBuiltin = true };
+            var cellStyle2 = new CellStyle() { Name = "20% — акцент2", FormatId = (UInt32Value)23U, BuiltinId = (UInt32Value)34U, CustomBuiltin = true };
+            var cellStyle3 = new CellStyle() { Name = "20% — акцент3", FormatId = (UInt32Value)27U, BuiltinId = (UInt32Value)38U, CustomBuiltin = true };
+            var cellStyle4 = new CellStyle() { Name = "20% — акцент4", FormatId = (UInt32Value)31U, BuiltinId = (UInt32Value)42U, CustomBuiltin = true };
+            var cellStyle5 = new CellStyle() { Name = "20% — акцент5", FormatId = (UInt32Value)35U, BuiltinId = (UInt32Value)46U, CustomBuiltin = true };
+            var cellStyle6 = new CellStyle() { Name = "20% — акцент6", FormatId = (UInt32Value)39U, BuiltinId = (UInt32Value)50U, CustomBuiltin = true };
+            var cellStyle7 = new CellStyle() { Name = "40% — акцент1", FormatId = (UInt32Value)20U, BuiltinId = (UInt32Value)31U, CustomBuiltin = true };
+            var cellStyle8 = new CellStyle() { Name = "40% — акцент2", FormatId = (UInt32Value)24U, BuiltinId = (UInt32Value)35U, CustomBuiltin = true };
+            var cellStyle9 = new CellStyle() { Name = "40% — акцент3", FormatId = (UInt32Value)28U, BuiltinId = (UInt32Value)39U, CustomBuiltin = true };
+            var cellStyle10 = new CellStyle() { Name = "40% — акцент4", FormatId = (UInt32Value)32U, BuiltinId = (UInt32Value)43U, CustomBuiltin = true };
+            var cellStyle11 = new CellStyle() { Name = "40% — акцент5", FormatId = (UInt32Value)36U, BuiltinId = (UInt32Value)47U, CustomBuiltin = true };
+            var cellStyle12 = new CellStyle() { Name = "40% — акцент6", FormatId = (UInt32Value)40U, BuiltinId = (UInt32Value)51U, CustomBuiltin = true };
+            var cellStyle13 = new CellStyle() { Name = "60% — акцент1", FormatId = (UInt32Value)21U, BuiltinId = (UInt32Value)32U, CustomBuiltin = true };
+            var cellStyle14 = new CellStyle() { Name = "60% — акцент2", FormatId = (UInt32Value)25U, BuiltinId = (UInt32Value)36U, CustomBuiltin = true };
+            var cellStyle15 = new CellStyle() { Name = "60% — акцент3", FormatId = (UInt32Value)29U, BuiltinId = (UInt32Value)40U, CustomBuiltin = true };
+            var cellStyle16 = new CellStyle() { Name = "60% — акцент4", FormatId = (UInt32Value)33U, BuiltinId = (UInt32Value)44U, CustomBuiltin = true };
+            var cellStyle17 = new CellStyle() { Name = "60% — акцент5", FormatId = (UInt32Value)37U, BuiltinId = (UInt32Value)48U, CustomBuiltin = true };
+            var cellStyle18 = new CellStyle() { Name = "60% — акцент6", FormatId = (UInt32Value)41U, BuiltinId = (UInt32Value)52U, CustomBuiltin = true };
+            var cellStyle19 = new CellStyle() { Name = "Акцент1", FormatId = (UInt32Value)18U, BuiltinId = (UInt32Value)29U, CustomBuiltin = true };
+            var cellStyle20 = new CellStyle() { Name = "Акцент2", FormatId = (UInt32Value)22U, BuiltinId = (UInt32Value)33U, CustomBuiltin = true };
+            var cellStyle21 = new CellStyle() { Name = "Акцент3", FormatId = (UInt32Value)26U, BuiltinId = (UInt32Value)37U, CustomBuiltin = true };
+            var cellStyle22 = new CellStyle() { Name = "Акцент4", FormatId = (UInt32Value)30U, BuiltinId = (UInt32Value)41U, CustomBuiltin = true };
+            var cellStyle23 = new CellStyle() { Name = "Акцент5", FormatId = (UInt32Value)34U, BuiltinId = (UInt32Value)45U, CustomBuiltin = true };
+            var cellStyle24 = new CellStyle() { Name = "Акцент6", FormatId = (UInt32Value)38U, BuiltinId = (UInt32Value)49U, CustomBuiltin = true };
+            var cellStyle25 = new CellStyle() { Name = "Ввод ", FormatId = (UInt32Value)9U, BuiltinId = (UInt32Value)20U, CustomBuiltin = true };
+            var cellStyle26 = new CellStyle() { Name = "Вывод", FormatId = (UInt32Value)10U, BuiltinId = (UInt32Value)21U, CustomBuiltin = true };
+            var cellStyle27 = new CellStyle() { Name = "Вычисление", FormatId = (UInt32Value)11U, BuiltinId = (UInt32Value)22U, CustomBuiltin = true };
+            var cellStyle28 = new CellStyle() { Name = "Заголовок 1", FormatId = (UInt32Value)2U, BuiltinId = (UInt32Value)16U, CustomBuiltin = true };
+            var cellStyle29 = new CellStyle() { Name = "Заголовок 2", FormatId = (UInt32Value)3U, BuiltinId = (UInt32Value)17U, CustomBuiltin = true };
+            var cellStyle30 = new CellStyle() { Name = "Заголовок 3", FormatId = (UInt32Value)4U, BuiltinId = (UInt32Value)18U, CustomBuiltin = true };
+            var cellStyle31 = new CellStyle() { Name = "Заголовок 4", FormatId = (UInt32Value)5U, BuiltinId = (UInt32Value)19U, CustomBuiltin = true };
+            var cellStyle32 = new CellStyle() { Name = "Итог", FormatId = (UInt32Value)17U, BuiltinId = (UInt32Value)25U, CustomBuiltin = true };
+            var cellStyle33 = new CellStyle() { Name = "Контрольная ячейка", FormatId = (UInt32Value)13U, BuiltinId = (UInt32Value)23U, CustomBuiltin = true };
+            var cellStyle34 = new CellStyle() { Name = "Название", FormatId = (UInt32Value)1U, BuiltinId = (UInt32Value)15U, CustomBuiltin = true };
+            var cellStyle35 = new CellStyle() { Name = "Нейтральный", FormatId = (UInt32Value)8U, BuiltinId = (UInt32Value)28U, CustomBuiltin = true };
+            var cellStyle36 = new CellStyle() { Name = "Обычный", FormatId = (UInt32Value)0U, BuiltinId = (UInt32Value)0U };
+            var cellStyle37 = new CellStyle() { Name = "Плохой", FormatId = (UInt32Value)7U, BuiltinId = (UInt32Value)27U, CustomBuiltin = true };
+            var cellStyle38 = new CellStyle() { Name = "Пояснение", FormatId = (UInt32Value)16U, BuiltinId = (UInt32Value)53U, CustomBuiltin = true };
+            var cellStyle39 = new CellStyle() { Name = "Примечание", FormatId = (UInt32Value)15U, BuiltinId = (UInt32Value)10U, CustomBuiltin = true };
+            var cellStyle40 = new CellStyle() { Name = "Связанная ячейка", FormatId = (UInt32Value)12U, BuiltinId = (UInt32Value)24U, CustomBuiltin = true };
+            var cellStyle41 = new CellStyle() { Name = "Текст предупреждения", FormatId = (UInt32Value)14U, BuiltinId = (UInt32Value)11U, CustomBuiltin = true };
+            var cellStyle42 = new CellStyle() { Name = "Хороший", FormatId = (UInt32Value)6U, BuiltinId = (UInt32Value)26U, CustomBuiltin = true };
 
             cellStyles1.Append(cellStyle1);
             cellStyles1.Append(cellStyle2);
@@ -1459,13 +1463,18 @@ namespace WebApp.Tools
             cellStyles1.Append(cellStyle40);
             cellStyles1.Append(cellStyle41);
             cellStyles1.Append(cellStyle42);
-            DifferentialFormats differentialFormats1 = new DifferentialFormats() { Count = (UInt32Value)0U };
-            
-            var tableStyles1 = new TableStyles() { 
-                Count = (UInt32Value)0U, DefaultTableStyle = "TableStyleMedium2", 
-                DefaultPivotStyle = "PivotStyleLight16" 
+
+            var differentialFormats1 = new DifferentialFormats()
+            {
+                Count = (UInt32Value)0U
             };
 
+            var tableStyles1 = new TableStyles()
+            {
+                Count = (UInt32Value)0U,
+                DefaultTableStyle = "TableStyleMedium2",
+                DefaultPivotStyle = "PivotStyleLight16"
+            };
 
             stylesheet1.Append(fonts1);
             stylesheet1.Append(fills1);
