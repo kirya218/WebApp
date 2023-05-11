@@ -55,7 +55,7 @@ namespace WebApp.Controllers.ContactControllers
                     contact.FullName,
                     contact.Email,
                     contact.Age,
-                    BirthDate = contact.BirthDate.ToString("F"),
+                    BirthDate = contact.BirthDate.ToShortDateString(),
                     contact.Phone,
                     contact.MobilePhone,
                     ContactType = contact.ContactType.Name
