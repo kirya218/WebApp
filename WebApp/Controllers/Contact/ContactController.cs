@@ -1,17 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GridLibrary;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using GridLibrary;
+using WebApp.Builders.Filters;
 using WebApp.Context;
 using WebApp.Entities;
 using WebApp.Interfaces;
 using WebApp.Models;
 using WebApp.Models.Contact;
 using WebApp.Tools;
-using System.Reflection;
-using System;
-using WebApp.Builders.Filters;
-using Microsoft.IdentityModel.Tokens;
-using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace WebApp.Controllers.ContactControllers
 {
@@ -140,7 +136,7 @@ namespace WebApp.Controllers.ContactControllers
             {
                 Id = id,
                 GridId = gridId,
-                Message = string.Format("Are you sure you want to delete the contact <b>{0}</b> ?", contact.FullName)
+                Message = string.Format(ConstansCS.LocalizationStrings.DeleteString, contact.FullName)
             });
         }
 
@@ -237,7 +233,7 @@ namespace WebApp.Controllers.ContactControllers
                         Name = item.Name
                     };
 
-                    _context.Contacts.Add(item);
+                    _context.Contacts.Add(newContact);
                 }
                 else
                 {
@@ -255,7 +251,7 @@ namespace WebApp.Controllers.ContactControllers
             }
 
             _context.SaveChanges();
-            return Json(items);
+            return Redirect("/Contact/Index");
         }
 
         private class Frow

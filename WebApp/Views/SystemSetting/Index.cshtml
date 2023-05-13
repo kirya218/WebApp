@@ -21,7 +21,7 @@
         new Column { Bind = "Id", Groupable = false, Hidden = true },
         new Column { Bind = "Name", Header = "Название" }.Mod(o => o.Nohide()),
         new Column { Bind = "Code", Header = "Код" },
-        new Column { Bind = "Value", Header = "Значение" },
+        new Column { Bind = "Value", Sortable = false, Groupable = false, Header = "Значение" },
         new Column { Bind = "Description", Header = "Описание" },
         new Column { ClientFormat = Html.EditFormatForGrid(gridName), Width = 55 }.Mod(o => o.Nohide())))
 </div>

@@ -139,7 +139,7 @@ namespace WebApp.Builders
                             partMinute,
                             0);
 
-                    row.Time = (DateTime.UtcNow.Date + new TimeSpan(partHour, partMinute, 0)).ToString(_dateFormat.ShortTimePattern);
+                    row.Time = (DateTime.Now.Date + new TimeSpan(partHour, partMinute, 0)).ToString(_dateFormat.ShortTimePattern);
 
                     var days = GetDaysCount();
                     var cells = new List<ScheduleCell>();
@@ -297,7 +297,7 @@ namespace WebApp.Builders
 
             if (_model.ViewType == ScheduleViewType.Month)
             {
-                cell.Day = startUtc.Day == 1 ? startUtc.ToString("d MMM") : startUtc.Day.ToString(CultureInfo.InvariantCulture);
+                cell.Day = startUtc.ToString("d MMM");
                 cell.Date = startUtc.Date.ToString(_dateFormat.ShortDatePattern);
             }
 
@@ -310,7 +310,7 @@ namespace WebApp.Builders
                     Id = schedule.Id, 
                     Title = schedule.Name, 
                     Color = schedule.Color ?? "White", 
-                    Time = "" 
+                    Time = ""
                 };
 
                 if (!schedule.IsAllDay)

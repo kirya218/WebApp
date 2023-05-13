@@ -6470,13 +6470,7 @@ var awem = function ($) {
         var shov = 'o-hov';
         var shovc = '.' + shov;
         var monthNames = cd().Months;
-
-        var dayNames = cd().Days.slice(0);
-
-        if (awem.fdw) {
-            dayNames.push(dayNames.shift());
-        }
-
+        var dayNames = cd().Days;
         var prm = o;
         var input = o.v;
         var openb = o.f.find('.awe-dpbtn');

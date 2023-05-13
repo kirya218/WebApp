@@ -8,6 +8,7 @@ using WebApp.Enums.Schedule;
 using WebApp.Interfaces;
 using WebApp.Models;
 using WebApp.Models.Schedule;
+using WebApp.Tools;
 
 namespace WebApp.Controllers.ScheludeControllers
 {
@@ -39,11 +40,28 @@ namespace WebApp.Controllers.ScheludeControllers
         /// <returns>Записи.</returns>
         public ActionResult GridGetItems(GridParams gridParams, DateTime? date, ScheduleViewType? viewType, int hourStep)
         {
+            var userId = Guid.Parse(User.Claims.First(x => x.Type == "UserId").Value);
+            var roleId = Guid.Parse(User.Claims.First(x => x.Type == "RoleId").Value);
+
             var items = _context.Schedules
                 .Include(x => x.Owner)
                 .Include(x => x.Procedure)
                 .Include(x => x.Patient)
                 .AsQueryable();
+
+            var contactId = GridUtils.GetContactId(userId, _context);
+
+            if (roleId == ConstansCS.Roles.User)
+            {
+                items = items
+                    .Where(x => x.Patient != null && x.Patient.Id == contactId);
+            }
+
+            if (roleId == ConstansCS.Roles.Employee)
+            {
+                items = items
+                    .Where(x => x.Owner != null && x.Owner.Id == contactId);
+            }
 
             var model = new ScheduleBuilder(new ScheduleBuilderModel
             {
@@ -105,7 +123,7 @@ namespace WebApp.Controllers.ScheludeControllers
 
             if (!view.IsAllDay && end <= start || end < start)
             {
-                ModelState.AddModelError("StartDate", "end date and time should be greater than start date and time");
+                ModelState.AddModelError("StartDate", ConstansCS.LocalizationStrings.StartDateError);
                 return PartialView(view);
             }
 
@@ -160,6 +178,13 @@ namespace WebApp.Controllers.ScheludeControllers
         [HttpPost]
         public ActionResult Edit(ScheduleEditInput view)
         {
+            var roleId = User.Claims.First(x => x.Type == "RoleId")?.Value;
+
+            if (string.IsNullOrWhiteSpace(roleId) || Guid.Parse(roleId) == ConstansCS.Roles.User)
+            {
+                return Json(new { });
+            }
+
             if (!ModelState.IsValid)
             {
                 return PartialView("Edit", view);
@@ -176,7 +201,7 @@ namespace WebApp.Controllers.ScheludeControllers
 
             if (!view.IsAllDay && end <= start || end < start)
             {
-                ModelState.AddModelError("StartDate", "end date and time should be greater than start date and time");
+                ModelState.AddModelError("StartDate", ConstansCS.LocalizationStrings.StartDateError);
                 return PartialView("Edit", view);
             }
 
@@ -208,7 +233,7 @@ namespace WebApp.Controllers.ScheludeControllers
             {
                 Id = id,
                 GridId = gridId,
-                Message = string.Format("Are you sure you want to delete the contact <b>{0}</b> ?", schelude.Name)
+                Message = string.Format(ConstansCS.LocalizationStrings.DeleteString, schelude.Name)
             });
         }
 

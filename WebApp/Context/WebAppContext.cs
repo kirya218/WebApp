@@ -50,6 +50,7 @@ namespace WebApp.Context
 
             var contactType = new ContactType()
             {
+                Id = new Guid("20adea7c-b9a3-4b1a-9968-a7895c3c6ef3"),
                 Name = "Работник",
                 CreatedOn = DateTime.Now,
                 ModifiedOn = DateTime.Now
@@ -57,13 +58,13 @@ namespace WebApp.Context
 
             var contactType2 = new ContactType()
             {
-                Name = "Пациент",
+                Id = new Guid("968be231-af10-4f4a-99aa-3799be8be508"),
+                Name = "Проживающий",
                 CreatedOn = DateTime.Now,
                 ModifiedOn = DateTime.Now
             };
 
-            ContactTypes.Add(contactType);
-            ContactTypes.Add(contactType2);
+            ContactTypes.AddRange(contactType, contactType2);
 
             var gender = new Gender()
             {
@@ -86,9 +87,7 @@ namespace WebApp.Context
                 ModifiedOn = DateTime.Now
             };
 
-            Genders.Add(gender);
-            Genders.Add(gender2);
-            Genders.Add(gender3);
+            Genders.AddRange(gender, gender2, gender3);
 
             var chamberType = new ChamberType()
             {
@@ -111,22 +110,38 @@ namespace WebApp.Context
                 ModifiedOn = DateTime.Now
             };
 
-            ChamberTypes.Add(chamberType);
-            ChamberTypes.Add(chamberType2);
-            ChamberTypes.Add(chamberType3);
+            ChamberTypes.AddRange(chamberType, chamberType2, chamberType3);
 
-            var role = new Role()
+            var roleEmployee = new Role
+            {
+                Id = new Guid("432ff91d-40f0-4d4e-8971-ec0570faec65"),
+                Name = "Работник",
+                Description = "Роль работника",
+                CreatedOn = DateTime.Now,
+                ModifiedOn = DateTime.Now
+            };
+
+            var roleAdmin = new Role()
             {
                 Id = new Guid("09f161d7-8ed6-4eb0-a11d-3338453052d4"),
-                Name = "Supervisor",
+                Name = "Администратор",
                 Description = "Роль администратора",
+                CreatedOn = DateTime.Now,
+                ModifiedOn = DateTime.Now
+            };
+
+            var roleUser = new Role()
+            {
+                Id = new Guid("a9458d1d-ac61-4936-8c85-c72a76baeef8"),
+                Name = "Пользователь",
+                Description = "Роль для всех пользователей",
                 CreatedOn = DateTime.Now,
                 ModifiedOn = DateTime.Now
             };
 
             var contact = new Contact()
             {
-                Name = "Чернов К.К",
+                Name = "Чернов К.К.",
                 FullName = "Чернов Кирилл Константинович",
                 Email = "Kirill@mail.ru",
                 Phone = "+79192222222",
@@ -141,11 +156,11 @@ namespace WebApp.Context
 
             var contact2 = new Contact()
             {
-                Name = "Шикина Е.А",
+                Name = "Шикина Е.А.",
                 FullName = "Шикина Евгения Александровна",
                 Email = "Shik-310101@mail.ru",
                 Phone = "+791921231242",
-                ContactType = contactType2,
+                ContactType = contactType,
                 Age = 22,
                 BirthDate = DateTime.Parse("31.01.2001"),
                 MobilePhone = "+43564432426",
@@ -154,18 +169,23 @@ namespace WebApp.Context
                 ModifiedOn = DateTime.Now
             };
 
-            Contacts.Add(contact);
-            Contacts.Add(contact2);
-            Roles.Add(role);
-
-            Roles.Add(new Role()
+            var contact3 = new Contact()
             {
-                Id = new Guid("a9458d1d-ac61-4936-8c85-c72a76baeef8"),
-                Name = "User",
-                Description = "Роль пользователя",
+                Name = "Зимаков C.К.",
+                FullName = "Зимаков Степан Константинович",
+                Email = "stepanZimakov@mail.ru",
+                Phone = "+7919536272242",
+                ContactType = contactType2,
+                Age = 22,
+                BirthDate = DateTime.Parse("07.03.2002"),
+                MobilePhone = "+4357533572426",
+                Gender = gender,
                 CreatedOn = DateTime.Now,
                 ModifiedOn = DateTime.Now
-            });
+            };
+
+            Contacts.AddRange(contact, contact2, contact3);
+            Roles.AddRange(roleAdmin, roleEmployee, roleUser);
 
             Users.Add(new User()
             {
@@ -174,7 +194,7 @@ namespace WebApp.Context
                 Contact = contact,
                 IsBlocked = false,
                 Password = "123456",
-                Role = role,
+                Role = roleAdmin,
                 CreatedOn = DateTime.Now,
                 ModifiedOn = DateTime.Now
             });
@@ -186,7 +206,19 @@ namespace WebApp.Context
                 Contact = contact2,
                 IsBlocked = false,
                 Password = "123456",
-                Role = role,
+                Role = roleEmployee,
+                CreatedOn = DateTime.Now,
+                ModifiedOn = DateTime.Now
+            });
+
+            Users.Add(new User()
+            {
+                UserName = "Stepan",
+                Login = "stepa123",
+                Contact = contact3,
+                IsBlocked = false,
+                Password = "123456",
+                Role = roleUser,
                 CreatedOn = DateTime.Now,
                 ModifiedOn = DateTime.Now
             });
@@ -291,7 +323,7 @@ namespace WebApp.Context
                 Floor = 1,
                 QuantitySeats = 2,
                 Gender = gender2,
-                Owner = contact,
+                Owner = contact2,
                 ChamberType = chamberType2,
                 CreatedOn = DateTime.Now,
                 ModifiedOn = DateTime.Now
@@ -303,7 +335,7 @@ namespace WebApp.Context
                 Floor = 2,
                 QuantitySeats = 2,
                 Gender = gender3,
-                Owner = contact,
+                Owner = contact2,
                 ChamberType = chamberType3,
                 CreatedOn = DateTime.Now,
                 ModifiedOn = DateTime.Now

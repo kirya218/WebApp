@@ -7,8 +7,8 @@ namespace WebApp.Controllers.Lookups.BaseMultiLookup
 {
     public class HobbiesMultiLookupController : Controller, IMultiLookupController
     {
-        private const int PageSize = 7;
-        private readonly WebAppContext _context;
+        protected const int PageSize = 7;
+        protected readonly WebAppContext _context;
 
         public HobbiesMultiLookupController(WebAppContext context)
         {

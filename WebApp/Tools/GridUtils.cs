@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using GridLibrary;
 using System.Reflection;
+using WebApp.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApp.Tools
 {
@@ -78,5 +80,7 @@ namespace WebApp.Tools
                 .Where(type => type.IsSubclassOf(baseType))
                 .ToList();
         }
+
+        public static Guid GetContactId(Guid userId, WebAppContext context) => context.Users.Include(x => x.Contact)?.FirstOrDefault(x => x.Id == userId)?.Contact?.Id ?? Guid.Empty;
     }
 }

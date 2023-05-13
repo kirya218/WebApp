@@ -27,10 +27,10 @@ namespace WebApp.Models.Chamber
         [UIHint("Lookup")]
         public Guid? Gender { get; set; }
 
-        [Display(Name = "Имеет ли братьев или сестер?")]
+        [Display(Name = "Есть ли братья/сестеры?")]
         public bool HasBrather { get; set; }
 
-        [Display(Name = "Количество братьев или сестер")]
+        [Display(Name = "Количество братьев/сестер")]
         public int? QuantityBrather { get; set; }
         public Guid SystemType { get; set; }
     }

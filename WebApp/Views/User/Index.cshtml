@@ -1,0 +1,35 @@
+﻿@{
+    var gridName = "User";
+}
+
+@Html.InitCrudPopupsForGrid(gridName, "User")
+
+<header style="margin-bottom:35px">
+    <div class="container">
+        <h2>Пользователи</h2>
+    </div>
+
+    <div class="container" style="display:flex">
+        <form>
+            <button type="button" onclick="awe.open('@("create" + gridName)')" class="btn btn-secondary btn-main col-sm-4">
+                Добавить
+            </button>
+        </form>
+    </div>
+</header>
+<hr />
+
+<div class="gui3">
+    @(Html.Awe().Grid(gridName)
+        .Url(Url.Action("GridGetItems"))
+        .Reorderable()
+        .Resizable()
+        .Columns(
+        new Column { Bind = "Id", Groupable = false, Hidden = true },
+        new Column { Bind = "UserName", Header = "Ник нейм" },
+        new Column { Bind = "Contact.Name", ClientFormat = ".(Contact)", Header = "ФИО" }.Mod(o => o.Nohide()),
+        new Column { Bind = "Role.Name", ClientFormat = ".(Role)", Header = "Роль" },
+        new Column { Bind = "IsBlocked", Header = "Заблокирован" },
+        new Column { ClientFormat = Html.EditFormatForGrid(gridName), Width = 55 }.Mod(o => o.Nohide()),
+        new Column { ClientFormat = Html.DeleteFormatForGrid(gridName), Width = 55 }.Mod(o => o.Nohide())))
+</div>

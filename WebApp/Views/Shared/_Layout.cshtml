@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var roleId = Guid.Parse(User.Claims.First(x => x.Type == "RoleId").Value);
+    var roleName = User.Claims.First(x => x.Type == "RoleName").Value;
+}
+
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="utf-8" />
@@ -24,35 +29,69 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Chamber" asp-action="Index">
-                                <span>Палаты</span>
-                            </a>
-                        </li>
+
+                        @if (roleId != ConstansCS.Roles.User)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Chamber" asp-action="Index">
+                                    <span>Палаты</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Contact" asp-action="Index">
+                                    <span>Контакты</span>
+                                </a>
+                            </li>
+                        }
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Schedule" asp-action="Index">
                                 <span>Расписание</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Contact" asp-action="Index">
-                                <span>Контакты</span>
-                            </a>
+
+                        @if (roleId == ConstansCS.Roles.User)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Sudoku" asp-action="Index">
+                                    <span>Судоку</span>
+                                </a>
+                            </li>
+                        }
+
+                        @if (roleId != ConstansCS.Roles.User)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="LookupMain" asp-action="Index">
+                                    <span>Справочники</span>
+                                </a>
+                            </li>
+                        }
+
+                        @if (roleId == ConstansCS.Roles.Supervisor)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">
+                                    <span>Пользователи</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="SystemSetting" asp-action="Index">
+                                    <span>Системные настройки</span>
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li>
+                            <label>
+                                Пользователь: @User?.Identity?.Name
+                                <br />
+                                Роль: @roleName
+                            </label>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Sudoku" asp-action="Index">
-                                <span>Судоку</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="SystemSetting" asp-action="Index">
-                                <span>Системные настройки</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="LookupMain" asp-action="Index">
-                                <span>Справочники</span>
-                            </a>
+                        <li style="align-content: center; margin-left: 30px; display: grid;">
+                            <a class="text-dark" name="logout" id="logout" asp-area="" asp-controller="Authorization" asp-action="Logout">Выйти</a>
                         </li>
                     </ul>
                 </div>
@@ -69,7 +108,7 @@
             &copy; 2022 - Веб-приложение - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

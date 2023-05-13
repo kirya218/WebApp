@@ -262,7 +262,7 @@ namespace WebApp.Tools
         /// <returns>Наименования свойств.</returns>
         private Dictionary<string, string> GetNameProperties<T>(T entity)
         {
-            var result = _systemProperties;
+            var result = _systemProperties.ToDictionary(entry => entry.Key, entry => entry.Value);
             var properties = entity.GetType().GetProperties().Where(x => !result.ContainsKey(x.Name));
 
             foreach (var property in properties)

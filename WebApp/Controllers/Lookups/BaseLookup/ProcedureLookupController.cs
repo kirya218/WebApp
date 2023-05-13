@@ -8,8 +8,8 @@ namespace WebApp.Controllers.Lookups.BaseLookup
 {
     public class ProcedureLookupController: Controller, ILookupController
     {
-        private readonly WebAppContext _context;
-        private const int PageSize = 7;
+        protected readonly WebAppContext _context;
+        protected const int PageSize = 7;
 
         public ProcedureLookupController(WebAppContext context)
         {

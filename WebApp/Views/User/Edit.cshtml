@@ -1,0 +1,14 @@
+﻿@model UserEditInput
+@using (Html.BeginForm())
+{
+    using (Html.Awe().BeginContext())
+    {
+        @Html.EditorFor(model => model.UserName)
+        @Html.EditorFor(model => model.Login)
+        @Html.EditorFor(model => model.Password)
+        @Html.EditorFor(model => model.ConfirmPassword)
+        @Html.EditorFor(model => model.Contact)
+        @Html.EditorFor(model => model.Role)
+        @Html.EditorFor(model => model.IsBlocked)
+    }
+}

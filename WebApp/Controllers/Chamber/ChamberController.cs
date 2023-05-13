@@ -229,7 +229,7 @@ namespace WebApp.Controllers.ChamberControllers
             {
                 Id = id,
                 GridId = gridId,
-                Message = string.Format("Вы действительно хотите удалить данную запись <b>{0}</b> ?", chamber.Number)
+                Message = string.Format(ConstansCS.LocalizationStrings.DeleteString, chamber.Number)
             });
         }
 

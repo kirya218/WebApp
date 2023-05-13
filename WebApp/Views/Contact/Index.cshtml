@@ -1,9 +1,11 @@
 ﻿@{
     var gridName = "Contact";
     var pref = "frowOut";
+    var roleId = Guid.Parse(User.Claims.First(x => x.Type == "RoleId").Value);
 }
 
 @Html.InitCrudPopupsForGrid(gridName, "Contact")
+@Html.InitImportFile(gridName, "Contact")
 
 <header style="margin-bottom:35px">
     <div class="container">
@@ -16,18 +18,22 @@
                 Добавить
             </button>
         </form>
-        <form>
-            <div class="dropdown">
-                <button class="btn btn-secondary btn-actions dropdown-toggle col-sm-4" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    Действия
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><input type="file" name="file"/></li>
-                    <li><button formmethod="post" formenctype="multipart/form-data" asp-controller="Contact" asp-action="ImportExcel">Import Excel</button></li>
-                    <li><button formmethod="get" asp-controller="Contact" asp-action="ExportToExcel">Export Excel</button></li>
-                </ul>
-            </div>
-        </form>
+
+        @if (roleId == ConstansCS.Roles.Supervisor)
+        {
+            <form>
+                <div class="dropdown">
+                    <button class="btn btn-secondary btn-actions dropdown-toggle col-sm-4" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Действия
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><input type="file" name="file" /></li>
+                        <li><button formmethod="post" formenctype="multipart/form-data" asp-controller="Contact" asp-action="ImportExcel">Import Excel</button></li>
+                        <li><button formmethod="get" asp-controller="Contact" asp-action="ExportToExcel">Export Excel</button></li>
+                    </ul>
+                </div>
+            </form>
+        }
     </div>
 </header>
 <hr />

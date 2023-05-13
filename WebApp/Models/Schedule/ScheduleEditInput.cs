@@ -10,15 +10,15 @@ namespace WebApp.Models.Schedule
         [DisplayName("Весь день")]
         public bool IsAllDay { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Обязательно")]
         [DisplayName("Заголовок")]
         public string Title { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Обязательно")]
         [DisplayName("Дата начала")]
         public DateTime? StartDate { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Обязательно")]
         [DisplayName("Дата окончания")]
         public DateTime? EndDate { get; set; }
 
@@ -48,6 +48,6 @@ namespace WebApp.Models.Schedule
 
         [DisplayName("Комментарий")]
         [UIHint("Textarea")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
     }
 }

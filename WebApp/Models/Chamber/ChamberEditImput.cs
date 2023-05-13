@@ -15,13 +15,13 @@ namespace WebApp.Models.Chamber
         [Display(Name = "Этаж")]
         [UIHint("Combobox")]
         [AweUrl(Action = "GetFloorsList", Controller = "Chamber")]
-        [Required(ErrorMessage = "Floor is required")]
+        [Required(ErrorMessage = "Обязательно")]
         public int Floor { get; set; }
 
         [Display(Name = "Количество мест")]
         [UIHint("Combobox")]
         [AweUrl(Action = "GetSeatsList", Controller = "Chamber")]
-        [Required(ErrorMessage = "Quantity of seats is required")]
+        [Required(ErrorMessage = "Обязательно")]
         public int QuantitySeats { get; set; }
 
         [Display(Name = "Постояльцы")]
@@ -30,7 +30,7 @@ namespace WebApp.Models.Chamber
 
         [Display(Name = "Ответственный")]
         [UIHint("Lookup")]
-        [Required(ErrorMessage = "Owner is required")]
+        [Required(ErrorMessage = "Обязательно")]
         public Guid Owner { get; set; }
     }
 }

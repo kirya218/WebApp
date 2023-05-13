@@ -97,7 +97,6 @@ namespace WebApp.Tools
             string crudController,
             int createPopupHeight = 430,
             int maxWidth = 284,
-            bool reload = false,
             string area = null)
         {
             var url = GetUrlHelper(html);
@@ -113,7 +112,45 @@ namespace WebApp.Tools
                     .Height(createPopupHeight)
                     .MaxWidth(maxWidth)
                     .Url(url.Action("Choice", crudController, new { area }))
-                    .Title("Подбор полаты")
+                    .Title("Подбор палаты")
+                    .Modal()
+                    .Success(reloadFunc)
+                    .ToString()
+             );
+        }
+
+        /// <summary>
+        /// Инициализирует окно выбора фильтров.
+        /// </summary>
+        /// <typeparam name="T">Тип html.</typeparam>
+        /// <param name="html">HTML.</param>
+        /// <param name="gridId">Идентификатор таблицы.</param>
+        /// <param name="crudController">Названия контролера.</param>
+        /// <param name="createPopupHeight">Высота окна.</param>
+        /// <param name="maxWidth">Максимальная ширина окна.</param>
+        /// <returns>Контент HTML.</returns>
+        public static IHtmlContent InitImportFile<T>(
+            this IHtmlHelper<T> html,
+            string gridId,
+            string crudController,
+            int createPopupHeight = 200,
+            int maxWidth = 0,
+            string area = null)
+        {
+            var url = GetUrlHelper(html);
+            gridId = html.Awe().GetContextPrefix() + gridId;
+
+            var reloadFunc = "utils.refreshGrid('" + gridId + "')";
+
+            return new HtmlString(
+                html.Awe()
+                    .InitPopupForm()
+                    .Name("importexcel" + gridId)
+                    .Group(gridId)
+                    .Height(createPopupHeight)
+                    .MaxWidth(maxWidth)
+                    .Url(url.Action("ImportExcel", crudController, new { area }))
+                    .Title("Выбор файла")
                     .Modal()
                     .Success(reloadFunc)
                     .ToString()

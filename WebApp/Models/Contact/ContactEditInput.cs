@@ -12,7 +12,7 @@ namespace WebApp.Models.Contact
         public string? Name { get; set; }
 
         [Display(Name = "ФИО")]
-        [Required(ErrorMessage = "Full name is required")]
+        [Required(ErrorMessage = "Обязательно")]
         [MinLength(6, ErrorMessage = "Full name must be at least {1} characters long")]
         [MaxLength(50, ErrorMessage = "Full name cannot exceed {1} characters")]
         public string FullName { get; set; }
@@ -24,6 +24,7 @@ namespace WebApp.Models.Contact
         public int Age { get; set; }
 
         [Display(Name = "Дата рождения")]
+        [Required(ErrorMessage = "Обязательно")]
         public DateTime BirthDate { get; set; }
 
         [Display(Name = "Мобильный телефон")]

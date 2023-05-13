@@ -7,10 +7,10 @@ namespace WebApp.Models.LookupEdit
         public Guid Id { get; set; }
 
         [Display(Name = "Название")]
-        [Required(ErrorMessage = "Данное поле обезательно")]
+        [Required(ErrorMessage = "Обязательно")]
         public string Name { get; set; }
 
         [Display(Name = "Описание")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
     }
 }

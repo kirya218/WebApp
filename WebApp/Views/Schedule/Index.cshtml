@@ -1,5 +1,6 @@
 ﻿@{
     var gridName = "Schedule";
+    var roleId = Guid.Parse(User.Claims.First(x => x.Type == "RoleId").Value);
 }
 
 @Html.InitCrudPopupsForGrid(gridName, "Schedule")
@@ -9,11 +10,14 @@
         <h2>Расписание</h2>
     </div>
 
-    <div class="container" style="display:flex">
-        <button type="button" onclick="awe.open('@("create" + gridName)')" class="btn btn-secondary btn-main col-sm-4">
-            Добавить
-        </button>
-    </div>
+    @if (roleId != ConstansCS.Roles.User)
+    {
+        <div class="container" style="display:flex">
+            <button type="button" onclick="awe.open('@("create" + gridName)')" class="btn btn-secondary btn-main col-sm-4">
+                Добавить
+            </button>
+        </div>
+    }
 </header>
 <hr />
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -35,17 +36,28 @@ namespace WebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                User? user = _context.Users.Include(u => u.Role).FirstOrDefault(u => u.Login == model.Login && u.Password == model.Password);
+                var user = await _context.Users
+                    .Include(u => u.Role)
+                    .FirstOrDefaultAsync(u => u.Login == model.Login && u.Password == model.Password);
 
-                if (user is null)
+                if (user == null)
                 {
-                    return Content("Не верно введен пароль или логин");
+                    ModelState.AddModelError("Login", "Не верно введен пароль или логин");
+                    return View();
+                }
+
+                if (user.IsBlocked)
+                {
+                    ModelState.AddModelError("Login", "Данный пользователь заблокирован");
+                    return View();
                 }
 
                 var claims = new List<Claim>
                 {
+                    new Claim("UserId", user.Id.ToString()),
                     new Claim(ClaimsIdentity.DefaultNameClaimType, user.UserName),
-                    new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.Name)
+                    new Claim("RoleId", user.Role.Id.ToString()),
+                    new Claim("RoleName", user.Role.Name)
                 };
 
                 var claimsIdentity = new ClaimsIdentity(claims, "Cookies");
@@ -58,19 +70,23 @@ namespace WebApp.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Не используется.
+        /// </summary>
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = _context.Users.FirstOrDefault(u => u.Login == model.Login);
+                var user = await _context.Users
+                    .FirstOrDefaultAsync(u => u.Login == model.Login);
 
                 if (user != null)
                 {
                     return Content("Такой пользователь уже существует");
                 }
 
-                await _context.Users.AddAsync(new User
+                await _context.Users.AddAsync(new Entities.User
                 {
                     Id = Guid.NewGuid(),
                     Login = model.Login,

@@ -1,24 +1,32 @@
 ﻿@model ScheduleEditInput
 
+@{
+    var roleId = User.Claims.First(x => x.Type == "RoleId").Value;
+}
+
 @using (Html.BeginForm())
 {
-    @Html.EditorFor(x => x.Title)
-    @Html.EditorFor(x => x.Color)
-    <div style="pointer-events: none">
+    <div style="pointer-events: @(Guid.Parse(roleId) == ConstansCS.Roles.User ? "none" : "")">
+        @Html.EditorFor(x => x.Title)
+        @Html.EditorFor(x => x.Color)
         @Html.EditorFor(x => x.Owner)
         @Html.EditorFor(x => x.Patient)
         @Html.EditorFor(x => x.Procedure)
+        @Html.EditorFor(x => x.IsAllDay)
+        @Html.EditorFor(x => x.StartDate)
+
+        <div class="timeEditor" style="display: @(Model.IsAllDay ? "none" : "")">
+            @Html.EditorFor(x => x.StartTime)
+        </div>
+
+        @Html.EditorFor(x => x.EndDate)
+
+        <div class="timeEditor" style="display: @(Model.IsAllDay ? "none" : "")">
+            @Html.EditorFor(x => x.EndTime)
+        </div>
+
+        @Html.EditorFor(x => x.Description)
     </div>
-    @Html.EditorFor(x => x.IsAllDay)
-    @Html.EditorFor(x => x.StartDate)
-    <div class="timeEditor" style="@(Model.IsAllDay ? "display:none" : "")">
-        @Html.EditorFor(x => x.StartTime)
-    </div>
-    @Html.EditorFor(x => x.EndDate)
-    <div class="timeEditor" style="@(Model.IsAllDay ? "display:none" : "")">
-        @Html.EditorFor(x => x.EndTime)
-    </div>
-    @Html.EditorFor(x => x.Description)
 }
 @Html.ValidationSummary(true)
 

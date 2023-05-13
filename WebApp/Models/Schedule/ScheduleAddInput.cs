@@ -48,6 +48,6 @@ namespace WebApp.Models.Schedule
 
         [DisplayName("Комментарий")]
         [UIHint("Textarea")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
     }
 }

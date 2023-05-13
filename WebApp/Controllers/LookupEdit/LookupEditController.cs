@@ -8,6 +8,7 @@ using WebApp.Models.LookupEdit;
 using WebApp.Models.Lookup;
 using DocumentFormat.OpenXml.Office2010.Excel;
 using Microsoft.EntityFrameworkCore;
+using WebApp.Tools;
 
 namespace WebApp.Controllers.ProcedureControllers
 {
@@ -76,7 +77,7 @@ namespace WebApp.Controllers.ProcedureControllers
             {
                 Id = id,
                 GridId = gridId,
-                Message = string.Format("Вы действительно хотете удалить данную запись <b>{0}</b> ?", obj.GetType().GetProperty("Name").GetValue(obj))
+                Message = string.Format(ConstansCS.LocalizationStrings.DeleteString, obj.GetType().GetProperty("Name").GetValue(obj))
             });
         }
 
