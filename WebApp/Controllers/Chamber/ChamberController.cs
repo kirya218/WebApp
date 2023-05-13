@@ -12,17 +12,7 @@ namespace WebApp.Controllers.ChamberControllers
 {
     public class ChamberController : Controller, IController<Chamber, ChamberAddImput, ChamberEditImput, DeleteInput>
     {
-        private static class FilterChoice
-        {
-            public static Guid? GenderId { get; set; }
-            public static Guid? ChamberTypeId { get; set; }
-            public static Guid[]? HobbiesId { get; set; }
-            public static int? QuantitySeats { get; set; }
-            public static int? Floor { get; set; }
-            public static bool IsChoice { get; set; }
-            public static bool HasBrather { get; set; }
-            public static int? QuantityBrather { get; set; }
-        }
+        private static ChamberChoiceImput? _filterInput;
 
         /// <summary>
         /// Контекст.
@@ -83,7 +73,7 @@ namespace WebApp.Controllers.ChamberControllers
                 .Include(x => x.ChamberType)
                 .AsQueryable();
 
-            if (FilterChoice.IsChoice)
+            if (_filterInput != null && _filterInput.IsChoice)
             {
                 var priority = 3;
                 var tempItems = items;
@@ -95,7 +85,7 @@ namespace WebApp.Controllers.ChamberControllers
                 while (!tempItems.Any() && priority != 0);
 
                 items = tempItems;
-                ClearFilter();
+                _filterInput.IsChoice = false;
             }
 
             return Json(await new GridModelBuilder<Chamber>(items, gridParams)
@@ -161,14 +151,18 @@ namespace WebApp.Controllers.ChamberControllers
                 return PartialView(view);
             }
 
-            FilterChoice.IsChoice = true;
-            FilterChoice.GenderId = view.Gender ?? Guid.Empty;
-            FilterChoice.ChamberTypeId = view.ChamberType ?? Guid.Empty;
-            FilterChoice.HobbiesId = view.Hobbies?.ToArray() ?? Array.Empty<Guid>();
-            FilterChoice.QuantitySeats = view.QuantitySeats ?? 0;
-            FilterChoice.Floor = view.Floor ?? 0;
-            FilterChoice.HasBrather = view.HasBrather;
-            FilterChoice.QuantityBrather = view.QuantityBrather ?? 0;
+            _filterInput = new ChamberChoiceImput()
+            {
+                Gender = view.Gender ?? Guid.Empty,
+                ChamberType = view.ChamberType ?? Guid.Empty,
+                Hobbies = view.Hobbies?.ToArray() ?? Array.Empty<Guid>(),
+                QuantitySeats = view.QuantitySeats,
+                Floor = view.Floor,
+                HasBrather = view.HasBrather,
+                QuantityBrather = view.QuantityBrather,
+                SystemType = view.SystemType,
+                IsChoice = true
+            };
 
             return Json(new { view });
         }
@@ -321,31 +315,31 @@ namespace WebApp.Controllers.ChamberControllers
         {
             if (priority >= 1)
             {
-                items = items.Where(x => x.ChamberType.Id == FilterChoice.ChamberTypeId || x.Gender.Id == FilterChoice.GenderId);
+                items = items.Where(x => x.ChamberType.Id == _filterInput.ChamberType || x.Gender.Id == _filterInput.Gender);
             }
 
             if (priority >= 2)
             {
                 var chamberIds = GetChamberByHobbies();
 
-                if (SettingHelper.TryGetValue<Guid>(_context, "SystemType", out var type) && type == ConstansCS.Type.Orphanage)
+                if (chamberIds.Any())
                 {
-                    items = items.Where(x => chamberIds.Contains(x.Id) || x.QuantitySeats == FilterChoice.QuantitySeats);
+                    items = items.Where(x => chamberIds.Contains(x.Id));
+                }
 
-                    if (FilterChoice.HasBrather)
-                    {
-                        items = items.Where(x => x.QuantitySeats == FilterChoice.QuantityBrather + 1);
-                    }
+                if (_filterInput.SystemType == ConstansCS.Type.Orphanage && _filterInput.HasBrather)
+                {
+                    items = items.Where(x => x.QuantitySeats == _filterInput.QuantityBrather + 1);
                 }
                 else
                 {
-                    items = items.Where(x => chamberIds.Contains(x.Id) || x.QuantitySeats == FilterChoice.QuantitySeats);
+                    items = items.Where(x => x.QuantitySeats == _filterInput.QuantitySeats);
                 }
             }
 
-            if (priority >= 3)
+            if (priority >= 3 && _filterInput?.Floor != null)
             {
-                items = items.Where(x => x.Floor == FilterChoice.Floor);
+                items = items.Where(x => x.Floor == _filterInput.Floor);
             }
 
             return items;
@@ -353,21 +347,9 @@ namespace WebApp.Controllers.ChamberControllers
 
         private Guid[] GetChamberByHobbies()
         {
-            var contacts = _context.ContactHobbies.Where(x => FilterChoice.HobbiesId.Contains(x.Id)).Select(x => x.Contact.Id);
+            var contacts = _context.ContactHobbies.Where(x => _filterInput.Hobbies.Contains(x.Id))?.Select(x => x.Contact.Id);
             var chambers = _context.ContactInChambers.Where(x => contacts.Contains(x.Contact.Id)).Select(x => x.Chamber.Id);
             return chambers.ToArray();
-        }
-
-        private static void ClearFilter()
-        {
-            FilterChoice.IsChoice = false;
-            FilterChoice.GenderId = (Guid?)null;
-            FilterChoice.ChamberTypeId = (Guid?)null;
-            FilterChoice.HobbiesId = null;
-            FilterChoice.QuantitySeats = null;
-            FilterChoice.Floor = null;
-            FilterChoice.HasBrather = false;
-            FilterChoice.QuantityBrather = null;
         }
     }
 }

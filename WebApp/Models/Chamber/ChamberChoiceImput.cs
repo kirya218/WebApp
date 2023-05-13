@@ -21,10 +21,12 @@ namespace WebApp.Models.Chamber
 
         [Display(Name = "Тип палаты")]
         [UIHint("Lookup")]
+        [Required(ErrorMessage = "Обязательно")]
         public Guid? ChamberType { get; set; }
 
         [Display(Name = "Пол")]
         [UIHint("Lookup")]
+        [Required(ErrorMessage = "Обязательно")]
         public Guid? Gender { get; set; }
 
         [Display(Name = "Есть ли братья/сестеры?")]
@@ -33,5 +35,6 @@ namespace WebApp.Models.Chamber
         [Display(Name = "Количество братьев/сестер")]
         public int? QuantityBrather { get; set; }
         public Guid SystemType { get; set; }
+        public bool IsChoice { get; set; }
     }
 }
