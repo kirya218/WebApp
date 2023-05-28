@@ -51,11 +51,13 @@
         new Column { Bind = "Id", Groupable = false, Hidden = true },
         new Column { Bind = "Number", Header = "Номер палаты" }.Mod(o => o.Nohide()),
         new Column { Bind = "Floor", Header = "Этаж" },
+        new Column { Bind = "ChamberType.Name", ClientFormat = ".(ChamberTypeName)", Header = "Тип палаты" },
+        new Column { Bind = "Gender.Name", ClientFormat = ".(GenderName)", Header = "Пол" },
         new Column { Bind = "QuantitySeats", Header = "Количество мест" },
-        new Column { Bind = "Patients", ClientFormat = ".(PatientNames)", Header = "Постояльцы" },
+        new Column { Bind = "Patients", ClientFormat = ".(PatientNames)", Header = "Постояльцы", Groupable = false },
         new Column { Bind = "Owner.FullName", ClientFormat = ".(OwnerName)", Header = "Ответственный" },
-        new Column { Bind = "CreatedOn", Header = "Дата создания" },
-        new Column { Bind = "ModifiedOn", Header = "Дата изменения" },
+        new Column { Bind = "CreatedOn", Header = "Дата создания", Hidden = true },
+        new Column { Bind = "ModifiedOn", Header = "Дата изменения", Hidden = true },
         new Column { ClientFormat = Html.EditFormatForGrid(gridName), Width = 55 }.Mod(o => o.Nohide()),
         new Column { ClientFormat = Html.DeleteFormatForGrid(gridName), Width = 55 }.Mod(o => o.Nohide())))
 </div>

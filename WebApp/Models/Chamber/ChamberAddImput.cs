@@ -25,6 +25,16 @@ namespace WebApp.Models.Chamber
         [Required(ErrorMessage = "Обязательно")]
         public int QuantitySeats { get; set; }
 
+        [Display(Name = "Тип палаты")]
+        [UIHint("Lookup")]
+        [Required(ErrorMessage = "Обязательно")]
+        public Guid ChamberType { get; set; }
+
+        [Display(Name = "Пол")]
+        [UIHint("Lookup")]
+        [Required(ErrorMessage = "Обязательно")]
+        public Guid Gender { get; set; }
+
         [Display(Name = "Постояльцы")]
         [UIHint("MultiLookup")]
         public IEnumerable<Guid>? Patients { get; set; }

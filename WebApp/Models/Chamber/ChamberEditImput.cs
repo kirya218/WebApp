@@ -32,5 +32,15 @@ namespace WebApp.Models.Chamber
         [UIHint("Lookup")]
         [Required(ErrorMessage = "Обязательно")]
         public Guid Owner { get; set; }
+
+        [Display(Name = "Тип палаты")]
+        [UIHint("Lookup")]
+        [Required(ErrorMessage = "Обязательно")]
+        public Guid ChamberType { get; set; }
+
+        [Display(Name = "Пол")]
+        [UIHint("Lookup")]
+        [Required(ErrorMessage = "Обязательно")]
+        public Guid Gender { get; set; }
     }
 }

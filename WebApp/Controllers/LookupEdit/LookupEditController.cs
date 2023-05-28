@@ -1,18 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using GridLibrary;
+﻿using GridLibrary;
+using Microsoft.AspNetCore.Mvc;
 using WebApp.Context;
-using WebApp.Entities;
 using WebApp.Interfaces;
 using WebApp.Models;
-using WebApp.Models.LookupEdit;
 using WebApp.Models.Lookup;
-using DocumentFormat.OpenXml.Office2010.Excel;
-using Microsoft.EntityFrameworkCore;
+using WebApp.Models.LookupEdit;
 using WebApp.Tools;
 
 namespace WebApp.Controllers.ProcedureControllers
 {
-    public class LookupEditController : Controller
+    public class LookupEditController : Controller, IController<object, LookupEditAddInput, LookupEditEditInput, DeleteInput>
     {
         private static string _lookupCode;
 
@@ -38,13 +35,13 @@ namespace WebApp.Controllers.ProcedureControllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public ActionResult Create()
         {
             return PartialView();
         }
 
         [HttpPost]
-        public IActionResult Create(LookupEditAddInput view)
+        public ActionResult Create(LookupEditAddInput view)
         {
             if (!ModelState.IsValid)
             {
@@ -68,7 +65,7 @@ namespace WebApp.Controllers.ProcedureControllers
         }
 
         [HttpGet]
-        public IActionResult Delete(Guid id, string gridId)
+        public ActionResult Delete(Guid id, string gridId)
         {
             var obj = ((IEnumerable<object>)_context.GetType()?.GetProperty($"{_lookupCode}s")?.GetValue(_context))
                 .Single(x => (Guid)x.GetType().GetProperty("Id").GetValue(x) == id);
@@ -82,7 +79,7 @@ namespace WebApp.Controllers.ProcedureControllers
         }
 
         [HttpPost]
-        public IActionResult Delete(DeleteInput view)
+        public ActionResult Delete(DeleteInput view)
         {
             var obj = ((IEnumerable<object>)(_context.GetType()?.GetProperty($"{_lookupCode}s")?.GetValue(_context)))
                  .Single(x => (Guid)x.GetType().GetProperty("Id").GetValue(x) == view.Id);
@@ -94,7 +91,7 @@ namespace WebApp.Controllers.ProcedureControllers
         }
 
         [HttpGet]
-        public IActionResult Edit(Guid id)
+        public ActionResult Edit(Guid id)
         {
             var obj = ((IEnumerable<object>)_context.GetType()?.GetProperty($"{_lookupCode}s")?.GetValue(_context))
                 .Single(x => (Guid)x.GetType().GetProperty("Id").GetValue(x) == id);
@@ -110,7 +107,7 @@ namespace WebApp.Controllers.ProcedureControllers
         }
 
         [HttpPost]
-        public IActionResult Edit(LookupEditEditInput view)
+        public ActionResult Edit(LookupEditEditInput view)
         {
             if (!ModelState.IsValid)
             {

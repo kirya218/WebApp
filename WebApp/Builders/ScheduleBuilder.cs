@@ -15,7 +15,7 @@ namespace WebApp.Builders
         /// <summary>
         /// Get events based on start and end utc dates
         /// </summary>
-        public Func<DateTime, DateTime, IEnumerable<Schedule>> GetEvents => (startUtc, endUtc) => _model.Schedules.Where(o => o.StartDate < endUtc && o.EndDate >= startUtc);
+        private Func<DateTime, DateTime, IEnumerable<Schedule>> GetEvents => (startUtc, endUtc) => _model.Schedules.Where(o => o.StartDate < endUtc && o.EndDate >= startUtc);
 
         public ScheduleBuilder(ScheduleBuilderModel model)
         {

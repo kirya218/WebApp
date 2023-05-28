@@ -58,6 +58,8 @@ namespace WebApp.Controllers.ChamberControllers
                     chamber.Number,
                     chamber.Floor,
                     chamber.QuantitySeats,
+                    ChamberTypeName = chamber.ChamberType.Name,
+                    GenderName = chamber.Gender.Name,
                     OwnerName = chamber.Owner.FullName,
                     PatientNames = string.Join(",", patientNames),
                     CreatedOn = chamber.CreatedOn.ToString("F"),
@@ -116,6 +118,8 @@ namespace WebApp.Controllers.ChamberControllers
                 Floor = view.Floor,
                 QuantitySeats = view.QuantitySeats,
                 Owner = _context.Contacts.Single(x => x.Id == view.Owner),
+                ChamberType = _context.ChamberTypes.Single(x => x.Id == view.ChamberType),
+                Gender = _context.Genders.Single(x => x.Id == view.Gender),
                 CreatedOn = DateTime.Now.ToLocalTime(),
                 ModifiedOn = DateTime.Now.ToLocalTime()
             };
@@ -170,7 +174,12 @@ namespace WebApp.Controllers.ChamberControllers
         [HttpGet]
         public ActionResult Edit(Guid id)
         {
-            var chamber = _context.Chambers.Include(x => x.Owner).Single(x => x.Id == id);
+            var chamber = _context.Chambers
+                .Include(x => x.Owner)
+                .Include(x => x.ChamberType)
+                .Include(x => x.Gender)
+                .Single(x => x.Id == id);
+
             var patients = _context.ContactInChambers
                 .Include(x => x.Contact)
                 .Include(x => x.Chamber)
@@ -184,7 +193,9 @@ namespace WebApp.Controllers.ChamberControllers
                 Floor = chamber.Floor,
                 Owner = chamber.Owner.Id,
                 Patients = patients.Select(x => x.Contact.Id),
-                QuantitySeats = chamber.QuantitySeats
+                QuantitySeats = chamber.QuantitySeats,
+                ChamberType = chamber.ChamberType.Id,
+                Gender = chamber.Gender.Id  ,
             };
 
             return PartialView("Edit", input);
@@ -203,6 +214,8 @@ namespace WebApp.Controllers.ChamberControllers
             chamber.Number = view.Number;
             chamber.Floor = view.Floor;
             chamber.Owner = _context.Contacts.Single(x => x.Id == view.Owner);
+            chamber.ChamberType = _context.ChamberTypes.Single(x => x.Id == view.ChamberType);
+            chamber.Gender = _context.Genders.Single(x => x.Id == view.Gender);
             chamber.QuantitySeats = view.QuantitySeats;
             chamber.ModifiedOn = DateTime.Now.ToLocalTime();
 

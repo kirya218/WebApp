@@ -17,9 +17,9 @@ namespace WebApp.Entities
         public int QuantitySeats { get; set; }
 
         [Display(Name = "Пол")]
-        public Gender? Gender { get; set; }
+        public Gender Gender { get; set; }
 
         [Display(Name = "Тип палаты")]
-        public ChamberType? ChamberType { get; set; }
+        public ChamberType ChamberType { get; set; }
     }
 }

@@ -192,11 +192,11 @@
             return sudokuWithHidedElement;
         }
 
-        private int[,] To2D(int[][] source, int _sizeBlock)
+        private int[,] To2D(int[][] source, int sizeBlock)
         {
-            var result = new int[_sizeBlock, _sizeBlock];
-            for (int i = 0; i < _sizeBlock; ++i)
-                for (int j = 0; j < _sizeBlock; ++j)
+            var result = new int[sizeBlock, sizeBlock];
+            for (int i = 0; i < sizeBlock; ++i)
+                for (int j = 0; j < sizeBlock; ++j)
                     result[i, j] = source[i][j];
 
             return result;
@@ -209,6 +209,7 @@
                 if (sudoku[rowIndex, x] != 0) yield return sudoku[rowIndex, x];
             }
         }
+
         private IEnumerable<int> GetColumnFixedNumbers(int columnIndex, int[,] sudoku)
         {
             for (int y = 0; y < 9; y++)
@@ -216,6 +217,7 @@
                 if (sudoku[y, columnIndex] != 0) yield return sudoku[y, columnIndex];
             }
         }
+
         private IEnumerable<int> GetBlockFixedNumbers(int rowIndex, int columnIndex, int[,] sudoku)
         {
             int startX = 3 * (rowIndex / 3);
