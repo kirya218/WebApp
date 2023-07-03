@@ -307,7 +307,7 @@ namespace WebApp.Builders
             {
                 var display = new ScheduleDisplay 
                 { 
-                    Id = schedule.Id, 
+                    Id = schedule.Id,  
                     Title = schedule.Name, 
                     Color = schedule.Color ?? "White", 
                     Time = ""

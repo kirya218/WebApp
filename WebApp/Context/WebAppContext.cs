@@ -33,7 +33,7 @@ namespace WebApp.Context
             Lookups.Add(new Lookup
             {
                 LookupCode = "ContactType",
-                Name = "Тип контакта",
+                Name = "Типы контакта",
                 CreatedOn = DateTime.Now,
                 ModifiedOn = DateTime.Now,
                 Description = "Для типизации контантов"
